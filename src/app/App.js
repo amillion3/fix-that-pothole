@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import {SimpleButton} from '@terrestris/react-geo';
+import '../../node_modules/antd/dist/antd.css';
+// import '../../node_modules/react-geo.css';
 import './App.css';
 
 class App extends Component {
   render () {
     return (
-      <button className='btn btn-info'>Check check, 1 2 3...</button>
+      <SimpleButton onClick={() => { alert('hi'); }}>
+        Hello World!
+      </SimpleButton>
     );
   }
 }
