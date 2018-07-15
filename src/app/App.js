@@ -7,6 +7,9 @@ import OlView from 'ol/view';
 import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
 import {MapComponent} from '@terrestris/react-geo';
+
+import Register from '../Components/Register/Register';
+import Login from '../Components/Login/Login';
 import fbConnection from '../firebaseRequests/connection';
 
 import './App.css';
@@ -68,6 +71,22 @@ class App extends Component {
 
   render () {
     return (
+      <BrowserRouter>
+        <Navbar />
+        <div className='overall-container'>
+        <Switch>
+          <Route path='/' exact component={Home}/>
+          <PublicRoute
+            path='/register'
+            authed={this.state.authed}
+            component={Register} />
+          <PublicRoute
+            path='/login'
+            authed={this.state.authed}
+            component={Login} />
+        </Switch>
+        </div>
+      </BrowserRouter>
       <div className="App">
         <h1>Fix That Pothole</h1>
         <MapComponent
