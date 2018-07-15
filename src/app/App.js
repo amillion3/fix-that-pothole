@@ -1,17 +1,54 @@
 import React, { Component } from 'react';
-import {MapComponent} from '@terrestris/react-geo';
-
-import './App.css';
-import 'ol/ol.css';
-import 'antd/dist/antd.css';
-// import './react-geo.css';
+import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom';
+import firebase from 'firebase';
 
 import OlMap from 'ol/map';
 import OlView from 'ol/view';
 import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
+import {MapComponent} from '@terrestris/react-geo';
+import fbConnection from '../firebaseRequests/connection';
 
 import './App.css';
+import 'ol/ol.css';
+import 'antd/dist/antd.css';
+// import './react-geo.css';
+fbConnection();
+
+const PrivateRoute = ({ component: Component, authed, ...rest}) => {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authed === true ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: '/login', state: {from: props.location}}}
+          />
+        )
+      }
+    />
+  );
+};
+
+const PublicRoute = ({ component: Component, authed, ...rest}) => {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authed === false ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: '/home', state: {from: props.location}}}
+          />
+        )
+      }
+    />
+  );
+};
+
 // center coordinates are in EPSG:3857
 const center = [ -9657703.280456, 4318894.518143 ];
 
