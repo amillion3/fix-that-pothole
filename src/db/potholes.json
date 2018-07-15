@@ -3,62 +3,38 @@
 		"sample1": {
 			"itemId": 1,
 			"createdBy": "d934ks0l0slsksjdancudk37373",
-            "geometryType": "point",
             "coordX": 36.1645083,
             "coordY": -86.7974366,
             "status": "Newly Added",
             "severity": "Moderate",
             "descriptionNotes": "West bound lane, near the crosswalk",
-            "votes": 1,
-            "attachment": false,
-            "attachmentUrl": "",
-            "repairNotes": "",
             "updated": true,
             "updatedUserId": "d934ks0l0slsksjdl330128",
-            "updatedDate": "01/02/2018",
-            "collectedZoomLevel": 15,
-            "collectedBasemap": "map",
-            "collectedGeolocation": false
+            "updatedDate": "01/02/2018"
 		},
 		"sample2": {
 			"itemId": 2,
 			"createdBy": "d934ks0l0slsksjdancudk37373",
-            "geometryType": "point",
             "coordX": 36.158346,
             "coordY": -86.7740357,
             "status": "Newly Added",
             "severity": "Severe",
             "descriptionNotes": "High-speeds here",
-            "votes": 6,
-            "attachment": false,
-            "attachmentUrl": "",
-            "repairNotes": "",
             "updated": true,
             "updatedUserId": "d934ks0l0slsksjdl330128",
-            "updatedDate": "01/02/2018",
-            "collectedZoomLevel": 17,
-            "collectedBasemap": "map",
-            "collectedGeolocation": false
+            "updatedDate": "01/02/2018"
         },
         "sample3": {
 			"itemId": 3,
 			"createdBy": "d934ks0l0slsksjdancudk37373",
-            "geometryType": "point",
             "coordX": 36.148399,
             "coordY": -86.762028,
             "status": "Newly Added",
             "severity": "Low",
             "descriptionNotes": "On shoulder",
-            "votes": 1,
-            "attachment": false,
-            "attachmentUrl": "",
-            "repairNotes": "",
             "updated": true,
             "updatedUserId": "d934ks0l0slsksjdl330128",
-            "updatedDate": "01/02/2018",
-            "collectedZoomLevel": 15,
-            "collectedBasemap": "map",
-            "collectedGeolocation": false
+            "updatedDate": "01/02/2018"
 		}
 	}
 }
