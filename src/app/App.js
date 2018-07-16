@@ -10,6 +10,9 @@ import {MapComponent} from '@terrestris/react-geo';
 
 import Register from '../Components/Register/Register';
 import Login from '../Components/Login/Login';
+import Home from '../Components/Home/Home';
+import Navbar from '../Components/Navbar/Navbar';
+import MainComponent from '../Components/MainComponent/MainComponent';
 import fbConnection from '../firebaseRequests/connection';
 
 import './App.css';
@@ -74,25 +77,29 @@ class App extends Component {
       <BrowserRouter>
         <Navbar />
         <div className='overall-container'>
-        <Switch>
-          <Route path='/' exact component={Home}/>
-          <PublicRoute
-            path='/register'
-            authed={this.state.authed}
-            component={Register} />
-          <PublicRoute
-            path='/login'
-            authed={this.state.authed}
-            component={Login} />
-        </Switch>
+          <Switch>
+            <Route path='/' exact component={Home}/>
+            <PublicRoute
+              path='/register'
+              authed={this.state.authed}
+              component={Register} />
+            <PublicRoute
+              path='/login'
+              authed={this.state.authed}
+              component={Login} />
+            <PrivateRoute
+              path='/main'
+              authed={this.state.authed}
+              component={MainComponent} />
+          </Switch>
         </div>
       </BrowserRouter>
-      <div className="App">
-        <h1>Fix That Pothole</h1>
-        <MapComponent
-          map={map}
-        />
-      </div>
+      // <div className="App">
+      //   <h1>Fix That Pothole</h1>
+      //   <MapComponent
+      //     map={map}
+      //   />
+      // </div>
     );
   }
 }
