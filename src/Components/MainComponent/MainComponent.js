@@ -5,7 +5,7 @@ import './MainComponent.css';
 class MainComponent extends React.Component {
   render () {
     return (
-      <div>MainComp</div>
+      <div>MainComp, yessssss</div>
     );
   }
 };

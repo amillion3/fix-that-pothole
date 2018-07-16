@@ -13,13 +13,13 @@ import Login from '../Components/Login/Login';
 import Home from '../Components/Home/Home';
 import Navbar from '../Components/Navbar/Navbar';
 import MainComponent from '../Components/MainComponent/MainComponent';
-import fbConnection from '../firebaseRequests/connection';
+import firebaseApp from '../firebaseRequests/connection';
 
 import './App.css';
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
 // import './react-geo.css';
-fbConnection();
+firebaseApp();
 
 const PrivateRoute = ({ component: Component, authed, ...rest}) => {
   return (
@@ -47,7 +47,7 @@ const PublicRoute = ({ component: Component, authed, ...rest}) => {
           <Component {...props} />
         ) : (
           <Redirect
-            to={{ pathname: '/main', state: {from: props.location}}}
+            to={{ pathname: '/maincomponent', state: {from: props.location}}}
           />
         )
       }
@@ -89,11 +89,18 @@ class App extends Component {
     this.removeListener();
   }
 
+  userWantsToLogOut = () => {
+    this.setState({authed: false});
+  };
+
   render () {
     return (
       <BrowserRouter>
         <div>
-          <Navbar />
+          <Navbar
+            authed={this.state.authed}
+            userWantsToLogOut={this.userWantsToLogOut}
+          />
           <div className='overall-container'>
             <Switch>
               <Route path='/' exact component={Home}/>
@@ -106,7 +113,7 @@ class App extends Component {
                 authed={this.state.authed}
                 component={Login} />
               <PrivateRoute
-                path='/main'
+                path='/maincomponent'
                 authed={this.state.authed}
                 component={MainComponent} />
             </Switch>

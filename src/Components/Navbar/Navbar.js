@@ -1,10 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import authRequests from '../../firebaseRequests/auth';
 
 import './Navbar.css';
 
 class Navbar extends React.Component {
   render () {
+
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">
