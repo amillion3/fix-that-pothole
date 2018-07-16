@@ -71,37 +71,55 @@ const map = new OlMap({
 });
 
 class App extends Component {
+  state = {
+    authed: false,
+  }
+
+  componentDidMount () {
+    this.removeListener = firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({authed: true});
+      } else {
+        this.setState({authed: false});
+      }
+    });
+  }
+
+  componentWillUnmount () {
+    this.removeListener();
+  }
 
   render () {
     return (
       <BrowserRouter>
-        <Navbar />
-        <div className='overall-container'>
-          <Switch>
-            <Route path='/' exact component={Home}/>
-            <PublicRoute
-              path='/register'
-              authed={this.state.authed}
-              component={Register} />
-            <PublicRoute
-              path='/login'
-              authed={this.state.authed}
-              component={Login} />
-            <PrivateRoute
-              path='/main'
-              authed={this.state.authed}
-              component={MainComponent} />
-          </Switch>
+        <div>
+          <Navbar />
+          <div className='overall-container'>
+            <Switch>
+              <Route path='/' exact component={Home}/>
+              <PublicRoute
+                path='/register'
+                authed={this.state.authed}
+                component={Register} />
+              <PublicRoute
+                path='/login'
+                authed={this.state.authed}
+                component={Login} />
+              <PrivateRoute
+                path='/main'
+                authed={this.state.authed}
+                component={MainComponent} />
+            </Switch>
+          </div>
         </div>
       </BrowserRouter>
-      // <div className="App">
-      //   <h1>Fix That Pothole</h1>
-      //   <MapComponent
-      //     map={map}
-      //   />
-      // </div>
     );
   }
 }
-
+// <div className="App">
+//   <h1>Fix That Pothole</h1>
+//   <MapComponent
+//     map={map}
+//   />
+// </div>
 export default App;
