@@ -17,7 +17,7 @@ class Login extends React.Component {
     const { user } = this.state;
     e.preventDefault();
     authRequests
-      .loginUser(user)
+      .fbLoginUser(user)
       .then(() => {
         this.props.history.push('/home');
       })

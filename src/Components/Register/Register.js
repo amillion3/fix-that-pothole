@@ -17,7 +17,7 @@ class Register extends React.Component {
     const { user } = this.state;
     e.preventDefault();
     authRequests
-      .registerUser(user)
+      .fbRegisterUser(user)
       .then(() => {
         this.props.history.push('/login');
       })
