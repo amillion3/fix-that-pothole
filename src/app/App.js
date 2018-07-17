@@ -2,23 +2,14 @@ import React, { Component } from 'react';
 import {Route, BrowserRouter, Redirect, Switch} from 'react-router-dom';
 import firebase from 'firebase';
 
-import OlMap from 'ol/map';
-import OlView from 'ol/view';
-import OlLayerTile from 'ol/layer/tile';
-import OlSourceOsm from 'ol/source/osm';
-import {MapComponent} from '@terrestris/react-geo';
-
 import Register from '../Components/Register/Register';
 import Login from '../Components/Login/Login';
-import Home from '../Components/Home/Home';
 import Navbar from '../Components/Navbar/Navbar';
-import MainComponent from '../Components/MainComponent/MainComponent';
+import Dashboard from '../Components/Dashboard/Dashboard';
 import firebaseApp from '../firebaseRequests/connection';
 
 import './App.css';
-import 'ol/ol.css';
-import 'antd/dist/antd.css';
-// import './react-geo.css';
+
 firebaseApp();
 
 const PrivateRoute = ({ component: Component, authed, ...rest}) => {
@@ -55,21 +46,6 @@ const PublicRoute = ({ component: Component, authed, ...rest}) => {
   );
 };
 
-// center coordinates are in EPSG:3857
-const center = [ -9657703.280456, 4318894.518143 ];
-
-const layer = new OlLayerTile({
-  source: new OlSourceOsm(),
-});
-
-const map = new OlMap({
-  view: new OlView({
-    center: center,
-    zoom: 16,
-  }),
-  layers: [layer],
-});
-
 class App extends Component {
   state = {
     authed: false,
@@ -103,7 +79,7 @@ class App extends Component {
           />
           <div className='overall-container'>
             <Switch>
-              <Route path='/' exact component={Home}/>
+              <Route exact path='/' component={Login}/>
               <PublicRoute
                 path='/register'
                 authed={this.state.authed}
@@ -113,9 +89,13 @@ class App extends Component {
                 authed={this.state.authed}
                 component={Login} />
               <PrivateRoute
-                path='/maincomponent'
+                path='/map'
                 authed={this.state.authed}
-                component={MainComponent} />
+                component={Map} />
+              <PrivateRoute
+                path='/dashboard'
+                authed={this.state.authed}
+                component={Dashboard} />
             </Switch>
           </div>
         </div>
@@ -123,10 +103,5 @@ class App extends Component {
     );
   }
 }
-// <div className="App">
-//   <h1>Fix That Pothole</h1>
-//   <MapComponent
-//     map={map}
-//   />
-// </div>
+
 export default App;
