@@ -11,13 +11,13 @@ import 'antd/dist/antd.css';
 // import './react-geo.css';
 import './Map.css';
 
-// center coordinates are in EPSG:3857
-const center = [ -9657703.280456, 4318894.518143 ];
-
 const layer = new OlLayerTile({
   source: new OlSourceOsm(),
 });
 
+const center = [ 788453.4890155146, 6573085.729161344 ];
+
+// create a new instance of ol.map in ES6 syntax
 const map = new OlMap({
   view: new OlView({
     center: center,
@@ -27,9 +27,10 @@ const map = new OlMap({
 });
 
 class Map extends React.Component {
+
   render () {
     return (
-      <div className="App">
+      <div className="map-container">
         <h1>Fix That Pothole</h1>
         <MapComponent
           map={map}
