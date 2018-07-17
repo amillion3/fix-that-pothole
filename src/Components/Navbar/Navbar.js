@@ -26,7 +26,7 @@ class Navbar extends React.Component {
             <img className='navbar-brand navbar-img-brand'src='http://www.clker.com/cliparts/1/d/8/a/13167253271330505170Pothole Symbol.svg.thumb.png' alt='icon' />
             {
               authed ? (
-                <Link to='/home' className='navbar-brand'>Fix That Pothole</Link>
+                <Link to='/map' className='navbar-brand'>Fix That Pothole</Link>
               ) : (
                 <Link to='/login' className='navbar-brand'>Fix That Pothole</Link>
               )

@@ -29,13 +29,11 @@ const map = new OlMap({
 class Map extends React.Component {
   render () {
     return (
-      <div>MAP
-        <div className="App">
-          <h1>Fix That Pothole</h1>
-          <MapComponent
-            map={map}
-          />
-        </div>
+      <div className="App">
+        <h1>Fix That Pothole</h1>
+        <MapComponent
+          map={map}
+        />
       </div>
     );
   }

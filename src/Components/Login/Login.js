@@ -19,7 +19,7 @@ class Login extends React.Component {
     authRequests
       .fbLoginUser(user)
       .then(() => {
-        this.props.history.push('/home');
+        this.props.history.push('/map');
       })
       .catch(error => {
         console.error('Error logging in, ', error);
