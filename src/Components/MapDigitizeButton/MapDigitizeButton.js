@@ -6,7 +6,7 @@ const testingtesting = '';
 
 class MapDigitizeButton extends React.Component {
 
-  abc123 = () => {
+  test = () => {
     console.error('abc123');
   }
   componentDidUpdate (prevProps) {
@@ -23,8 +23,7 @@ class MapDigitizeButton extends React.Component {
         className='col-xs-12 btn btn-danger'
         map={this.props.map}
         drawType="Point"
-        digitizeLayerName={testingtesting}
-        onClick={this.abc123}
+        // digitizeLayerName={testingtesting}
       >
       Draw point
       </DigitizeButton>

@@ -16,8 +16,9 @@ import './Map.css';
 // import { resolve } from 'url';
 
 class Map extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
+    this.mapDivId = `map-${Math.random()}`;
     const layer = new OlLayerTile({
       source: new OlSourceOsm(),
     });
@@ -36,6 +37,10 @@ class Map extends React.Component {
     });
   }
 
+  abc123 = () => {
+    console.error('abc123');
+  }
+
   render () {
     return (
       <div className="map-container col-xs-12">
@@ -44,7 +49,8 @@ class Map extends React.Component {
         />
         <div className='map-container-menu col-xs-12'>
           <MapDigitizeButton
-            map={this.mappityMap} />
+            map={this.mappityMap}
+          />
           {/* <DigitizeButton
             name="drawPoint"
             className='col-xs-12 btn btn-danger'
