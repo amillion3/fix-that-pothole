@@ -6,7 +6,8 @@ import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
 import {MapComponent} from '@terrestris/react-geo';
 
-import MenuItemAddPothole from '../MenuItemAddPothole/MenuItemAddPothole';
+// import MenuItemAddPothole from '../MenuItemAddPothole/MenuItemAddPothole';
+import MapDigitizeButton from '../MapDigitizeButton/MapDigitizeButton';
 
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
@@ -34,6 +35,7 @@ class Map extends React.Component {
       renderer: 'webgl',
     });
   }
+
   render () {
     return (
       <div className="map-container col-xs-12">
@@ -41,7 +43,16 @@ class Map extends React.Component {
           map={this.mappityMap}
         />
         <div className='map-container-menu col-xs-12'>
-          <MenuItemAddPothole />
+          <MapDigitizeButton
+            map={this.mappityMap} />
+          {/* <DigitizeButton
+            name="drawPoint"
+            className='col-xs-12 btn btn-danger'
+            map={this.mappityMap}
+            drawType="Point"
+          >
+          Draw point
+          </DigitizeButton> */}
         </div>
       </div>
     );
