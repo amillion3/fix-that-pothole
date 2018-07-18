@@ -10,30 +10,34 @@ import 'ol/ol.css';
 import 'antd/dist/antd.css';
 // import './react-geo.css';
 import './Map.css';
-
-const layer = new OlLayerTile({
-  source: new OlSourceOsm(),
-});
-
-const center = [ 788453.4890155146, 6573085.729161344 ];
-
-// create a new instance of ol.map in ES6 syntax
-const map = new OlMap({
-  view: new OlView({
-    center: center,
-    zoom: 16,
-  }),
-  layers: [layer],
-});
+// import { resolve } from 'url';
 
 class Map extends React.Component {
+  constructor () {
+    super();
+    const layer = new OlLayerTile({
+      source: new OlSourceOsm(),
+    });
 
+    // // center coordinates are in EPSG:3857
+    const center = [ -9657703.280456, 4318894.518143 ];
+
+    // // create a new instance of ol.map in ES6 syntax
+    this.mappityMap = new OlMap({
+      view: new OlView({
+        center: center,
+        zoom: 16,
+      }),
+      layers: [layer],
+      renderer: 'webgl',
+    });
+  }
   render () {
     return (
       <div className="map-container">
-        <h1>Fix That Pothole</h1>
+        <h1>Map.js Component</h1>
         <MapComponent
-          map={map}
+          map={this.mappityMap}
         />
       </div>
     );

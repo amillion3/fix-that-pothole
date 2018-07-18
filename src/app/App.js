@@ -7,6 +7,7 @@ import Login from '../Components/Login/Login';
 import Navbar from '../Components/Navbar/Navbar';
 import Dashboard from '../Components/Dashboard/Dashboard';
 import firebaseApp from '../firebaseRequests/connection';
+import Map from '../Components/Map/Map';
 
 import './App.css';
 
