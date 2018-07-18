@@ -6,6 +6,8 @@ import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
 import {MapComponent} from '@terrestris/react-geo';
 
+import MenuItemAddPothole from '../MenuItemAddPothole/MenuItemAddPothole';
+
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
 // import './react-geo.css';
@@ -34,11 +36,13 @@ class Map extends React.Component {
   }
   render () {
     return (
-      <div className="map-container">
-        <h1>Map.js Component</h1>
+      <div className="map-container col-xs-12">
         <MapComponent
           map={this.mappityMap}
         />
+        <div className='map-container-menu col-xs-12'>
+          <MenuItemAddPothole />
+        </div>
       </div>
     );
   }
