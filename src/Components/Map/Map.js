@@ -32,7 +32,18 @@ class Map extends React.Component {
 
   componentDidMount () {
     this.map.setTarget(this.mapDivId);
+    // console.error('moo', this.state.digitizeLayer.sourceChangeKey_.target.featuresCollection_.array_[0].values_.geometry.flatCoordinates[0]);
+    // const test = this.state.digitizeLayer.sourceChangeKey_.target.featuresCollection_.array_[12345].values_.geometry.flatCoordinates[0];
+    // if (this.state.digitizeLayer.sourceChangeKey_.target.featuresCollection_.array_[12345].values_.geometry.flatCoordinates[0] !== null) {
+    //   console.error(test);
+    // }
+
   }
+
+  componentDidUpdate () {
+    console.error(this.state);
+  }
+
   render () {
     return (
       <div className='map-container'>
@@ -48,6 +59,7 @@ class Map extends React.Component {
               name="drawPoint"
               map={this.map}
               drawType="Point"
+              digitizeLayerName='testingtesting'
             >
             Draw point
             </DigitizeButton>
