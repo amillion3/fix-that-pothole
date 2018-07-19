@@ -1,9 +1,19 @@
-.map-container {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 83vh;
-  border: 5px solid white;
+.mappityMap {
+  background-color: #ddd;
+  box-shadow: 0px 4px 4px #666;
+  text-align: center;
+  margin: 7px;
+}
+.mappityMap:after {
+  content: "";
+  left: 2px;
+  right: 2px;
+  height: 10px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: -10;
+  box-shadow: 0px -1px 4px #aaa;
 }
 
 .map-container-menu {

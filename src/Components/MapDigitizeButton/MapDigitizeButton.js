@@ -1,9 +1,6 @@
 import React from 'react';
 // const {ToggleGroup, DigitizeButton} = require('../../index');
 import { DigitizeButton } from '@terrestris/react-geo';
-
-const testingtesting = '';
-
 class MapDigitizeButton extends React.Component {
 
   test = () => {

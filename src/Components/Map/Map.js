@@ -4,61 +4,120 @@ import OlMap from 'ol/map';
 import OlView from 'ol/view';
 import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
-import {MapComponent} from '@terrestris/react-geo';
-
-// import MenuItemAddPothole from '../MenuItemAddPothole/MenuItemAddPothole';
-import MapDigitizeButton from '../MapDigitizeButton/MapDigitizeButton';
+import OlProj from 'ol/proj';
+import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
 
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
 // import './react-geo.css';
 import './Map.css';
-// import { resolve } from 'url';
 
 class Map extends React.Component {
   constructor (props) {
     super(props);
     this.mapDivId = `map-${Math.random()}`;
-    const layer = new OlLayerTile({
-      source: new OlSourceOsm(),
-    });
 
-    // // center coordinates are in EPSG:3857
-    const center = [ -9657703.280456, 4318894.518143 ];
-
-    // // create a new instance of ol.map in ES6 syntax
-    this.mappityMap = new OlMap({
+    this.map = new OlMap({
+      layers: [
+        new OlLayerTile({
+          name: 'OSM',
+          source: new OlSourceOsm(),
+        }),
+      ],
       view: new OlView({
-        center: center,
-        zoom: 16,
+        center: OlProj.fromLonLat([-86.7587529,36.1325381]),
+        zoom: 14,
       }),
-      layers: [layer],
-      renderer: 'webgl',
     });
   }
 
-  abc123 = () => {
-    console.error('abc123');
+  componentDidMount () {
+    this.map.setTarget(this.mapDivId);
   }
-
   render () {
     return (
-      <div className="map-container col-xs-12">
-        <MapComponent
-          map={this.mappityMap}
+      <div>
+        <div
+          id={this.mapDivId}
+          className='mappityMap'
         />
-        <div className='map-container-menu col-xs-12'>
-          <MapDigitizeButton
-            map={this.mappityMap}
-          />
-          {/* <DigitizeButton
-            name="drawPoint"
-            className='col-xs-12 btn btn-danger'
-            map={this.mappityMap}
-            drawType="Point"
-          >
-          Draw point
-          </DigitizeButton> */}
+
+        <div>
+          <span>Select a digitize type:</span>
+          <ToggleGroup>
+            <DigitizeButton
+              name="drawPoint"
+              map={this.map}
+              drawType="Point"
+            >
+            Draw point
+            </DigitizeButton>
+
+            <DigitizeButton
+              name="drawLine"
+              map={this.map}
+              drawType="LineString"
+            >
+            Draw line
+            </DigitizeButton>
+
+            <DigitizeButton
+              name="drawPolygon"
+              map={this.map}
+              drawType="Polygon"
+            >
+            Draw polygon
+            </DigitizeButton>
+
+            <DigitizeButton
+              name="drawCircle"
+              map={this.map}
+              drawType="Circle"
+            >
+            Draw circle
+            </DigitizeButton>
+
+            <DigitizeButton
+              name="drawRectangle"
+              map={this.map}
+              drawType="Rectangle"
+            >
+            Draw rectangle
+            </DigitizeButton>
+
+            <DigitizeButton
+              name="drawText"
+              map={this.map}
+              drawType="Text"
+            >
+            Draw text label
+            </DigitizeButton>
+
+            <DigitizeButton
+              name="selectAndModify"
+              map={this.map}
+              editType="Edit"
+            >
+            Select and modify features
+            </DigitizeButton>
+
+            <DigitizeButton
+              name="copyFeature"
+              map={this.map}
+              editType="Copy"
+            >
+            Copy features
+            </DigitizeButton>
+
+            <DigitizeButton
+              name="deleteFeature"
+              map={this.map}
+              editType="Delete"
+            >
+            Delete features
+            </DigitizeButton>
+
+          </ToggleGroup>
         </div>
       </div>
     );
