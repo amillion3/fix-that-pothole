@@ -1,5 +1,4 @@
 import React from 'react';
-
 import OlMap from 'ol/map';
 import OlView from 'ol/view';
 import OlLayerTile from 'ol/layer/tile';
@@ -36,7 +35,7 @@ class Map extends React.Component {
   }
   render () {
     return (
-      <div>
+      <div className='map-container'>
         <div
           id={this.mapDivId}
           className='mappityMap'
