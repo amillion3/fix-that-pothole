@@ -1,25 +1,23 @@
 {
-	"potholes": {
-		"user1": {
-            "nameId": "dk38sdk4037dl30",
-            "nameFirst": "Steve",
-            "nameLast": "Harrington",
-            "userEmail": "steveharrington@gmail.com",
-            "isAdmin": true
-		},
-		"user2": {
-			"nameId": "dk34398djkv8d83",
-            "nameFirst": "Jim",
-            "nameLast": "Hopper",
-            "userEmail": "hopper@gmail.com",
-            "isAdmin": true
-        },
-        "user3": {
-			"nameId": "3489dsk09dd037dl30",
-            "nameFirst": "Nancy",
-            "nameLast": "Wheeler",
-            "userEmail": "nance@gmail.com",
-            "isAdmin": false
-		}
-	}
+    "user1": {
+        "nameId": "dk38sdk4037dl30",
+        "nameFirst": "Steve",
+        "nameLast": "Harrington",
+        "userEmail": "steveharrington@gmail.com",
+        "isAdmin": true
+    },
+    "user2": {
+        "nameId": "dk34398djkv8d83",
+        "nameFirst": "Jim",
+        "nameLast": "Hopper",
+        "userEmail": "hopper@gmail.com",
+        "isAdmin": true
+    },
+    "user3": {
+        "nameId": "3489dsk09dd037dl30",
+        "nameFirst": "Nancy",
+        "nameLast": "Wheeler",
+        "userEmail": "nance@gmail.com",
+        "isAdmin": false
+    }
 }

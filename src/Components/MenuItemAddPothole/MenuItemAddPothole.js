@@ -2,14 +2,6 @@ import React from 'react';
 
 class MenuItemAddPothole extends React.Component {
 
-  eventAddNewPothole = e => {
-    console.error('eventAddNewPothole', e);
-  };
-
-  eventDashboard = e => {
-    console.error('eventDashboard', e);
-  };
-
   render () {
     return (
       <div className='col-xs-12'>
