@@ -12,6 +12,11 @@ import 'antd/dist/antd.css';
 import './Map.css';
 
 class Map extends React.Component {
+  state = {
+    x: '',
+    y: '',
+  }
+
   constructor (props) {
     super(props);
     this.mapDivId = `map-${Math.random()}`;
@@ -35,14 +40,26 @@ class Map extends React.Component {
   }
 
   componentDidUpdate () {
-    console.error('hi');
+    console.error('compDidUpdate!');
   }
 
   render () {
-
     const handleClick = e => {
-      console.error('clickity', e);
-      console.error(e.feature.geometryChangeKey_.target.flatCoordinates);
+      const coordinates = e.feature.geometryChangeKey_.target.flatCoordinates;
+      this.setState({
+        x: coordinates[0],
+        y: coordinates[1],
+      });
+      console.error(this.state);
+      // 1. call a modal to enter attributes?
+      // might need to expand state to capture these
+      // 2. will need to capture all attributes and
+      // send to firebase and then
+      // 3. setState to default
+      // 4. after each point is created, make sure that
+      // the 'digitize point' on next mouse click goes
+      // away. I want the user to have to click the
+      // 'Add Point' button before adding another
     };
 
     return (
