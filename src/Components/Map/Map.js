@@ -1,47 +1,87 @@
 import React from 'react';
-
 import OlMap from 'ol/map';
 import OlView from 'ol/view';
 import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
-import {MapComponent} from '@terrestris/react-geo';
-
-import MenuItemAddPothole from '../MenuItemAddPothole/MenuItemAddPothole';
+import OlProj from 'ol/proj';
+import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
 
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
 // import './react-geo.css';
 import './Map.css';
-// import { resolve } from 'url';
 
 class Map extends React.Component {
-  constructor () {
-    super();
-    const layer = new OlLayerTile({
-      source: new OlSourceOsm(),
-    });
+  state = {
+    x: '',
+    y: '',
+  }
 
-    // // center coordinates are in EPSG:3857
-    const center = [ -9657703.280456, 4318894.518143 ];
+  constructor (props) {
+    super(props);
+    this.mapDivId = `map-${Math.random()}`;
 
-    // // create a new instance of ol.map in ES6 syntax
-    this.mappityMap = new OlMap({
+    this.map = new OlMap({
+      layers: [
+        new OlLayerTile({
+          name: 'OSM',
+          source: new OlSourceOsm(),
+        }),
+      ],
       view: new OlView({
-        center: center,
-        zoom: 16,
+        center: OlProj.fromLonLat([-86.7587529,36.1325381]),
+        zoom: 14,
       }),
-      layers: [layer],
-      renderer: 'webgl',
     });
   }
+
+  componentDidMount () {
+    this.map.setTarget(this.mapDivId);
+  }
+
+  componentDidUpdate () {
+    console.error('compDidUpdate!');
+  }
+
   render () {
+    const handleClick = e => {
+      const coordinates = e.feature.geometryChangeKey_.target.flatCoordinates;
+      this.setState({
+        x: coordinates[0],
+        y: coordinates[1],
+      });
+      console.error(this.state);
+      // 1. call a modal to enter attributes?
+      // might need to expand state to capture these
+      // 2. will need to capture all attributes and
+      // send to firebase and then
+      // 3. setState to default
+      // 4. after each point is created, make sure that
+      // the 'digitize point' on next mouse click goes
+      // away. I want the user to have to click the
+      // 'Add Point' button before adding another
+    };
+
     return (
-      <div className="map-container col-xs-12">
-        <MapComponent
-          map={this.mappityMap}
+      <div className='map-container'>
+        <div
+          id={this.mapDivId}
+          className='mappityMap'
         />
-        <div className='map-container-menu col-xs-12'>
-          <MenuItemAddPothole />
+
+        <div>
+          <span>Select a digitize type:</span>
+          <ToggleGroup>
+            <DigitizeButton
+              name="drawPoint"
+              map={this.map}
+              drawType="Point"
+              digitizeLayerName='testingtesting'
+              onDrawEnd={handleClick}
+            >
+            Draw point
+            </DigitizeButton>
+          </ToggleGroup>
         </div>
       </div>
     );
