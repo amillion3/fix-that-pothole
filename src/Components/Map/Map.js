@@ -40,6 +40,11 @@ class Map extends React.Component {
 
   render () {
 
+    const handleClick = e => {
+      console.error('clickity', e);
+      console.error(e.feature.geometryChangeKey_.target.flatCoordinates);
+    };
+
     return (
       <div className='map-container'>
         <div
@@ -55,74 +60,10 @@ class Map extends React.Component {
               map={this.map}
               drawType="Point"
               digitizeLayerName='testingtesting'
+              onDrawEnd={handleClick}
             >
             Draw point
             </DigitizeButton>
-
-            <DigitizeButton
-              name="drawLine"
-              map={this.map}
-              drawType="LineString"
-            >
-            Draw line
-            </DigitizeButton>
-
-            <DigitizeButton
-              name="drawPolygon"
-              map={this.map}
-              drawType="Polygon"
-            >
-            Draw polygon
-            </DigitizeButton>
-
-            <DigitizeButton
-              name="drawCircle"
-              map={this.map}
-              drawType="Circle"
-            >
-            Draw circle
-            </DigitizeButton>
-
-            <DigitizeButton
-              name="drawRectangle"
-              map={this.map}
-              drawType="Rectangle"
-            >
-            Draw rectangle
-            </DigitizeButton>
-
-            <DigitizeButton
-              name="drawText"
-              map={this.map}
-              drawType="Text"
-            >
-            Draw text label
-            </DigitizeButton>
-
-            <DigitizeButton
-              name="selectAndModify"
-              map={this.map}
-              editType="Edit"
-            >
-            Select and modify features
-            </DigitizeButton>
-
-            <DigitizeButton
-              name="copyFeature"
-              map={this.map}
-              editType="Copy"
-            >
-            Copy features
-            </DigitizeButton>
-
-            <DigitizeButton
-              name="deleteFeature"
-              map={this.map}
-              editType="Delete"
-            >
-            Delete features
-            </DigitizeButton>
-
           </ToggleGroup>
         </div>
       </div>
