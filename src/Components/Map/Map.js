@@ -13,8 +13,11 @@ import './Map.css';
 
 class Map extends React.Component {
   state = {
-    x: '',
-    y: '',
+    newPothole: {
+      coordX: '',
+      coordY: '',
+    },
+
   }
 
   constructor (props) {
@@ -47,8 +50,10 @@ class Map extends React.Component {
     const handleClick = e => {
       const coordinates = e.feature.geometryChangeKey_.target.flatCoordinates;
       this.setState({
-        x: coordinates[0],
-        y: coordinates[1],
+        newPothole: {
+          coordX: coordinates[0],
+          coordY: coordinates[1],
+        },
       });
       console.error(this.state);
       // 1. call a modal to enter attributes?
