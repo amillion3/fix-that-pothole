@@ -6,18 +6,38 @@ import OlSourceOsm from 'ol/source/osm';
 import OlProj from 'ol/proj';
 import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
 
+import potholeRequests from '../../firebaseRequests/potholeRequests';
+
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
 // import './react-geo.css';
 import './Map.css';
 
+// const defaultState = {
+//   coordLat: '',
+//   coordLong: '',
+//   createdBy: '',
+//   descriptionNotes: '',
+//   itemId: '',
+//   severity: '',
+//   status: '',
+//   updated: false,
+//   updatedDate: '',
+//   updatedUserId: '',
+// };
+
 class Map extends React.Component {
   state = {
-    newPothole: {
-      coordX: '',
-      coordY: '',
-    },
-
+    coordLat: '',
+    coordLong: '',
+    createdBy: '',
+    descriptionNotes: '',
+    itemId: '',
+    severity: '',
+    status: '',
+    updated: false,
+    updatedDate: '',
+    updatedUserId: '',
   }
 
   constructor (props) {
@@ -43,19 +63,32 @@ class Map extends React.Component {
   }
 
   componentDidUpdate () {
-    console.error('compDidUpdate!');
+    // console.error('compDidUpdate!', this.state);
+    potholeRequests.potholePOST(this.state);
+    // this.setState(defaultState);
+    // console.error('default state should be blank', this.state);
   }
 
   render () {
     const handleClick = e => {
       const coordinates = e.feature.geometryChangeKey_.target.flatCoordinates;
+      const convertedCoordinates = OlProj.toLonLat(coordinates);
       this.setState({
-        newPothole: {
-          coordX: coordinates[0],
-          coordY: coordinates[1],
-        },
+        coordLat: convertedCoordinates[1],
+        coordLong: convertedCoordinates[0],
+        createdBy: '',
+        descriptionNotes: '',
+        itemId: '',
+        severity: '',
+        status: '',
+        updated: false,
+        updatedDate: new Date().toLocaleDateString('en-US'),
+        updatedUserId: '',
       });
       console.error(this.state);
+      // const sample = OlProj.toLonLat(coordinates);
+      // console.error('converted', sample);
+
       // 1. call a modal to enter attributes?
       // might need to expand state to capture these
       // 2. will need to capture all attributes and
