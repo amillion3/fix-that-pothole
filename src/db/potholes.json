@@ -2,6 +2,7 @@
     "sample1": {
         "itemId": 1,
         "createdBy": "d934ks0l0slsksjdancudk37373",
+        "createdDate": "7/19/2018",
         "coordLat": 36.1645083,
         "coordLong": -86.7974366,
         "status": "Newly Added",
@@ -14,6 +15,7 @@
     "sample2": {
         "itemId": 2,
         "createdBy": "d934ks0l0slsksjdancudk37373",
+        "createdDate": "6/9/2018",
         "coordLat": 36.158346,
         "coordLong": -86.7740357,
         "status": "Newly Added",
@@ -26,6 +28,7 @@
     "sample3": {
         "itemId": 3,
         "createdBy": "d934ks0l0slsksjdancudk37373",
+        "createdDate": "1/1/2018",
         "coordLat": 36.148399,
         "coordLong": -86.762028,
         "status": "Newly Added",

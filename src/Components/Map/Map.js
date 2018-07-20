@@ -6,6 +6,7 @@ import OlSourceOsm from 'ol/source/osm';
 import OlProj from 'ol/proj';
 import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
 
+import auth from '../../firebaseRequests/auth';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import 'ol/ol.css';
@@ -17,6 +18,7 @@ import './Map.css';
 //   coordLat: '',
 //   coordLong: '',
 //   createdBy: '',
+//   createdDate: '',
 //   descriptionNotes: '',
 //   itemId: '',
 //   severity: '',
@@ -31,6 +33,7 @@ class Map extends React.Component {
     coordLat: '',
     coordLong: '',
     createdBy: '',
+    createdDate: '',
     descriptionNotes: '',
     itemId: '',
     severity: '',
@@ -76,13 +79,14 @@ class Map extends React.Component {
       this.setState({
         coordLat: convertedCoordinates[1],
         coordLong: convertedCoordinates[0],
-        createdBy: '',
+        createdBy: auth.fbGetUid(),
+        createdDate: new Date().toLocaleDateString('en-US'),
         descriptionNotes: '',
         itemId: '',
         severity: '',
-        status: '',
+        status: 'Newly added',
         updated: false,
-        updatedDate: new Date().toLocaleDateString('en-US'),
+        updatedDate: '',
         updatedUserId: '',
       });
       console.error(this.state);
