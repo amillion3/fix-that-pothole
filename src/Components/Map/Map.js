@@ -66,10 +66,7 @@ class Map extends React.Component {
   }
 
   componentDidUpdate () {
-    // console.error('compDidUpdate!', this.state);
     potholeRequests.potholePOST(this.state);
-    // this.setState(defaultState);
-    // console.error('default state should be blank', this.state);
   }
 
   render () {
@@ -89,7 +86,6 @@ class Map extends React.Component {
         updatedDate: '',
         updatedUserId: '',
       });
-      console.error(this.state);
       // const sample = OlProj.toLonLat(coordinates);
       // console.error('converted', sample);
 
@@ -119,8 +115,7 @@ class Map extends React.Component {
               map={this.map}
               drawType="Point"
               digitizeLayerName='testingtesting'
-              onDrawEnd={handleClick}
-            >
+              onDrawEnd={handleClick}>
             Draw point
             </DigitizeButton>
           </ToggleGroup>

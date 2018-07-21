@@ -5,16 +5,15 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 import './PotholeCompleteRecord.css';
 
 class PotholeCompleteRecord extends React.Component {
-  state = {
+  state = {}
 
-  }
   componentDidMount () {
     const firebaseId = this.props.match.params.id;
+    // this gets the firebaseId
     potholeRequests
       .potholeGETSingle(firebaseId)
       .then(response => {
-        console.error('response', response);
-        this.setState(response.data);
+        this.setState(response);
       })
       .catch(err => {
         console.error(err);
@@ -22,12 +21,30 @@ class PotholeCompleteRecord extends React.Component {
   }
 
   render () {
+    const p = this.state;
     return (
       <div>
-        <h2>{this.state.status}</h2>
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <p><strong>Id: </strong>{p.itemId}</p>
+            <p><strong>Created Date: </strong>{p.createdDate}</p>
+            <p><strong>Created By: </strong>{p.createdBy}</p>
+            <p><strong>Status: </strong>{p.status}</p>
+            <p><strong>Severity: </strong>{p.severity}</p>
+            <p><strong>Notes: </strong>{p.descriptionNotes}</p>
+            <p><strong>Updated ? </strong>{p.updated}</p>
+            <p><strong>Updated Date: </strong>{p.updatedDate}</p>
+            <p><strong>Updated By: </strong>{p.updatedUserId}</p>
+            <p><strong>Latitude: </strong>{p.coordLat}</p>
+            <p><strong>Longitude: </strong>{p.coordLong}</p>
+          </div>
+        </div>
       </div>
     );
   }
 }
+
+// back button would be nice
+// collapse with a map marker
 
 export default PotholeCompleteRecord;

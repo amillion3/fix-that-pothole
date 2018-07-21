@@ -6,7 +6,6 @@ import './Navbar.css';
 
 class Navbar extends React.Component {
   render () {
-    console.error('navbar this props', this.props);
     const {authed, userWantsToLogOut} = this.props;
 
     const logoutClicked = () => {

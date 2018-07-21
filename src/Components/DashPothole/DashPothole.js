@@ -1,8 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 
-import potholeRequests from '../../firebaseRequests/potholeRequests';
-
 import './DashPothole.css';
 
 class DashPothole extends React.Component {
@@ -10,19 +8,7 @@ class DashPothole extends React.Component {
   render () {
     const {details} = this.props;
     const clickSinglePothole = () => {
-      potholeRequests
-        .potholeGETSingle(details.id)
-        .then(response => {
-          this.setState(response);
-        })
-        .then(response => {
-          console.error('details.id', details.id);
-          this.props.history.push(`/pothole/${details.id}`);
-        }
-        )
-        .catch(err => {
-          console.error(err);
-        });
+      this.props.history.push(`/pothole/${details.id}`);
     };
 
     return (
@@ -35,14 +21,11 @@ class DashPothole extends React.Component {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={clickSinglePothole}
-
-          >
-            click
+            onClick={clickSinglePothole}>
+            Full Record
           </button>
-          &#9783;</td>
+        </td>
       </tr>
-
     );
   }
 };
