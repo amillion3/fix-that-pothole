@@ -7,13 +7,14 @@ import './Dashboard.css';
 
 class Dashboard extends React.Component {
   state = {
+    potholes: [],
   };
 
   componentDidMount () {
     potholeRequests
       .potholesGETAll()
       .then(a => {
-        this.setState({a});
+        this.setState({potholes: a});
       })
       .catch(err => {
         console.error('Error with getting pothole records: ', err);
@@ -21,9 +22,10 @@ class Dashboard extends React.Component {
   }
 
   render () {
-    const potholeComponents = this.state.map(pothole => {
+    const potholeComponents = this.state.potholes.map(pothole => {
       return (
         <DashPothole
+          details={pothole}
           key={pothole.id}
           status={pothole.status}
           createdDate={pothole.createdDate}
@@ -35,21 +37,22 @@ class Dashboard extends React.Component {
     });
 
     return (
-      <div className='table-responsive table-condensed'>
+      <div className='table-responsive table-condensed table-bordered'>
         <table>
-          <tr>
-            <th>Status</th>
-            <th>Date</th>
-            <th>Severity</th>
-            <th>Notes</th>
-            <th>Full Details</th>
-          </tr>
-          <tr>
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Severity</th>
+              <th>Notes</th>
+              <th>Full Details</th>
+            </tr>
+          </thead>
+          <tbody>
             {potholeComponents}
-          </tr>
+          </tbody>
         </table>
       </div>
-
     );
   }
 };
