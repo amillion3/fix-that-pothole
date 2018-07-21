@@ -37,15 +37,15 @@ class Dashboard extends React.Component {
     });
 
     return (
-      <div className='table-bordered'>
-        <table>
+      <div className=''>
+        <table className='table table-hover'>
           <thead>
-            <tr>
+            <tr className=''>
               <th>Status</th>
               <th>Date</th>
               <th>Severity</th>
               <th>Notes</th>
-              <th>Full Details</th>
+              <th>More...</th>
             </tr>
           </thead>
           <tbody>

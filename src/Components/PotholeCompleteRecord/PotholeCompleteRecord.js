@@ -37,6 +37,12 @@ class PotholeCompleteRecord extends React.Component {
             <p><strong>Updated By: </strong>{p.updatedUserId}</p>
             <p><strong>Latitude: </strong>{p.coordLat}</p>
             <p><strong>Longitude: </strong>{p.coordLong}</p>
+            <div className='col-xs-6'>
+              <button className='btn btn-info col-xs-12'>Edit Record</button>
+            </div>
+            <div className='col-xs-6'>
+              <button className='btn btn-danger col-xs-12'>Delete Record</button>
+            </div>
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@ class DashPothole extends React.Component {
         <td>{details.status}</td>
         <td>{details.createdDate}</td>
         <td>{details.severity}</td>
-        <td>{details.descriptionNotes}</td>
+        <td className='overflow-hidden'>{details.descriptionNotes}</td>
         <td>
           <button
             type="button"
