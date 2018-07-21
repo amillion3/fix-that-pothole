@@ -37,7 +37,7 @@ class Dashboard extends React.Component {
     });
 
     return (
-      <div className='table-responsive table-condensed table-bordered'>
+      <div className='table-bordered'>
         <table>
           <thead>
             <tr>
