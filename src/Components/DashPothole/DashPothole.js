@@ -1,21 +1,29 @@
 import React from 'react';
 
-import DashModal from '../DashModal/DashModal';
+import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './DashPothole.css';
 
 class DashPothole extends React.Component {
-
+  state = {};
   render () {
     const {details} = this.props;
-    const openModalSinglePothole = e => {
-      console.error('details', details.id);
-      return (
-        <DashModal
-          firebaseId={details.id}
-          details={details}
-        />
-      );
+
+    const clickSinglePothole = () => {
+      potholeRequests
+        .potholeGETSingle(details.id)
+        .then(response => {
+          this.setState(response);
+        })
+        .then(response => {
+          console.error('details.id', details.id);
+          this.props.history.push(`/pothole/${details.id}`);
+        }
+        )
+        .catch(err => {
+          console.error(err);
+        });
+
     };
 
     return (
@@ -28,7 +36,7 @@ class DashPothole extends React.Component {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={openModalSinglePothole}
+            onClick={clickSinglePothole}
           >
             click
           </button>

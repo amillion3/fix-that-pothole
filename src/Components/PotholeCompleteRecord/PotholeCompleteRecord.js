@@ -5,7 +5,7 @@ import './PotholeCompleteRecord.css';
 class PotholeCompleteRecord extends React.Component {
   render () {
     return (
-      <div></div>
+      <div>single record</div>
     );
   }
 }

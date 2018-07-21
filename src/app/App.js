@@ -99,7 +99,7 @@ class App extends Component {
                 authed={this.state.authed}
                 component={Dashboard} />
               <PrivateRoute
-                path='/pothole'
+                path='/pothole/:id'
                 authed={this.state.authed}
                 component={PotholeCompleteRecord} />
             </Switch>
