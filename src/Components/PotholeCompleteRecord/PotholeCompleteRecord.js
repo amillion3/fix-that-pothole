@@ -4,11 +4,12 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './PotholeCompleteRecord.css';
 
+let firebaseId = '';
 class PotholeCompleteRecord extends React.Component {
   state = {}
 
   componentDidMount () {
-    const firebaseId = this.props.match.params.id;
+    firebaseId = this.props.match.params.id;
     // this gets the firebaseId
     potholeRequests
       .potholeGETSingle(firebaseId)
@@ -22,6 +23,13 @@ class PotholeCompleteRecord extends React.Component {
 
   render () {
     const p = this.state;
+    const clickDeleteButton = () => {
+      potholeRequests
+        .potholeDELETE(firebaseId)
+        .then(response => {
+          this.props.history.push(`/dashboard`);
+        });
+    };
     return (
       <div>
         <div className="panel panel-default">
@@ -41,7 +49,10 @@ class PotholeCompleteRecord extends React.Component {
               <button className='btn btn-info col-xs-12'>Edit Record</button>
             </div>
             <div className='col-xs-6'>
-              <button className='btn btn-danger col-xs-12'>Delete Record</button>
+              <button
+                className='btn btn-danger col-xs-12'
+                onClick={clickDeleteButton}
+              >Delete Record</button>
             </div>
           </div>
         </div>
