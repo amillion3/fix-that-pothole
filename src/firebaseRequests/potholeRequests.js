@@ -60,4 +60,17 @@ const potholeDELETE = firebaseId => {
   });
 };
 
-export default {potholePOST, potholesGETAll, potholeGETSingle, potholeDELETE};
+const potholePUT = (firebaseId, updatedPothole) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(`${constants.firebaseConfig.databaseURL}/potholes/${firebaseId}.json`, updatedPothole)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export default {potholePOST, potholesGETAll, potholeGETSingle, potholeDELETE, potholePUT};
