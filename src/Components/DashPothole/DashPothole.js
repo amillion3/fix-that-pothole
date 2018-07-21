@@ -10,10 +10,12 @@ class DashPothole extends React.Component {
     const {details} = this.props;
     const openModalSinglePothole = e => {
       console.error('details', details.id);
-      return <DashModal
-        firebaseId={details.id}
-        details={details}
-      />;
+      return (
+        <DashModal
+          firebaseId={details.id}
+          details={details}
+        />
+      );
     };
 
     return (

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Modal} from 'react-bootstrap';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 
@@ -15,6 +14,7 @@ class DashModal extends React.Component {
       .potholeGETSingle(this.props.firebaseId)
       .then(response => {
         this.setState(response.data);
+        console.error('dashmodal this.state', this.state);
       })
       .catch(err => {
         console.error(err);
@@ -22,13 +22,26 @@ class DashModal extends React.Component {
   }
 
   render () {
-    const {details} = this.props;
+    // const {details} = this.props;
     return (
-      <div className="static-modal">
-        <Modal.Dialog>
-          <h1>{details.status}</h1>
-        </Modal.Dialog>
+      <div>
+        <h1>HIHIHI</h1>
       </div>
+      // <div className="modal fade" id="myModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
+      //   <div className="modal-dialog" role="document">
+      //     <div className="modal-content">
+      //       <div className="modal-header">
+      //         <h4 className="modal-title" id="myModalLabel">{details.status}</h4>
+      //       </div>
+      //       <div className="modal-body">
+      //         ...
+      //       </div>
+      //       <div className="modal-footer">
+      //         ...
+      //       </div>
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 }
