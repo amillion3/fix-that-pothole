@@ -5,8 +5,8 @@ const potholePOST = newPothole => {
   return new Promise((resolve, reject) => {
     axios
       .post(`${constants.firebaseConfig.databaseURL}/potholes.json`, newPothole)
-      .then(res => {
-        resolve(res);
+      .then(response => {
+        resolve(response);
       })
       .catch(err => {
         reject(err);
@@ -14,4 +14,37 @@ const potholePOST = newPothole => {
   });
 };
 
-export default {potholePOST};
+const potholesGETAll = () => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${constants.firebaseConfig.databaseURL}/potholes.json`)
+      .then(response => {
+        const potholeArray = [];
+        if (response.data !== null) {
+          Object.keys(response.data).forEach(fbKey => {
+            response.data[fbKey].id = fbKey;
+            potholeArray.push(response.data[fbKey]);
+          });
+        }
+        resolve(potholeArray);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
+const potholeGETSingle = id => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${constants.firebaseConfig.databaseURL}/potholes/${id}.json`)
+      .then(response => {
+        resolve(response.data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
+export default {potholePOST, potholesGETAll, potholeGETSingle};

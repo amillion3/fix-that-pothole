@@ -6,6 +6,7 @@ import Register from '../Components/Register/Register';
 import Login from '../Components/Login/Login';
 import Navbar from '../Components/Navbar/Navbar';
 import Dashboard from '../Components/Dashboard/Dashboard';
+import PotholeCompleteRecord from '../Components/PotholeCompleteRecord/PotholeCompleteRecord';
 import firebaseApp from '../firebaseRequests/connection';
 import Map from '../Components/Map/Map';
 
@@ -97,6 +98,10 @@ class App extends Component {
                 path='/dashboard'
                 authed={this.state.authed}
                 component={Dashboard} />
+              <PrivateRoute
+                path='/pothole/:id'
+                authed={this.state.authed}
+                component={PotholeCompleteRecord} />
             </Switch>
           </div>
         </div>
