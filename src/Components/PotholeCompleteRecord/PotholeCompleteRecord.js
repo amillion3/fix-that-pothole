@@ -18,6 +18,9 @@ class PotholeCompleteRecord extends React.Component {
       .then(response => {
         this.setState(response);
       })
+      .then(() => {
+        this.setState({isEditing: false});
+      })
       .catch(err => {
         console.error(err);
       });
@@ -30,14 +33,10 @@ class PotholeCompleteRecord extends React.Component {
   // };
 
   changeStatus = e => {
-    const tempVal = {...this.state.status };
-    tempVal.status = e.target.value;
-    this.setState({status: tempVal.status});
+    this.setState({status: e.target.value});
   };
   changeSeverity = e => {
-    const tempVal = {...this.state.severity };
-    tempVal.severity = e.target.value;
-    this.setState({severity: tempVal.severity});
+    this.setState({severity: e.target.value});
   };
   changeDescriptionNotes = e => {
     const tempVal = {...this.state.descriptionNotes };
@@ -154,23 +153,20 @@ class PotholeCompleteRecord extends React.Component {
                         value={p.createdDate}
                         readOnly />
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="status">Status:</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="status"
-                        value={this.state.status}
-                        onChange={this.changeStatus}/>
+                    <div>
+                      <select value={this.state.status} onChange={this.changeStatus}>
+                        <option value="Newly Added" onChange={this.changeStatus}>Newly Added</option>
+                        <option value="Pothole Assigned" onChange={this.changeStatus}>Pothole Assigned</option>
+                        <option value="Pothole Fixed" onChange={this.changeStatus}>Pothole Fixed</option>
+                        <option value="Problem With Repair" onChange={this.changeStatus}>Problem With Repair</option>
+                      </select>
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="severity">Severity</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="severity"
-                        value={p.severity}
-                        onChange={this.changeSeverity}/>
+                    <div>
+                      <select value={this.state.severity} onChange={this.changeSeverity}>
+                        <option value="Low" onChange={this.changeSeverity}>Low</option>
+                        <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
+                        <option value="Severe" onChange={this.changeSeverity}>Severe</option>
+                      </select>
                     </div>
                     <div className="form-group">
                       <label htmlFor="descriptionNotes">Notes:</label>
