@@ -6,7 +6,11 @@ import './PotholeCompleteRecord.css';
 
 let firebaseId = '';
 class PotholeCompleteRecord extends React.Component {
-  state = {}
+  state = {
+    display: {
+      isEditing: false,
+    },
+  }
 
   componentDidMount () {
     firebaseId = this.props.match.params.id;
@@ -21,8 +25,120 @@ class PotholeCompleteRecord extends React.Component {
       });
   }
 
+  changeStatus = e => {};
+  changeSeverity = e => {};
+  changeDescriptionNotes = e => {};
+  changeLatitude = e => {};
+  changeLongitude = e => {};
+
+  changeStatus = e => {};
+  changeStatus = e => {};
+
   render () {
     const p = this.state;
+    const clickEditButton = () => {
+      return (
+
+        //     <p><strong>Latitude: </strong>{p.coordLat}</p>
+        //     <p><strong>Longitude: </strong>{p.coordLong}</p>
+        <div>
+          <form className="form-inline">
+            <div className="form-group">
+              <label htmlFor="firebaseId">Id:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="firebaseId"
+                value={p.itemId}
+                readOnly/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="createdDate">Created Date:</label>
+              <input
+                type="date"
+                className="form-control"
+                id="createdDate"
+                value={p.createdDate}
+                readOnly />
+            </div>
+            <div className="form-group">
+              <label htmlFor="status">Status:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="status"
+                value={p.status}
+                onChange={this.changeStatus}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="severity">Severity</label>
+              <input
+                type="text"
+                className="form-control"
+                id="severity"
+                value={p.severity}
+                onChange={this.changeSeverity}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="descriptionNotes">Notes:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="descriptionNotes"
+                value={p.descriptionNotes}
+                onChange={this.changeDescriptionNotes}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="updated">Updated ?</label>
+              <input
+                type="text"
+                className="form-control"
+                id="updated"
+                value={p.updated}
+                readOnly/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="updatedDate">Updated Date:</label>
+              <input
+                type="date"
+                className="form-control"
+                id="updatedDate"
+                value={p.updatedDate}
+                readOnly/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="updatedUserId">Updated User:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="updatedUserId"
+                value={p.updatedUserId}
+                readOnly/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleInputName2">Latitude</label>
+              <input
+                type="text"
+                className="form-control"
+                id="exampleInputName2"
+                value={p.coordLat}
+                onChange={this.changeLatitude}/>
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleInputName2">Longitude</label>
+              <input
+                type="text"
+                className="form-control"
+                id="exampleInputName2"
+                value={p.coordLong}
+                onChange={this.changeLongitude}/>
+            </div>
+
+          </form>
+        </div>
+      );
+    };
+
     const clickDeleteButton = () => {
       potholeRequests
         .potholeDELETE(firebaseId)
@@ -46,7 +162,10 @@ class PotholeCompleteRecord extends React.Component {
             <p><strong>Latitude: </strong>{p.coordLat}</p>
             <p><strong>Longitude: </strong>{p.coordLong}</p>
             <div className='col-xs-6'>
-              <button className='btn btn-info col-xs-12'>Edit Record</button>
+              <button
+                className='btn btn-info col-xs-12'
+                onClick={clickEditButton}
+              >Edit Record</button>
             </div>
             <div className='col-xs-6'>
               <button
