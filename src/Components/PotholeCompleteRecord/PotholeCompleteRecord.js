@@ -60,18 +60,45 @@ class PotholeCompleteRecord extends React.Component {
     const isEditing = this.state.isEditing;
 
     const clickEditButton = () => {
-      this.setState({isEditing: !isEditing});
+      this.setState({isEditing: true});
     };
 
     const clickDeleteButton = () => {
       potholeRequests
         .potholeDELETE(firebaseId)
+        .then(() => {
+          this.setState({isEditing: false});
+        })
         .then(response => {
           this.props.history.push(`/dashboard`);
+          alert('Record deleted');
         });
     };
-    const clickCancelButton = () => {};
-    const clickSaveButton = () => {};
+    const clickCancelButton = () => {
+      potholeRequests
+        .potholeGETSingle(firebaseId)
+        .then(response => {
+          this.setState(response);
+          this.setState({isEditing: false});
+        })
+        .then(() => {
+          this.props.history.push(`/dashboard`);
+        })
+        .catch(err => {
+          console.error('Error with cancel request', err);
+        });
+    };
+    const clickSaveButton = () => {
+      potholeRequests
+        .potholePUT(firebaseId, this.state)
+        .then(() => {
+          this.setState({isEditing: false});
+        })
+        .then(() => {
+          this.props.history.push(`/dashboard`);
+          alert('Record saved');
+        });
+    };
 
     return (
       <div>
