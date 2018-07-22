@@ -23,11 +23,37 @@ class PotholeCompleteRecord extends React.Component {
       });
   }
 
-  changeStatus = e => {};
-  changeSeverity = e => {};
-  changeDescriptionNotes = e => {};
-  changeLatitude = e => {};
-  changeLongitude = e => {};
+  // passwordChange = e => {
+  //   const tempUser = { ...this.state.user };
+  //   tempUser.password = e.target.value;
+  //   this.setState({ user: tempUser });
+  // };
+
+  changeStatus = e => {
+    const tempVal = {...this.state.status };
+    tempVal.status = e.target.value;
+    this.setState({status: tempVal.status});
+  };
+  changeSeverity = e => {
+    const tempVal = {...this.state.severity };
+    tempVal.severity = e.target.value;
+    this.setState({severity: tempVal.severity});
+  };
+  changeDescriptionNotes = e => {
+    const tempVal = {...this.state.descriptionNotes };
+    tempVal.descriptionNotes = e.target.value;
+    this.setState({descriptionNotes: tempVal.descriptionNotes});
+  };
+  changeLatitude = e => {
+    const tempVal = {...this.state.coordLat };
+    tempVal.coordLat = e.target.value;
+    this.setState({coordLat: tempVal.coordLat});
+  };
+  changeLongitude = e => {
+    const tempVal = {...this.state.coordLong };
+    tempVal.coordLong = e.target.value;
+    this.setState({coordLong: tempVal.coordLong});
+  };
 
   render () {
     const p = this.state;
@@ -95,7 +121,7 @@ class PotholeCompleteRecord extends React.Component {
                     <div className="form-group">
                       <label htmlFor="createdDate">Created Date:</label>
                       <input
-                        type="date"
+                        type="text"
                         className="form-control"
                         id="createdDate"
                         value={p.createdDate}
@@ -107,7 +133,7 @@ class PotholeCompleteRecord extends React.Component {
                         type="text"
                         className="form-control"
                         id="status"
-                        value={p.status}
+                        value={this.state.status}
                         onChange={this.changeStatus}/>
                     </div>
                     <div className="form-group">
@@ -140,7 +166,7 @@ class PotholeCompleteRecord extends React.Component {
                     <div className="form-group">
                       <label htmlFor="updatedDate">Updated Date:</label>
                       <input
-                        type="date"
+                        type="text"
                         className="form-control"
                         id="updatedDate"
                         value={p.updatedDate}
