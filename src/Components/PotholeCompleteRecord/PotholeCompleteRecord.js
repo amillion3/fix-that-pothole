@@ -4,6 +4,8 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './PotholeCompleteRecord.css';
 
+// TO DO remove alert('') with modals or something
+
 let firebaseId = '';
 class PotholeCompleteRecord extends React.Component {
   state = {
@@ -25,12 +27,6 @@ class PotholeCompleteRecord extends React.Component {
         console.error(err);
       });
   }
-
-  // passwordChange = e => {
-  //   const tempUser = { ...this.state.user };
-  //   tempUser.password = e.target.value;
-  //   this.setState({ user: tempUser });
-  // };
 
   changeStatus = e => {
     this.setState({status: e.target.value});
@@ -154,6 +150,7 @@ class PotholeCompleteRecord extends React.Component {
                         readOnly />
                     </div>
                     <div>
+                      <label>Status:</label><br/>
                       <select value={this.state.status} onChange={this.changeStatus}>
                         <option value="Newly Added" onChange={this.changeStatus}>Newly Added</option>
                         <option value="Pothole Assigned" onChange={this.changeStatus}>Pothole Assigned</option>
@@ -162,6 +159,7 @@ class PotholeCompleteRecord extends React.Component {
                       </select>
                     </div>
                     <div>
+                      <label>Severity:</label><br/>
                       <select value={this.state.severity} onChange={this.changeSeverity}>
                         <option value="Low" onChange={this.changeSeverity}>Low</option>
                         <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
