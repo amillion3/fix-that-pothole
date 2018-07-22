@@ -31,10 +31,10 @@ class PotholeCompleteRecord extends React.Component {
 
   render () {
     const p = this.state;
-    const {isEditing} = this.state.isEditing;
+    const isEditing = this.state.isEditing;
 
     const clickEditButton = () => {
-      this.setState(false);
+      this.setState({isEditing: !isEditing});
     };
 
     const clickDeleteButton = () => {
@@ -44,6 +44,9 @@ class PotholeCompleteRecord extends React.Component {
           this.props.history.push(`/dashboard`);
         });
     };
+    const clickCancelButton = () => {};
+    const clickSaveButton = () => {};
+
     return (
       <div>
         <div className="panel panel-default">
@@ -78,6 +81,7 @@ class PotholeCompleteRecord extends React.Component {
               )
               : (
                 <div>
+                  <h3 className='text-center'>Edit This Pothole Record</h3>
                   <form className="">
                     <div className="form-group">
                       <label htmlFor="firebaseId">Id:</label>
@@ -170,6 +174,18 @@ class PotholeCompleteRecord extends React.Component {
                         onChange={this.changeLongitude}/>
                     </div>
                   </form>
+                  <div className='col-xs-6'>
+                    <button
+                      className='btn btn-info col-xs-12'
+                      onClick={clickSaveButton}
+                    >Save Changes</button>
+                  </div>
+                  <div className='col-xs-6'>
+                    <button
+                      className='btn btn-danger col-xs-12'
+                      onClick={clickCancelButton}
+                    >Cancel</button>
+                  </div>
                 </div>
               )
             }
