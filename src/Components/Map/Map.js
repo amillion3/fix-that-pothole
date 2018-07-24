@@ -8,6 +8,7 @@ import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
 
 import auth from '../../firebaseRequests/auth';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
+import ShowPotholes from '../ShowPotholes/ShowPotholes';
 
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
@@ -63,10 +64,12 @@ class Map extends React.Component {
 
   componentDidMount () {
     this.map.setTarget(this.mapDivId);
+
   }
 
   componentDidUpdate () {
     potholeRequests.potholePOST(this.state);
+
   }
 
   render () {
@@ -110,6 +113,7 @@ class Map extends React.Component {
         <div>
           <span>Select a digitize type:</span>
           <ToggleGroup>
+            <ShowPotholes />
             <DigitizeButton
               name="drawPoint"
               map={this.map}

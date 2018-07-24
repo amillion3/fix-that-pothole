@@ -1,72 +1,54 @@
-// let inputCreatedBy = '';
-// let inputCreatedDate = '';
-// let inputCoordLat = '';
-// let inputCoordLong = '';
-// let inputStatus = '';
-// let inputSeverity = '';
-// let inputDescriptionNotes = '';
-// let inputUpdated = '';
-// let inputUpdatedUserId = '';
-// let inputUpdatedDate = '';
+const convertedArray = [];
+
+// const conversion = inputObject => {
+//   inputObject.map(input => {
+//     return convertedArray.push({
+//       'type': 'Feature',
+//       'geometry': {
+//         'type': 'Point',
+//         'coordinates': [input.coordLat, input.coordLong]
+//       },
+//       'properties': {
+//         'createdBy': input.createdBy,
+//         'createdDate': input.createdDate,
+//         'status': input.status,
+//         'severity': input.severity,
+//         'descriptionNotes': input.descriptionNotes,
+//         'updated': input.updated,
+//         'updatedUserId': input.updatedUserId,
+//         'updatedDate': input.updatedDate
+//       },
+//     });
+//   });
+// };
+
+// TO DO ternery to decide where commas are needed
+// (ie, not the last object)
 
 const jsonToGeoJson = input => {
-  return {
-    'type': 'Feature',
-    'geometry': {
-      'type': 'Point',
-      'coordinates': [input.coordLat, input.coordLong]
-    },
-    'properties': {
-      'createdBy': input.createdBy,
-      'createdDate': input.createdDate,
-      'status': input.status,
-      'severity': input.severity,
-      'descriptionNotes': input.descriptionNotes,
-      'updated': input.updated,
-      'updatedUserId': input.updatedUserId,
-      'updatedDate': input.updatedDate
-    },
+  for (let i = 0; i < input.length; i++) {
+    const convertedObject = {
+      'type': 'Feature',
+      'geometry': {
+        'type': 'Point',
+        'coordinates': [input[i].coordLat, input[i].coordLong]
+      },
+      'properties': {
+        'createdBy': input[i].createdBy,
+        'createdDate': input[i].createdDate,
+        'status': input[i].status,
+        'severity': input[i].severity,
+        'descriptionNotes': input[i].descriptionNotes,
+        'updated': input[i].updated,
+        'updatedUserId': input[i].updatedUserId,
+        'updatedDate': input[i].updatedDate
+      },
+    };
+    convertedArray.push(convertedObject);
+  }
+  return convertedArray;
 };
 
-// const conversionProcess = () => {
-//   const convertedObject = {
-//     'type': 'Feature',
-//     'geometry': {
-//       'type': 'Point',
-//       'coordinates': [inputCoordLat, inputCoordLong]
-//     },
-//     'properties': {
-//       'createdBy': inputCreatedBy,
-//       'createdDate': inputCreatedDate,
-//       'coordLat': inputCoordLat,
-//       'coordLong': inputCoordLong,
-//       'status': inputStatus,
-//       'severity': inputSeverity,
-//       'descriptionNotes': inputDescriptionNotes,
-//       'updated': inputUpdated,
-//       'updatedUserId': inputUpdatedUserId,
-//       'updatedDate': inputUpdatedDate
-//     }
-//   };
-//   return convertedObject;
-// };
-
-// const readAndStoreValues = inputObject => {
-//   inputCreatedBy = inputObject.createdBy;
-//   inputCreatedDate = inputObject.createdDate;
-//   inputCoordLat = inputObject.coordLat;
-//   inputCoordLong = inputObject.coordLong;
-//   inputStatus = inputObject.status;
-//   inputSeverity = inputObject.severity;
-//   inputDescriptionNotes = inputObject.descriptionNotes;
-//   inputUpdated = inputObject.updated;
-//   inputUpdatedUserId = inputObject.updpatedUserId;
-//   inputUpdatedDate = inputObject.updatedDate;
-//   conversionProcess();
-// };
-
-// const jsonToGeoJson = () => {
-//   return readAndStoreValues();
-// };
-
-export default jsonToGeoJson;
+module.exports = {
+  jsonToGeoJson,
+};
