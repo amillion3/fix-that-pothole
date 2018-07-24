@@ -1,30 +1,5 @@
 const convertedArray = [];
 
-// const conversion = inputObject => {
-//   inputObject.map(input => {
-//     return convertedArray.push({
-//       'type': 'Feature',
-//       'geometry': {
-//         'type': 'Point',
-//         'coordinates': [input.coordLat, input.coordLong]
-//       },
-//       'properties': {
-//         'createdBy': input.createdBy,
-//         'createdDate': input.createdDate,
-//         'status': input.status,
-//         'severity': input.severity,
-//         'descriptionNotes': input.descriptionNotes,
-//         'updated': input.updated,
-//         'updatedUserId': input.updatedUserId,
-//         'updatedDate': input.updatedDate
-//       },
-//     });
-//   });
-// };
-
-// TO DO ternery to decide where commas are needed
-// (ie, not the last object)
-
 const jsonToGeoJson = input => {
   for (let i = 0; i < input.length; i++) {
     const convertedObject = {
@@ -46,7 +21,14 @@ const jsonToGeoJson = input => {
     };
     convertedArray.push(convertedObject);
   }
-  return convertedArray;
+  // addGeoJsonStructure(convertedArray);
+  const output =
+  {
+    'type': 'FeatureCollection',
+    'features': convertedArray
+  };
+  console.error('jsonToGeoJson.js output:', output);
+  return output;
 };
 
 module.exports = {

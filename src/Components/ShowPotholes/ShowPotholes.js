@@ -11,15 +11,13 @@ class ShowPotholes extends React.Component {
     potholeRequests
       .potholesGETAll()
       .then(response => {
-        console.error('original data, ', response);
         return response;
       })
       .then(allPotholes => {
-        console.error('2nd .then', allPotholes);
-        this.setState(jsonToGeoJson.jsonToGeoJson(allPotholes));
+        console.error('yeehaw', jsonToGeoJson.jsonToGeoJson(allPotholes));
       })
       .then(() => {
-        console.error('converted data', this.state);
+        console.error('done');
       })
       .catch(error => {
         console.error('Error with getting potholes from firebase, ', error);
