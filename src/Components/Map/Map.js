@@ -5,31 +5,18 @@ import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
 import OlProj from 'ol/proj';
 import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
-// import GeoJSON from 'ol/format/geojson.js';
-// import VectorLayer from 'ol/layer/vector.js';
-// import VectorSource from 'ol/source/vector.js';
+import GeoJSON from 'ol/format/geojson.js';
+import VectorLayer from 'ol/layer/vector.js';
+import VectorSource from 'ol/source/vector.js';
 
 import auth from '../../firebaseRequests/auth';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
+import {getGeoJsonObject} from '../../helperFunctions/getGeoJsonObject';
 
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
 // import './react-geo.css';
 import './Map.css';
-
-// const defaultState = {
-//   coordLat: '',
-//   coordLong: '',
-//   createdBy: '',
-//   createdDate: '',
-//   descriptionNotes: '',
-//   itemId: '',
-//   severity: '',
-//   status: '',
-//   updated: false,
-//   updatedDate: '',
-//   updatedUserId: '',
-// };
 
 class Map extends React.Component {
   state = {
@@ -50,24 +37,45 @@ class Map extends React.Component {
     super(props);
     this.mapDivId = `map-${Math.random()}`;
 
+    // this works
+    const vectorLayer = new VectorLayer({
+      source: new VectorSource({
+        url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson',
+        format: new GeoJSON(),
+      }),
+    });
+    // debugger;
+    const testing = new VectorLayer({
+      source: new VectorSource({
+        url: `${JSON.stringify(getGeoJsonObject())}.geojson`,
+        format: new GeoJSON(),
+        // getGeoJsonObject returns undefined
+      }),
+    });
+
     this.map = new OlMap({
       layers: [
         new OlLayerTile({
           name: 'OSM',
           source: new OlSourceOsm(),
         }),
+        vectorLayer,
+        testing,
       ],
 
       view: new OlView({
         center: OlProj.fromLonLat([-86.7587529,36.1325381]),
-        zoom: 14,
+        zoom: 4,
       }),
     });
   }
 
+  componentWillMount () {
+    console.error('!!!getGeoJsonObject: ', getGeoJsonObject);
+  }
+
   componentDidMount () {
     this.map.setTarget(this.mapDivId);
-
   }
 
   componentDidUpdate () {

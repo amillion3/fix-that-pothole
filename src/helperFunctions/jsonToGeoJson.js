@@ -26,7 +26,6 @@ const jsonToGeoJson = input => {
     'type': 'FeatureCollection',
     'features': convertedArray
   };
-  console.error('jsonToGeoJson.js output:', output);
   return output;
 };
 
