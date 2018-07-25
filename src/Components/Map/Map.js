@@ -5,10 +5,12 @@ import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
 import OlProj from 'ol/proj';
 import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
+// import GeoJSON from 'ol/format/geojson.js';
+// import VectorLayer from 'ol/layer/vector.js';
+// import VectorSource from 'ol/source/vector.js';
 
 import auth from '../../firebaseRequests/auth';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
-import getGeoJsonObject from '../getGeoJsonObject/getGeoJsonObject';
 
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
@@ -55,10 +57,7 @@ class Map extends React.Component {
           source: new OlSourceOsm(),
         }),
       ],
-      new ol.source.GeoJSON({
-        name: 'potholes',
-        source: getGeoJsonObject(),
-      }),
+
       view: new OlView({
         center: OlProj.fromLonLat([-86.7587529,36.1325381]),
         zoom: 14,
@@ -67,8 +66,6 @@ class Map extends React.Component {
   }
 
   componentDidMount () {
-    const test = getGeoJsonObject();
-    console.error('test', test);
     this.map.setTarget(this.mapDivId);
 
   }

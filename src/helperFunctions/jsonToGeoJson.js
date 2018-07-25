@@ -21,7 +21,6 @@ const jsonToGeoJson = input => {
     };
     convertedArray.push(convertedObject);
   }
-  // addGeoJsonStructure(convertedArray);
   const output =
   {
     'type': 'FeatureCollection',

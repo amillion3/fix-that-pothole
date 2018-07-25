@@ -1,6 +1,6 @@
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
-import jsonToGeoJson from '../../helperFunctions/jsonToGeoJson';
+import jsonToGeoJson from './jsonToGeoJson';
 
 const getGeoJsonObject = () => {
   potholeRequests
