@@ -21,12 +21,18 @@ const jsonToGeoJson = input => {
     };
     convertedArray.push(convertedObject);
   }
-  let output =
+  const output =
   {
     "type": "FeatureCollection",
     "features": convertedArray
   };
+  let stringy = JSON.stringify(output);
+  // const abc = '"/';
+  stringy = stringy.replace(/(\\")/g, "");
+  const parsedd = JSON.parse(stringy);
   console.log("OUTPUT HERE: ", output);
+  console.log("STRINGYYYY HERE: ", stringy);
+  console.log("PARSEDDDDDDDDD HERE: ", parsedd);
   return output;
 };
 

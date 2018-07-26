@@ -46,11 +46,12 @@ class Map extends React.Component {
     });
     // debugger;
     const testing = new VectorLayer({
-      source: new VectorSource({
-        url: `${JSON.stringify(getGeoJsonObject())}.geojson`,
-        format: new GeoJSON(),
+      source: `${JSON.stringify(getGeoJsonObject())}.json`,
+      // source: new VectorSource({
+      //   url: `${getGeoJsonObject()}.geojson`,
+      //   format: new GeoJSON(),
         // getGeoJsonObject returns undefined
-      }),
+      // }),
     });
 
     this.map = new OlMap({
@@ -72,7 +73,6 @@ class Map extends React.Component {
 
   componentWillMount () {
     console.log(typeof(getGeoJsonObject()));
-    console.log(this.state);
   }
 
   componentDidMount () {
