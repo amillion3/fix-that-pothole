@@ -71,7 +71,8 @@ class Map extends React.Component {
   }
 
   componentWillMount () {
-    console.error('!!!getGeoJsonObject: ', getGeoJsonObject);
+    console.log(typeof(getGeoJsonObject()));
+    console.log(this.state);
   }
 
   componentDidMount () {

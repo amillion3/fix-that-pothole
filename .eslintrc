@@ -19,8 +19,6 @@
     "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
     "keyword-spacing": ["error", { "before": true, "after": true }],
     "indent": ["error", 2],
-    "no-console": ["error", { "allow": ["error"] }],
-    "no-debugger": "error",
     "no-mixed-spaces-and-tabs": "error",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
     "no-redeclare": "error",
