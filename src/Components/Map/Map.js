@@ -12,6 +12,8 @@ import GeoJSON from 'ol/format/geojson.js';
 import auth from '../../firebaseRequests/auth';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 
+import {getGeoJsonObject} from './getGeoJsonObject';
+
 import {getJson} from '../../helperFunctions/jsonRequest';
 
 import 'ol/ol.css';
@@ -40,13 +42,13 @@ class Map extends React.Component {
     super(props);
     this.mapDivId = `map-${Math.random()}`;
 
-    // const vectorLayer = new VectorLayer({
-    //   source: new VectorSource({
-    //     // url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson',
-    //     url: getJson(),
-    //     format: new GeoJSON(),
-    //   }),
-    // });
+    const vectorLayer = new VectorLayer({
+      source: new VectorSource({
+        // url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson',
+        url: {getJson()},
+        format: new GeoJSON(),
+      }),
+    });
 
     const vectorSource = new VectorSource({
       features: (new GeoJSON())
