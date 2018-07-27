@@ -1,16 +1,19 @@
 import axios from 'axios';
+import data from '../db/tempPotholes.geojson';
 
 import {getGeoJsonObject} from './getGeoJsonObject';
 
 const getJson = () => {
   return new Promise((resolve, reject) => {
-    const stuff = getGeoJsonObject();
-    console.log(stuff);
-    axios
-      .get(`${stuff}.geojson`)
+    axios({
+      method: 'get',
+      url: data,
+      headers: {
+        'Content-Type': 'application/json' },
+    })
       .then(response => {
-        console.log('new promise', response);
-        resolve(response);
+        console.log('new promise!!', response.data);
+        resolve(response.data);
       })
       .catch(error => {
         reject(error);
@@ -18,4 +21,4 @@ const getJson = () => {
   });
 };
 
-export default {getJson};
+export {getJson};
