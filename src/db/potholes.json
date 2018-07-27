@@ -1,6 +1,5 @@
 {
     "sample1": {
-        "itemId": 1,
         "createdBy": "d934ks0l0slsksjdancudk37373",
         "createdDate": "7/19/2018",
         "coordLat": 36.1645083,
@@ -13,7 +12,6 @@
         "updatedDate": "01/02/2018"
     },
     "sample2": {
-        "itemId": 2,
         "createdBy": "d934ks0l0slsksjdancudk37373",
         "createdDate": "6/9/2018",
         "coordLat": 36.158346,
@@ -26,7 +24,6 @@
         "updatedDate": "01/02/2018"
     },
     "sample3": {
-        "itemId": 3,
         "createdBy": "d934ks0l0slsksjdancudk37373",
         "createdDate": "1/1/2018",
         "coordLat": 36.148399,

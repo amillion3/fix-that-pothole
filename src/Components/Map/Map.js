@@ -5,28 +5,23 @@ import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
 import OlProj from 'ol/proj';
 import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
+import VectorLayer from 'ol/layer/vector.js';
+import VectorSource from 'ol/source/vector.js';
+import GeoJSON from 'ol/format/geojson.js';
 
 import auth from '../../firebaseRequests/auth';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
+
+import {getGeoJsonObject} from './getGeoJsonObject';
+
+import {getJson} from '../../helperFunctions/jsonRequest';
 
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
 // import './react-geo.css';
 import './Map.css';
 
-// const defaultState = {
-//   coordLat: '',
-//   coordLong: '',
-//   createdBy: '',
-//   createdDate: '',
-//   descriptionNotes: '',
-//   itemId: '',
-//   severity: '',
-//   status: '',
-//   updated: false,
-//   updatedDate: '',
-//   updatedUserId: '',
-// };
+const test = getJson();
 
 class Map extends React.Component {
   state = {
@@ -47,18 +42,42 @@ class Map extends React.Component {
     super(props);
     this.mapDivId = `map-${Math.random()}`;
 
+    const vectorLayer = new VectorLayer({
+      source: new VectorSource({
+        // url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson',
+        url: {getJson()},
+        format: new GeoJSON(),
+      }),
+    });
+
+    const vectorSource = new VectorSource({
+      features: (new GeoJSON())
+        .readFeatures(JSON.stringify(test)),
+    });
+
+    const vectorLayer = new VectorLayer({
+      source: vectorSource,
+    });
+
     this.map = new OlMap({
       layers: [
         new OlLayerTile({
           name: 'OSM',
           source: new OlSourceOsm(),
         }),
+        vectorLayer,
+        // testing,
       ],
+
       view: new OlView({
         center: OlProj.fromLonLat([-86.7587529,36.1325381]),
         zoom: 14,
       }),
     });
+  }
+
+  componentWillMount () {
+    // console.log(typeof(getGeoJsonObject()));
   }
 
   componentDidMount () {
