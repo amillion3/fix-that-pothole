@@ -33,8 +33,8 @@ const jsonToGeoJson = input => {
   console.log("OUTPUT HERE: ", output);
   console.log("STRINGYYYY HERE: ", stringy);
   console.log("PARSEDDDDDDDDD HERE: ", parsedd);
-  return output;
-  // return stringy;
+  // return output;
+  return stringy;
   // return parsedd;
 };
 

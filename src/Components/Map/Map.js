@@ -5,15 +5,11 @@ import OlLayerTile from 'ol/layer/tile';
 import OlSourceOsm from 'ol/source/osm';
 import OlProj from 'ol/proj';
 import {DigitizeButton, ToggleGroup} from '@terrestris/react-geo';
-import GeoJSON from 'ol/format/geojson.js';
-import VectorLayer from 'ol/layer/vector.js';
-import VectorSource from 'ol/source/vector.js';
-import {Vector} from 'ol/source/vector';
-
+import ol from 'ol';
 
 import auth from '../../firebaseRequests/auth';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
-import getJson from '../../helperFunctions/jsonRequest';
+import {getGeoJsonObject} from '../../helperFunctions/getGeoJsonObject';
 
 import 'ol/ol.css';
 import 'antd/dist/antd.css';
@@ -39,42 +35,15 @@ class Map extends React.Component {
     super(props);
     this.mapDivId = `map-${Math.random()}`;
 
-    // this works
-    // const vectorLayer = new VectorLayer({
-    //   source: new VectorSource({
-    //     url: 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojson',
-    //     format: new GeoJSON(),
-    //   }),
-    // });
-    // debugger;
-    const testing = new VectorLayer({
-      source: new VectorSource({
-        url: `${JSON.stringify(getJson())}`,
-        format: new GeoJSON(),
-        // getGeoJsonObject returns undefined
-      }),
+    const geoJsonObject = getGeoJsonObject();
+
+    const vectorSource = new ol.source.vector({
+      features: (new ol.format.geojson()).readFeatures(geoJsonObject),
     });
-    // const testing = new VectorLayer({
-    //   format: new GeoJSON(),
-    //   loader: function () {
-    //     const url = 'https://www.andymillion.com/images/potholes.json';
-    //     const xhr = new XMLHttpRequest();
-    //     xhr.open('GET', url);
-    //     const onError = function () {
-    //       console.error('its broke');
-    //     };
-    //     xhr.onerror = onError;
-    //     xhr.onload = function () {
-    //       if (xhr.status === 200) {
-    //         testing.addFeatures(
-    //           testing.getFormat().readFeatures(xhr.responseText));
-    //       } else {
-    //         onError();
-    //       }
-    //     };
-    //     xhr.send();
-    //   },
-    // });
+
+    const vectorLayer = new ol.layer.vector({
+      source: vectorSource,
+    });
 
     this.map = new OlMap({
       layers: [
@@ -82,8 +51,8 @@ class Map extends React.Component {
           name: 'OSM',
           source: new OlSourceOsm(),
         }),
-        // vectorLayer,
-        testing,
+        vectorLayer,
+        // testing,
       ],
 
       view: new OlView({
