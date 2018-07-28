@@ -1,7 +1,9 @@
 import React from 'react';
 
 class MenuItemAddPothole extends React.Component {
-
+  eventAddNewPothole = e => {
+    console.log(e);
+  };
   render () {
     return (
       <div className='col-xs-12'>

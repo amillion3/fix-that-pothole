@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef, Component } from 'react';
 import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
@@ -9,50 +9,69 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './MapMain.css';
 
-const theGeoJson =
-{"type": "FeatureCollection",
-  "features": [
-    {"type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [0, 0]
-      },
-      "properties": {
-        "createdBy": "",
-        "createdDate": "",
-        "status": "",
-        "severity": "",
-        "descriptionNotes": "",
-        "updated": "",
-        "updatedUserId": "",
-        "updatedDate": ""
-      }
-    }
-  ]
-};
-
-class MapMain extends React.Component {
+class MapMain extends Component {
   constructor (props) {
     super (props);
     // Don't call this.setState() here!
-    this.state = { theGeoJson };
+    this.state = {
+      potholes: [],
+      hasLocation: false,
+      latlng: {
+        lat: 36.1643083,
+        lng: -86.7973366,
+      },
+    };
   }
-  state = {
-    potholes: [],
-  }
-  componentDidMount () {
+
+  componentWillMount () {
     potholeRequests
       .potholesGETAll()
       .then(potholes => {
         this.setState({potholes: potholes});
-        // this.setState({fishes});  ES6 shorthand
+        // this.setState({potholes});  ES6 shorthand
       })
       .catch(err => {
         console.error('Error with pothole GET request ', err);
       });
   }
 
+  mapRef = createRef();
+
+  handleClick = e => {
+    this.mapRef.current.leafletElement.locate();
+
+    // console.log(e);
+    const tempPothole = {};
+    tempPothole.coordLat = e.latlng.lat;
+    tempPothole.coordLong = e.latlng.lng;
+    tempPothole.isComplete = false;
+    // need to gather more attributes here
+    const {potholes} = this.state;
+    potholes.push(tempPothole);
+    // console.log(tempPothole);
+    // Display modal/Popup
+    // Display for for user input
+    // If user clicks 'Save' then POST to firebase
+    //   if POST is good, then reload all potholes to state
+
+  };
+
+  handleLocationFound = e => {
+    this.setState({
+      hasLocation: true,
+      latlng: e.latlng,
+    });
+    console.log('THIS.STATE', this.state);
+  }
+
   render () {
+    const marker = this.state.hasLocation ? (
+      <Marker position={this.state.latlng}>
+        <Popup>
+          <span>You are here</span>
+        </Popup>
+      </Marker>
+    ) : null;
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
         <GenerateMarkers
@@ -61,32 +80,23 @@ class MapMain extends React.Component {
         />
       );
     });
-    const position = [36.1491592, -86.7703593];
     return (
-
       <div className='map-container'>
-        <Map center={position} zoom={15} className='mappityMap'>
+        <Map
+          center={[36.1491592, -86.7703593]}
+          zoom={10}
+          length={4}
+          ref={this.mapRef}
+          onLocationfound={this.handleLocationFound}
+          className='mappityMap'
+          onClick={this.handleClick}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-          />
-          {/* <Marker
-            position={[36.1591592, -86.7503593]}>
-            <Popup>
-              <label htmlFor="item1">Item1</label>
-              <input id ="item1" type="text"></input>
-            </Popup>
-          </Marker> */}
-
+            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
           <div className="">
             {potholeComponents}
           </div>
-
-          <Marker position={position}>
-            <Popup>
-              A hard coded marker. <br /> Easily customizable.
-            </Popup>
-          </Marker>
+          {marker}
         </Map>
         <MenuItemAddPothole />
       </div>
