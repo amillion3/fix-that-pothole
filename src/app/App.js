@@ -8,7 +8,7 @@ import Navbar from '../Components/Navbar/Navbar';
 import Dashboard from '../Components/Dashboard/Dashboard';
 import PotholeCompleteRecord from '../Components/PotholeCompleteRecord/PotholeCompleteRecord';
 import firebaseApp from '../firebaseRequests/connection';
-import Map from '../Components/Map/Map';
+import MapMain from '../Components/MapMain/MapMain';
 
 import './App.css';
 
@@ -93,7 +93,7 @@ class App extends Component {
               <PrivateRoute
                 path='/map'
                 authed={this.state.authed}
-                component={Map} />
+                component={MapMain} />
               <PrivateRoute
                 path='/dashboard'
                 authed={this.state.authed}

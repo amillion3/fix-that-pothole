@@ -8,7 +8,7 @@ const getGeoJsonObject = () => {
   potholeRequests
     .potholesGETAll()
     .then(response => {
-      // console.error('helper:getGeoJsonObject response', response);
+      console.error('helper:getGeoJsonObject response', response);
       // console.error('helper function COMPLETE:', jsonToGeoJson.jsonToGeoJson(response));
       test = jsonToGeoJson.jsonToGeoJson(response);
       return test;
