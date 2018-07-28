@@ -23,7 +23,6 @@ class MapMain extends Component {
         lat: '',
         lng: '',
       },
-      tempPothole: [],
       show: false,
     };
   }
@@ -57,8 +56,8 @@ class MapMain extends Component {
     potholeToAdd.descriptionNotes = '';
     potholeToAdd.updated = false;
     this.showModal();
-    const {tempPothole} = this.state;
-    tempPothole.push(potholeToAdd);
+    // const {tempPothole} = this.state;
+    this.state.tempPothole.push(potholeToAdd);
   };
 
   handleLocationFound = e => {
@@ -95,10 +94,12 @@ class MapMain extends Component {
   //   this.setState({descriptionNotes: tempVal.descriptionNotes});
   // };
   changeDescriptionNotes = e => {
-    console.log(typeof(this.state.tempPothole[0]));
-    const tempVal = {...this.state.tempPothole[0].descriptionNotes};
+    console.log(this.state);
+    const {descriptionNotes} = this.state.tempPothole[1];
+    console.log('notes', descriptionNotes);
+    const tempVal = {...this.state.tempPothole[1].descriptionNotes};
     tempVal.descriptionNotes = e.target.value;
-    const {tempPothole: {descriptionNotes}} = this.state;
+    // const {tempPothole: {descriptionNotes}} = this.state;
     descriptionNotes.setState({descriptionNotes: tempVal.descriptionNotes});
     // const {tempPothole} = this.state;
     // tempPothole.push(potholeToAdd);
