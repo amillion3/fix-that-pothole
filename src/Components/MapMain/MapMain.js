@@ -23,7 +23,7 @@ class MapMain extends Component {
         lat: '',
         lng: '',
       },
-      tempPothole: {},
+      tempPothole: [],
       show: false,
     };
   }
@@ -47,16 +47,16 @@ class MapMain extends Component {
 
   handleClick = e => {
     this.mapRef.current.leafletElement.locate();
-    const tempPothole = {};
-    tempPothole.isComplete = false;
-    tempPothole.coordLat = e.latlng.lat;
-    tempPothole.coordLong = e.latlng.lng;
-    tempPothole.createdDate = new Date().toLocaleDateString('en-US');
-    tempPothole.createdBy = auth.fbGetUid();
-    tempPothole.updated = false;
+    const potholeToAdd = {};
+    potholeToAdd.isComplete = false;
+    potholeToAdd.coordLat = e.latlng.lat;
+    potholeToAdd.coordLong = e.latlng.lng;
+    potholeToAdd.createdDate = new Date().toLocaleDateString('en-US');
+    potholeToAdd.createdBy = auth.fbGetUid();
+    potholeToAdd.updated = false;
     this.showModal();
-    const {potholes} = this.state;
-    potholes.push(tempPothole);
+    const {tempPothole} = this.state;
+    tempPothole.push(potholeToAdd);
   };
 
   handleLocationFound = e => {
@@ -76,11 +76,10 @@ class MapMain extends Component {
     this.hideModal();
     console.log('save');
     potholeRequests
-      .potholePOST(this.state.tempPothole)
+      .potholePOST(this.state.tempPothole[0])
       .then(response => {
-        console.log('POST new marker', response);
-        console.log('POST NEW MARKER this.state', this.state);
-        console.log('tempPothole', this.tempPothole);
+        console.log('saved');
+        alert('saved');
       })
       .catch();
   };
