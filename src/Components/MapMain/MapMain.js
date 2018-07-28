@@ -1,5 +1,5 @@
 import React, { createRef, Component } from 'react';
-import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
+import { Map, TileLayer} from 'react-leaflet';
 import {Modal, Button} from 'react-bootstrap';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
@@ -20,6 +20,7 @@ class MapMain extends Component {
         lat: '',
         lng: '',
       },
+      tempPothole: {},
       show: false,
     };
   }
@@ -43,25 +44,22 @@ class MapMain extends Component {
 
   handleClick = e => {
     this.mapRef.current.leafletElement.locate();
-
-    console.log('clicked', e);
     const tempPothole = {};
+    tempPothole.isComplete = false;
     tempPothole.coordLat = e.latlng.lat;
     tempPothole.coordLong = e.latlng.lng;
-    tempPothole.isComplete = false;
+    tempPothole.createdDate = new Date().toLocaleDateString('en-US');
+    tempPothole.createdBy = auth.fbGetUid();
+    tempPothole.updated = false;
     this.showModal();
-
-    // need to gather more attributes here
 
     const {potholes} = this.state;
     potholes.push(tempPothole);
 
-    // console.log(tempPothole);
     // Display modal/Popup
     // Display for for user input
     // If user clicks 'Save' then POST to firebase
     //   if POST is good, then reload all potholes to state
-
   };
 
   handleLocationFound = e => {
@@ -77,21 +75,29 @@ class MapMain extends Component {
       return (
         <GenerateMarkers
           details={pothole}
-          key={pothole.id}
-        />
+          key={pothole.id} />
       );
     });
     return (
       <div className='map-container'>
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal show={this.state.show} onHide={this.hideModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Add New Pothole</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>hello</p>
+            <div className="input-group input-group-lg">
+              <label htmlFor='' className='input-label'>Status: </label>
+              <input type='text' className='form-control'></input><br/>
+              <label htmlFor='' className='input-label'>Severity: </label>
+              <input type='text' className='form-control'></input><br/>
+              <label htmlFor='' className='input-label'>Notes: </label>
+              <input type='text' className='form-control'></input><br/>
+            </div>
+
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.handleClose}>Close</Button>
+            <Button className='btn btn-primary' onClick={this.hideModal}>Save This Pothole</Button>
+            <Button className='btn btn-danger' onClick={this.hideModal}>Cancel</Button>
           </Modal.Footer>
         </Modal>
         <Map
@@ -108,29 +114,11 @@ class MapMain extends Component {
           <div className="">
             {potholeComponents}
           </div>
-          {/* {marker} */}
         </Map>
         <MenuItemAddPothole />
       </div>
-
     );
   }
-
-  // const handleClick = e => {
-
-  // this.setState({
-  //   coordLat: convertedCoordinates[1],
-  //   coordLong: convertedCoordinates[0],
-  //   createdBy: auth.fbGetUid(),
-  //   createdDate: new Date().toLocaleDateString('en-US'),
-  //   descriptionNotes: '',
-  //   itemId: '',
-  //   severity: '',
-  //   status: 'Newly added',
-  //   updated: false,
-  //   updatedDate: '',
-  //   updatedUserId: '',
-  // });
 
   // 1. call a modal to enter attributes?
   // might need to expand state to capture these
