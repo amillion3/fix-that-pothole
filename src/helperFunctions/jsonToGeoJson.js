@@ -1,6 +1,8 @@
 const convertedArray = [];
+let output = '';
 
 const jsonToGeoJson = input => {
+  console.log('input', input);
   for (let i = 0; i < input.length; i++) {
     const coords = [input[i].coordLong, input[i].coordLat];
     const convertedObject = {
@@ -18,24 +20,21 @@ const jsonToGeoJson = input => {
         "updated": input[i].updated,
         "updatedUserId": `"${input[i].updatedUserId}"`,
         "updatedDate": `"${input[i].updatedDate}"`
-      },
+      }
     };
     convertedArray.push(convertedObject);
+    console.log(`convertedArray, i is ${i}`, convertedArray);
   }
-  const output =
+  output =
   {
     "type": "FeatureCollection",
     "features": convertedArray
   };
-  let stringy = JSON.stringify(output);
-  stringy = stringy.replace(/(\\")/g, "");
-  const parsedd = JSON.parse(stringy);
+  output = JSON.stringify(output);
+  output = output.replace(/(\\")/g, "");
+  output = JSON.parse(output);
   console.log("OUTPUT HERE: ", output);
-  console.log("STRINGYYYY HERE: ", stringy);
-  console.log("PARSEDDDDDDDDD HERE: ", parsedd);
   // return output;
-  return stringy;
-  // return parsedd;
 };
 
 module.exports = {
