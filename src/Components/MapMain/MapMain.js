@@ -8,7 +8,10 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
 
 import './MapMain.css';
-
+// Display modal/Popup
+// Display for for user input
+// If user clicks 'Save' then POST to firebase
+//   if POST is good, then reload all potholes to state
 class MapMain extends Component {
   constructor (props) {
     super (props);
@@ -52,14 +55,8 @@ class MapMain extends Component {
     tempPothole.createdBy = auth.fbGetUid();
     tempPothole.updated = false;
     this.showModal();
-
     const {potholes} = this.state;
     potholes.push(tempPothole);
-
-    // Display modal/Popup
-    // Display for for user input
-    // If user clicks 'Save' then POST to firebase
-    //   if POST is good, then reload all potholes to state
   };
 
   handleLocationFound = e => {
@@ -69,6 +66,24 @@ class MapMain extends Component {
     });
     console.log('THIS.STATE', this.state);
   }
+
+  modalBtnCancel = () => {
+    this.hideModal();
+    console.log('cancel');
+
+  };
+  modalBtnSave = () => {
+    this.hideModal();
+    console.log('save');
+    potholeRequests
+      .potholePOST(this.state.tempPothole)
+      .then(response => {
+        console.log('POST new marker', response);
+        console.log('POST NEW MARKER this.state', this.state);
+        console.log('tempPothole', this.tempPothole);
+      })
+      .catch();
+  };
 
   render () {
     const potholeComponents = this.state.potholes.map(pothole => {
@@ -93,11 +108,10 @@ class MapMain extends Component {
               <label htmlFor='' className='input-label'>Notes: </label>
               <input type='text' className='form-control'></input><br/>
             </div>
-
           </Modal.Body>
           <Modal.Footer>
-            <Button className='btn btn-primary' onClick={this.hideModal}>Save This Pothole</Button>
-            <Button className='btn btn-danger' onClick={this.hideModal}>Cancel</Button>
+            <Button className='btn btn-primary' onClick={this.modalBtnSave}>Save This Pothole</Button>
+            <Button className='btn btn-danger' onClick={this.modalBtnCancel}>Cancel and Clear</Button>
           </Modal.Footer>
         </Modal>
         <Map
@@ -109,7 +123,6 @@ class MapMain extends Component {
           className='mappityMap'
           onClick={this.handleClick}>
           <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
           <div className="">
             {potholeComponents}
