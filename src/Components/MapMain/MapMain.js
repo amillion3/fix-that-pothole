@@ -49,10 +49,12 @@ class MapMain extends Component {
     this.mapRef.current.leafletElement.locate();
     const potholeToAdd = {};
     potholeToAdd.isComplete = false;
+    potholeToAdd.status = "Newly Added";
     potholeToAdd.coordLat = e.latlng.lat;
     potholeToAdd.coordLong = e.latlng.lng;
     potholeToAdd.createdDate = new Date().toLocaleDateString('en-US');
     potholeToAdd.createdBy = auth.fbGetUid();
+    potholeToAdd.descriptionNotes = '';
     potholeToAdd.updated = false;
     this.showModal();
     const {tempPothole} = this.state;
@@ -77,14 +79,32 @@ class MapMain extends Component {
     console.log('save');
     potholeRequests
       .potholePOST(this.state.tempPothole[0])
-      .then(response => {
+      .then(() => {
         console.log('saved');
         alert('saved');
       })
-      .catch();
+      .catch(err => console.error('Error during save', err));
+  };
+
+  changeSeverity = e => {
+    this.setState({severity: e.target.value});
+  };
+  // changeDescriptionNotes = e => {
+  //   const tempVal = {...this.state.descriptionNotes };
+  //   tempVal.descriptionNotes = e.target.value;
+  //   this.setState({descriptionNotes: tempVal.descriptionNotes});
+  // };
+  changeDescriptionNotes = e => {
+    const tempVal = {...this.state.tempPothole.descriptionNotes};
+    tempVal.descriptionNotes = e.target.value;
+    const {tempPothole} = this.state;
+    this.tempPothole.setState({descriptionNotes: tempVal.descriptionNotes});
+    // const {tempPothole} = this.state;
+    // tempPothole.push(potholeToAdd);
   };
 
   render () {
+    const p = this.state.tempPothole;
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
         <GenerateMarkers
@@ -99,14 +119,25 @@ class MapMain extends Component {
             <Modal.Title>Add New Pothole</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <div className="input-group input-group-lg">
-              <label htmlFor='' className='input-label'>Status: </label>
-              <input type='text' className='form-control'></input><br/>
-              <label htmlFor='' className='input-label'>Severity: </label>
-              <input type='text' className='form-control'></input><br/>
-              <label htmlFor='' className='input-label'>Notes: </label>
-              <input type='text' className='form-control'></input><br/>
-            </div>
+            <form className="">
+              <div>
+                <label>Severity:</label><br/>
+                <select value={this.state.severity} onChange={this.changeSeverity}>
+                  <option value="Low" onChange={this.changeSeverity}>Low</option>
+                  <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
+                  <option value="Severe" onChange={this.changeSeverity}>Severe</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="descriptionNotes">Notes:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="descriptionNotes"
+                  value={this.state.tempPothole.descriptionNotes}
+                  onChange={this.changeDescriptionNotes}/>
+              </div>
+            </form>
           </Modal.Body>
           <Modal.Footer>
             <Button className='btn btn-primary' onClick={this.modalBtnSave}>Save This Pothole</Button>
