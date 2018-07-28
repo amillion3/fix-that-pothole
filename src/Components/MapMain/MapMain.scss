@@ -3,7 +3,9 @@
   text-align: center;
   height: 85vh;
   margin: 7px;
+  z-index: 1;
 }
+
 .mappityMap:after {
   content: "";
   left: 2px;
