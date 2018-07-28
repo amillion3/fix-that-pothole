@@ -7,7 +7,7 @@ class DashPothole extends React.Component {
   state = {};
   render () {
     const {details} = this.props;
-    const p = this.state;
+    // const p = this.state;
     const clickSinglePothole = () => {
       this.props.history.push(`/pothole/${details.id}`);
     };

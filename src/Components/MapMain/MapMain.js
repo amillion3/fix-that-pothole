@@ -95,10 +95,11 @@ class MapMain extends Component {
   //   this.setState({descriptionNotes: tempVal.descriptionNotes});
   // };
   changeDescriptionNotes = e => {
-    const tempVal = {...this.state.tempPothole.descriptionNotes};
+    console.log(typeof(this.state.tempPothole[0]));
+    const tempVal = {...this.state.tempPothole[0].descriptionNotes};
     tempVal.descriptionNotes = e.target.value;
-    const {tempPothole} = this.state;
-    this.tempPothole.setState({descriptionNotes: tempVal.descriptionNotes});
+    const {tempPothole: {descriptionNotes}} = this.state;
+    descriptionNotes.setState({descriptionNotes: tempVal.descriptionNotes});
     // const {tempPothole} = this.state;
     // tempPothole.push(potholeToAdd);
   };
@@ -134,7 +135,7 @@ class MapMain extends Component {
                   type="text"
                   className="form-control"
                   id="descriptionNotes"
-                  value={this.state.tempPothole.descriptionNotes}
+                  value={p.descriptionNotes}
                   onChange={this.changeDescriptionNotes}/>
               </div>
             </form>
