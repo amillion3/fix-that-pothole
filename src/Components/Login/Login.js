@@ -42,12 +42,12 @@ class Login extends React.Component {
     const { user } = this.state;
     return (
       <div className='div-login-container col-xs-offset-3 col-xs-6'>
-        <h3 className='text-center'>Login</h3>
+        <h3 className='text-center'>User Login</h3>
         <form>
           <label htmlFor="inputEmail">Email:</label>
           <input
             type="email"
-            className="form-control"
+            className="form-control landing-page-input"
             id="inputEmail"
             value={user.email}
             onChange={this.emailChange}
@@ -55,7 +55,7 @@ class Login extends React.Component {
           <label htmlFor="inputPassword">Password:</label>
           <input
             type="password"
-            className="form-control"
+            className="form-control landing-page-input"
             id="inputPassword"
             value={user.password}
             onChange={this.passwordChange}
@@ -63,7 +63,7 @@ class Login extends React.Component {
         </form>
         <button
           type="submit"
-          className='btn btn-default col-xs-12 landing-page-button'
+          className='btn btn-default btn-lg col-xs-12 landing-page-button'
           onClick={this.handleButtonClick}>
           Login
         </button>

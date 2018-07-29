@@ -74,7 +74,7 @@ class App extends Component {
   render () {
     return (
       <BrowserRouter>
-        <div>
+        <div className='page-wrapper'>
           <Navbar
             authed={this.state.authed}
             userWantsToLogOut={this.userWantsToLogOut}
