@@ -37,7 +37,7 @@ class Dashboard extends React.Component {
     });
 
     return (
-      <div className=''>
+      <div className='dashboard'>
         <table className='table table-hover'>
           <thead>
             <tr className=''>
