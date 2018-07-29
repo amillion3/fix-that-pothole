@@ -108,12 +108,17 @@ class PotholeCompleteRecord extends React.Component {
                   <p><strong>Status: </strong>{p.status}</p>
                   <p><strong>Severity: </strong>{p.severity}</p>
                   <p><strong>Notes: </strong>{p.descriptionNotes}</p>
-                  <p><strong>Updated ? </strong>{p.updated}</p>
-                  <p><strong>Updated Date: </strong>{p.updatedDate}</p>
-                  <p><strong>Updated Time: </strong>{p.updatedTime}</p>
-                  <p><strong>Updated By: </strong>{p.updatedUserId}</p>
                   <p><strong>Latitude: </strong>{p.coordLat}</p>
                   <p><strong>Longitude: </strong>{p.coordLong}</p>
+                  <hr/>
+                  {p.updated ?
+                    <div>
+                      <p><strong>Updated Date: </strong>{p.updatedDate}</p>
+                      <p><strong>Updated Time: </strong>{p.updatedTime}</p>
+                      <p><strong>Updated By: </strong>{p.updatedUserId}</p>
+                    </div>
+                    : <p><strong>No updates for this record.</strong></p>}
+
                   <div className='col-xs-6'>
                     <button
                       className='btn btn-info col-xs-12'
