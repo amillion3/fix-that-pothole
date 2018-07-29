@@ -63,12 +63,13 @@ class Register extends React.Component {
         </form>
         <button
           type="submit"
-          className='btn btn-default'
+          className='btn btn-default col-xs-12 landing-page-button'
           onClick={this.handleButtonClick} >
           Register
         </button>
-
-        <Link to='/login'>Need to log in?</Link>
+        <div className='text-center'>
+          <Link to='/login'>Need to log in?</Link>
+        </div>
       </div>
     );
   }
