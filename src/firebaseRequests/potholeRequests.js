@@ -1,5 +1,6 @@
 import constants from '../constants';
 import axios from 'axios';
+import auth from './auth';
 
 const potholePOST = newPothole => {
   return new Promise((resolve, reject) => {
@@ -63,6 +64,10 @@ const potholeDELETE = firebaseId => {
 
 const potholePUT = (firebaseId, updatedPothole) => {
   return new Promise((resolve, reject) => {
+    updatedPothole.updated = true;
+    updatedPothole.updatedDate = new Date().toLocaleDateString('en-US');
+    updatedPothole.updatedTime = new Date().toLocaleTimeString('en-US');
+    updatedPothole.updatedUserId = auth.fbGetUid();
     axios
       .put(`${constants.firebaseConfig.databaseURL}/potholes/${firebaseId}.json`, updatedPothole)
       .then(res => {
