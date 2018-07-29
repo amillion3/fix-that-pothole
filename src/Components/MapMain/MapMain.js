@@ -23,6 +23,7 @@ class MapMain extends Component {
         lat: '',
         lng: '',
       },
+      tempPothole: {},
       show: false,
     };
   }
@@ -55,9 +56,8 @@ class MapMain extends Component {
     potholeToAdd.createdBy = auth.fbGetUid();
     potholeToAdd.descriptionNotes = '';
     potholeToAdd.updated = false;
+    this.setState({tempPothole: potholeToAdd});
     this.showModal();
-    // const {tempPothole} = this.state;
-    this.state.tempPothole.push(potholeToAdd);
   };
 
   handleLocationFound = e => {
@@ -77,7 +77,7 @@ class MapMain extends Component {
     this.hideModal();
     console.log('save');
     potholeRequests
-      .potholePOST(this.state.tempPothole[0])
+      .potholePOST(this.state.tempPothole)
       .then(() => {
         console.log('saved');
         alert('saved');
@@ -86,27 +86,25 @@ class MapMain extends Component {
   };
 
   changeSeverity = e => {
-    this.setState({severity: e.target.value});
+    // this.setState({severity: e.target.value});
+    // this.setState({tempPothole.severity: e.target.value});
+    const tempVal = {...this.state.tempPothole};
+    tempVal.severity = e.target.value;
+    this.setState({tempPothole: tempVal});
   };
-  // changeDescriptionNotes = e => {
-  //   const tempVal = {...this.state.descriptionNotes };
-  //   tempVal.descriptionNotes = e.target.value;
-  //   this.setState({descriptionNotes: tempVal.descriptionNotes});
+  // emailChange = e => {
+  //   const tempUser = { ...this.state.user };
+  //   tempUser.email = e.target.value;
+  //   this.setState({ user: tempUser });
   // };
   changeDescriptionNotes = e => {
-    console.log(this.state);
-    const {descriptionNotes} = this.state.tempPothole[1];
-    console.log('notes', descriptionNotes);
-    const tempVal = {...this.state.tempPothole[1].descriptionNotes};
+    const tempVal = {...this.state.tempPothole};
     tempVal.descriptionNotes = e.target.value;
-    // const {tempPothole: {descriptionNotes}} = this.state;
-    descriptionNotes.setState({descriptionNotes: tempVal.descriptionNotes});
-    // const {tempPothole} = this.state;
-    // tempPothole.push(potholeToAdd);
+    this.setState({tempPothole: tempVal});
   };
 
   render () {
-    const p = this.state.tempPothole;
+    const {tempPothole} = this.state;
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
         <GenerateMarkers
@@ -124,7 +122,7 @@ class MapMain extends Component {
             <form className="">
               <div>
                 <label>Severity:</label><br/>
-                <select value={this.state.severity} onChange={this.changeSeverity}>
+                <select value={this.state.tempPothole.severity} onChange={this.changeSeverity}>
                   <option value="Low" onChange={this.changeSeverity}>Low</option>
                   <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
                   <option value="Severe" onChange={this.changeSeverity}>Severe</option>
@@ -136,7 +134,7 @@ class MapMain extends Component {
                   type="text"
                   className="form-control"
                   id="descriptionNotes"
-                  value={p.descriptionNotes}
+                  value={tempPothole.descriptionNotes}
                   onChange={this.changeDescriptionNotes}/>
               </div>
             </form>
