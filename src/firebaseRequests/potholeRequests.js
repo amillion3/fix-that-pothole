@@ -26,6 +26,7 @@ const potholesGETAll = () => {
             potholeArray.push(response.data[fbKey]);
           });
         }
+        console.log('pothole array', potholeArray);
         resolve(potholeArray);
       })
       .catch(error => {
