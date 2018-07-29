@@ -137,6 +137,7 @@ class MapMain extends Component {
           length={4}
           ref={this.mapRef}
           onLocationfound={this.handleLocationFound}
+          id="Map"
           className='mappityMap'
           onClick={this.handleClick}>
           <TileLayer
