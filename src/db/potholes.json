@@ -9,7 +9,8 @@
         "descriptionNotes": "West bound lane, near the crosswalk",
         "updated": true,
         "updatedUserId": "d934ks0l0slsksjdl330128",
-        "updatedDate": "01/02/2018"
+        "updatedDate": "01/02/2018",
+        "updatedTime": "04:59:10"
     },
     "sample2": {
         "createdBy": "d934ks0l0slsksjdancudk37373",
@@ -21,7 +22,8 @@
         "descriptionNotes": "High-speeds here",
         "updated": true,
         "updatedUserId": "d934ks0l0slsksjdl330128",
-        "updatedDate": "01/02/2018"
+        "updatedDate": "01/02/2018",
+        "updatedTime": "03:59:10"
     },
     "sample3": {
         "createdBy": "d934ks0l0slsksjdancudk37373",
@@ -33,6 +35,7 @@
         "descriptionNotes": "On shoulder",
         "updated": true,
         "updatedUserId": "d934ks0l0slsksjdl330128",
-        "updatedDate": "01/02/2018"
+        "updatedDate": "01/02/2018",
+        "updatedTime": "02:59:10"
     }
 }

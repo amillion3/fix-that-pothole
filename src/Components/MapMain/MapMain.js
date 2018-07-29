@@ -8,10 +8,6 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
 
 import './MapMain.css';
-// Display modal/Popup
-// Display for for user input
-// If user clicks 'Save' then POST to firebase
-//   if POST is good, then reload all potholes to state
 class MapMain extends Component {
   constructor (props) {
     super (props);
@@ -21,8 +17,7 @@ class MapMain extends Component {
       hasLocation: false,
       latlng: {
         lat: '',
-        lng: '',
-      },
+        lng: '' },
       tempPothole: {},
       show: false,
     };
@@ -56,6 +51,9 @@ class MapMain extends Component {
     potholeToAdd.createdBy = auth.fbGetUid();
     potholeToAdd.descriptionNotes = '';
     potholeToAdd.updated = false;
+    potholeToAdd.updatedDate = '';
+    potholeToAdd.updatedUserId = '';
+    potholeToAdd.updatedTime = '';
     this.setState({tempPothole: potholeToAdd});
     this.showModal();
   };
@@ -65,38 +63,27 @@ class MapMain extends Component {
       hasLocation: true,
       latlng: e.latlng,
     });
-    console.log('THIS.STATE', this.state);
   }
 
   modalBtnCancel = () => {
     this.hideModal();
-    console.log('cancel');
-
+    this.setState({tempPothole: {}});
   };
   modalBtnSave = () => {
     this.hideModal();
-    console.log('save');
     potholeRequests
       .potholePOST(this.state.tempPothole)
       .then(() => {
-        console.log('saved');
         alert('saved');
       })
       .catch(err => console.error('Error during save', err));
   };
 
   changeSeverity = e => {
-    // this.setState({severity: e.target.value});
-    // this.setState({tempPothole.severity: e.target.value});
     const tempVal = {...this.state.tempPothole};
     tempVal.severity = e.target.value;
     this.setState({tempPothole: tempVal});
   };
-  // emailChange = e => {
-  //   const tempUser = { ...this.state.user };
-  //   tempUser.email = e.target.value;
-  //   this.setState({ user: tempUser });
-  // };
   changeDescriptionNotes = e => {
     const tempVal = {...this.state.tempPothole};
     tempVal.descriptionNotes = e.target.value;
@@ -162,16 +149,6 @@ class MapMain extends Component {
       </div>
     );
   }
-
-  // 1. call a modal to enter attributes?
-  // might need to expand state to capture these
-  // 2. will need to capture all attributes and
-  // send to firebase and then
-  // 3. setState to default
-  // 4. after each point is created, make sure that
-  // the 'digitize point' on next mouse click goes
-  // away. I want the user to have to click the
-  // 'Add Point' button before adding another
 };
 
 export default MapMain;

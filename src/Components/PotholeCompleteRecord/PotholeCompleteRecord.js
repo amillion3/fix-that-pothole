@@ -110,6 +110,7 @@ class PotholeCompleteRecord extends React.Component {
                   <p><strong>Notes: </strong>{p.descriptionNotes}</p>
                   <p><strong>Updated ? </strong>{p.updated}</p>
                   <p><strong>Updated Date: </strong>{p.updatedDate}</p>
+                  <p><strong>Updated Time: </strong>{p.updatedTime}</p>
                   <p><strong>Updated By: </strong>{p.updatedUserId}</p>
                   <p><strong>Latitude: </strong>{p.coordLat}</p>
                   <p><strong>Longitude: </strong>{p.coordLong}</p>
@@ -191,6 +192,15 @@ class PotholeCompleteRecord extends React.Component {
                         className="form-control"
                         id="updatedDate"
                         value={p.updatedDate}
+                        readOnly/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="updatedTime">Updated Time:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="updatedTime"
+                        value={p.updatedTime}
                         readOnly/>
                     </div>
                     <div className="form-group">
