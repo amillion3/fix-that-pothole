@@ -111,6 +111,7 @@ class PotholeCompleteRecord extends React.Component {
                   <p><strong>Latitude: </strong>{p.coordLat}</p>
                   <p><strong>Longitude: </strong>{p.coordLong}</p>
                   <hr/>
+                  {/* Ternary below determines if record has updates or not */}
                   {p.updated ?
                     <div>
                       <p><strong>Updated Date: </strong>{p.updatedDate}</p>
@@ -118,7 +119,6 @@ class PotholeCompleteRecord extends React.Component {
                       <p><strong>Updated By: </strong>{p.updatedUserId}</p>
                     </div>
                     : <p><strong>No updates for this record.</strong></p>}
-
                   <div className='col-xs-6'>
                     <button
                       className='btn btn-info col-xs-12'

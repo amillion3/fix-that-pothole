@@ -1,0 +1,25 @@
+html {
+  height:100%;
+}
+body {
+  background-image: url("https://www.andymillion.com/fix-that-pothole/meme.png");
+  background-color: #ffffff;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.landing-page-button {
+  margin: 15px 0 10px 0;
+}
+
+.landing-page-input {
+  margin: 10px 0 10px 0;
+}
+
+@media only screen and  (min-width: 700px) {
+  body {
+    background-position: 50% 85%;
+    background-size: auto;
+  }
+}

@@ -42,12 +42,12 @@ class Register extends React.Component {
     const { user } = this.state;
     return (
       <div className='div-register-container col-xs-offset-3 col-xs-6'>
-        <h3 className='text-center'>Register</h3>
+        <h3 className='text-center'>Register New User</h3>
         <form>
           <label htmlFor="inputEmail">Email:</label>
           <input
             type="email"
-            className="form-control"
+            className="form-control landing-page-input"
             id="inputEmail"
             placeholder="Email to Register with"
             value={user.email}
@@ -55,7 +55,7 @@ class Register extends React.Component {
           <label htmlFor="inputPassword">Password:</label>
           <input
             type="password"
-            className="form-control"
+            className="form-control landing-page-input"
             id="inputPassword"
             placeholder="Enter New Password"
             value={user.password}
@@ -63,12 +63,13 @@ class Register extends React.Component {
         </form>
         <button
           type="submit"
-          className='btn btn-default'
+          className='btn btn-default btn-lg col-xs-12 landing-page-button'
           onClick={this.handleButtonClick} >
           Register
         </button>
-
-        <Link to='/login'>Need to log in?</Link>
+        <div className='text-center'>
+          <Link to='/login'>Need to log in?</Link>
+        </div>
       </div>
     );
   }
