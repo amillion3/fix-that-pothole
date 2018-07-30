@@ -1,9 +1,9 @@
 import React, { createRef, Component } from 'react';
+import {Link} from 'react-router-dom';
 import { Map, TileLayer} from 'react-leaflet';
 import {Modal, Button} from 'react-bootstrap';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
-import MenuItemAddPothole from '../MenuItemAddPothole/MenuItemAddPothole';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
 
@@ -20,11 +20,23 @@ class MapMain extends Component {
         lng: '' },
       tempPothole: {},
       show: false,
+      canAddPoint: false,
+      mapCursorStyle: 'initial',
     };
   }
 
   showModal = () => this.setState({ show: true });
   hideModal = () => this.setState({ show: false });
+
+  // Can user add a new point by clicking on the map?
+  addPointTrue = () => {
+    this.setState({canAddPoint: true});
+    this.setState({mapCursorStyle: 'crosshair'});
+  };
+  addPointFalse = () => {
+    this.setState({canAddPoint: false});
+    this.setState({mapCursorStyle: 'initial'});
+  };
 
   componentWillMount () {
     potholeRequests
@@ -90,6 +102,11 @@ class MapMain extends Component {
     this.setState({tempPothole: tempVal});
   };
 
+  eventAddNewPothole = e => {
+    this.addPointTrue();
+
+  };
+
   render () {
     const {tempPothole} = this.state;
     const potholeComponents = this.state.potholes.map(pothole => {
@@ -140,13 +157,23 @@ class MapMain extends Component {
           id="Map"
           className='mappityMap'
           onClick={this.handleClick}>
+          cursor={this.state.mapCursorStyle}
           <TileLayer
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
           <div className="">
             {potholeComponents}
           </div>
         </Map>
-        <MenuItemAddPothole />
+        <div className='col-xs-12 menu-items'>
+          <button
+            className = 'col-xs-5 btn btn-large btn-warning menu-items-btn'
+            onClick={this.eventAddNewPothole}
+          >Report New Pothole</button>
+          <button
+            className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
+            onClick={this.eventDashboard}
+          ><Link to='/dashboard'>View Dashboard</Link></button>
+        </div>
       </div>
     );
   }
