@@ -78,6 +78,7 @@ class App extends Component {
           <NavigationBar
             authed={this.state.authed}
             userWantsToLogOut={this.userWantsToLogOut}
+            className='clearfix'
           />
           <div className='overall-container'>
             <Switch>

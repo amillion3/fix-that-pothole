@@ -40,11 +40,9 @@ class NavigationBar extends React.Component {
                     <Link to='/map'>Map</Link></NavItem>
                   <NavItem>
                     <Link to='/dashboard'>Dashboard</Link></NavItem>
-                  <NavItem><Link to='/login'>
-                    <button
-                      onClick={logoutClicked}
-                    >
-                    Logout</button></Link></NavItem>
+                  <NavItem onClick={logoutClicked}>
+                    <Link to='/login'>Logout</Link>
+                  </NavItem>
                 </Nav>
               ) : (
                 // USER IS NOT LOGGED IN
@@ -54,29 +52,6 @@ class NavigationBar extends React.Component {
               )
             }
           </Nav>
-          {/* <Nav pullRight>
-            {
-              authed ? (
-                // USER IS LOGGED IN
-                <Nav className="nav navbar-nav navbar-right">
-                  <NavItem>
-                    <Link to='/map'>Map</Link></NavItem>
-                  <NavItem>
-                    <Link to='/dashboard'>Dashboard</Link></NavItem>
-                  <NavItem><Link to='/login'>
-                    <button
-                      onClick={logoutClicked}
-                    >
-                    Logout</button></Link></NavItem>
-                </Nav>
-              ) : (
-                // USER IS NOT LOGGED IN
-                <Nav className="nav navbar-nav navbar-right">
-                  <NavItem><Link to='/login'>Login</Link></NavItem>
-                </Nav>
-              )
-            }
-          </Nav> */}
         </Navbar.Collapse>
       </Navbar>
     );
