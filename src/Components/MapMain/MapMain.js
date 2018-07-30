@@ -21,7 +21,7 @@ class MapMain extends Component {
       tempPothole: {},
       show: false,
       canAddPoint: false,
-      mapCursorStyle: 'initial',
+      style: {cursor: 'default'},
     };
   }
 
@@ -31,11 +31,11 @@ class MapMain extends Component {
   // Can user add a new point by clicking on the map?
   addPointTrue = () => {
     this.setState({canAddPoint: true});
-    this.setState({mapCursorStyle: 'crosshair'});
+    this.setState({style: {cursor: 'crosshair'}});
   };
   addPointFalse = () => {
     this.setState({canAddPoint: false});
-    this.setState({mapCursorStyle: 'initial'});
+    this.setState({style: {cursor: 'default'}});
   };
 
   componentWillMount () {
@@ -156,8 +156,8 @@ class MapMain extends Component {
           onLocationfound={this.handleLocationFound}
           id="Map"
           className='mappityMap'
-          onClick={this.handleClick}>
-          cursor={this.state.mapCursorStyle}
+          onClick={this.handleClick}
+          style={this.state.style}>
           <TileLayer
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
           <div className="">
