@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
               <th>Severity</th>
               <th>Notes</th>
               <th>Updated</th>
-              <th>Full Details</th>
+              <th>More Info</th>
             </tr>
           </thead>
           <tbody>

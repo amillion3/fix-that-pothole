@@ -182,7 +182,7 @@ class MapMain extends Component {
           onClick={this.handleClick}
           style={this.state.style}>
           <TileLayer
-            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
+            url='https://api.mapbox.com/styles/v1/ajmillion/cjk9sg5nv72zw2rqrnoj56sn7/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWptaWxsaW9uIiwiYSI6ImNpbDlzYWM1ZzAwZXZ1ZWx6Y3J4ZGc1OTQifQ.DzbGiAn3-DEOKOueazBt1g'/>
           <div className="">
             {potholeComponents}
           </div>
@@ -192,7 +192,7 @@ class MapMain extends Component {
             className = 'col-xs-5 btn btn-large btn-warning menu-items-btn'
             onClick={this.eventAddNewPothole}>
             <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
-              Report New Pothole
+              Add New Pothole
           </button>
 
           <Link to='/dashboard'>

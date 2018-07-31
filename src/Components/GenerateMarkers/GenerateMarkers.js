@@ -9,7 +9,8 @@ class GenerateMarkers extends React.Component {
 
     return (
       <Marker
-        position={[(details.coordLat * 1), (details.coordLong * 1)]}>
+        position={[(details.coordLat * 1), (details.coordLong * 1)]}
+        riseOnHover={true}>
         <Popup>
           <p><strong>Status: </strong>{details.status}</p>
           <p><strong>Severity: </strong>{details.severity}</p>

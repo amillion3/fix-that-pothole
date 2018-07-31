@@ -1,27 +1,44 @@
+@font-face {
+  font-family: "League Mono";
+  src: url("../styles/fonts/otf/LeagueMono-Regular.otf");
+}
+@font-face {
+  font-family: "League Mono Bold";
+  src: url("../styles/fonts/otf/LeagueMono-Bold.otf");
+}
+@font-face {
+  font-family: "League Mono Thin";
+  src: url("../styles/fonts/otf/LeagueMono-Thin.otf");
+}
+
+* {
+  font-family: 'League Mono Thin';
+}
+
 body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #6B6E70;
+  background-color: #3AAFA9;
 }
 
 .page-wrapper {
   height: 100%;
   // position: absolute;
   z-index: 1;
-  background-color: #6B6E70;
+  background-color: #3AAFA9;
 }
 
 .overall-container {
   height: calc(100% - 56px);
   z-index: 0;
   margin-bottom: 0;
-  background-color: #6B6E70;
+  // background-color: #DEF2F1;
 }
 
 .btn {
-  color: white;
-  background-color: #61892F;
+  color: #FEFFFF;
+  background-color: #17252A;
   border: none;
   border-radius: 30px;
 }
@@ -32,7 +49,7 @@ body {
 .btn:link,
 .btn:visited,
 .btn:target {
-  background-color:#86C232;
+  background-color:#2B7A78;
   outline: none;
 }
 
