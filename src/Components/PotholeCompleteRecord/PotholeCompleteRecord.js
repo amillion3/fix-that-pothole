@@ -147,19 +147,45 @@ class PotholeCompleteRecord extends React.Component {
                     </div>
                     <div>
                       <label>Status:</label><br/>
-                      <select value={this.state.status} onChange={this.changeStatus}>
-                        <option value="Newly Added" onChange={this.changeStatus}>Newly Added</option>
-                        <option value="Pothole Assigned" onChange={this.changeStatus}>Pothole Assigned</option>
-                        <option value="Pothole Fixed" onChange={this.changeStatus}>Pothole Fixed</option>
-                        <option value="Problem With Repair" onChange={this.changeStatus}>Problem With Repair</option>
+                      <select
+                        value={this.state.status}
+                        onChange={this.changeStatus}>
+                        <option
+                          value="Newly Added"
+                          onChange={this.changeStatus}>
+                          Newly Added</option>
+                        <option
+                          value="Pothole Assigned"
+                          onChange={this.changeStatus}>
+                          Pothole Assigned</option>
+                        <option
+                          value="Pothole Fixed"
+                          onChange={this.changeStatus}>
+                        Pothole Fixed</option>
+                        <option
+                          value="Problem With Repair"
+                          onChange={this.changeStatus}>
+                        Problem With Repair</option>
                       </select>
                     </div>
                     <div>
                       <label>Severity:</label><br/>
-                      <select value={this.state.severity} onChange={this.changeSeverity}>
-                        <option value="Low" onChange={this.changeSeverity}>Low</option>
-                        <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
-                        <option value="Severe" onChange={this.changeSeverity}>Severe</option>
+                      <select
+                        value={this.state.severity}
+                        onChange={this.changeSeverity}
+                        className='dropdown-selector'>
+                        <option
+                          value="Low"
+                          onChange={this.changeSeverity}>
+                          Low</option>
+                        <option
+                          value="Moderate"
+                          onChange={this.changeSeverity}>
+                          Moderate</option>
+                        <option
+                          value="Severe"
+                          onChange={this.changeSeverity}>
+                          Severe</option>
                       </select>
                     </div>
                     <div className="form-group">
