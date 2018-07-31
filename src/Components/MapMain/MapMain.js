@@ -67,13 +67,11 @@ class MapMain extends Component {
       potholeToAdd.updatedDate = '';
       potholeToAdd.updatedUserId = '';
       potholeToAdd.updatedTime = '';
+      potholeToAdd.id = Math.random();
       this.addPointFalse();
       this.setState({tempPothole: potholeToAdd});
       this.showModal();
-    } else {
-      console.log('nope');
     }
-
   };
 
   handleLocationFound = e => {
@@ -84,17 +82,25 @@ class MapMain extends Component {
   }
 
   modalBtnCancel = () => {
-    this.addPointFalse();
+    this.addPointFalse(); // user cannot add points now
     this.hideModal();
     this.setState({tempPothole: {}});
   };
   modalBtnSave = () => {
-    this.addPointFalse();
+    this.addPointFalse(); // user cannot add points now
     this.hideModal();
+    const {tempPothole} = this.state;
     potholeRequests
-      .potholePOST(this.state.tempPothole)
+      .potholePOST(tempPothole)
       .then(() => {
         alert('saved');
+      })
+      .then(() => {
+        // Adds newly added pothole to state
+        const temp = [...this.state.potholes];
+        temp.push(tempPothole);
+        this.setState({potholes: temp});
+
       })
       .catch(err => console.error('Error during save', err));
   };
@@ -111,8 +117,7 @@ class MapMain extends Component {
   };
 
   eventAddNewPothole = e => {
-    this.addPointTrue();
-
+    this.addPointTrue(); // user CAN add points now
   };
 
   render () {
@@ -158,7 +163,7 @@ class MapMain extends Component {
         </Modal>
         <Map
           center={[36.1491592, -86.7703593]}
-          zoom={10}
+          zoom={15}
           length={4}
           ref={this.mapRef}
           onLocationfound={this.handleLocationFound}

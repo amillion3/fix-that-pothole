@@ -12,7 +12,7 @@ class GenerateMarkers extends React.Component {
           <p><strong>Status: </strong>{details.status}</p>
           <p><strong>Severity: </strong>{details.severity}</p>
           <p><strong>Created Date: </strong>{details.createdDate}</p>
-          <p><strong>Updated ? </strong>{details.updated}</p>
+          <p><strong>Updated ? </strong>{JSON.stringify(details.updated)}</p>
           <p><strong>Notes: </strong>{details.descriptionNotes}</p>
         </Popup>
       </Marker>
