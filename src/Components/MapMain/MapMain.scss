@@ -1,10 +1,9 @@
-.Map {
-  height: 100%;
-  width: 100%;
+#Map {
+  border-radius: 8px;
 }
 
 .mappityMap {
-  box-shadow: 0px 4px 4px #666;
+  box-shadow: 0px 4px 4px black;
   text-align: center;
   height: 90%;
   margin: 7px 7px 15px 7px;
@@ -20,7 +19,7 @@
   left: 0;
   position: relative;
   z-index: -10;
-  box-shadow: 0px -1px 4px #aaa;
+  box-shadow: 0px -1px 4px black;
 }
 
 .map-container {
@@ -30,7 +29,7 @@
   height: 100%;
   width: 100%;
   background-image: none;
-  background-color: whitesmoke;
+  background-color: #6B6E70;
 }
 
 .input-label {

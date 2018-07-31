@@ -97,8 +97,8 @@ class PotholeCompleteRecord extends React.Component {
     };
 
     return (
-      <div>
-        <div className="panel panel-default">
+      <div className=''>
+        <div className="panel panel-default pothole-complete-record">
           <div className="panel-body">
             {isEditing === false
               ? (
