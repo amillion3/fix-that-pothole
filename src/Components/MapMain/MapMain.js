@@ -53,21 +53,27 @@ class MapMain extends Component {
   mapRef = createRef();
 
   handleClick = e => {
-    this.mapRef.current.leafletElement.locate();
-    const potholeToAdd = {};
-    potholeToAdd.isComplete = false;
-    potholeToAdd.status = "Newly Added";
-    potholeToAdd.coordLat = e.latlng.lat;
-    potholeToAdd.coordLong = e.latlng.lng;
-    potholeToAdd.createdDate = new Date().toLocaleDateString('en-US');
-    potholeToAdd.createdBy = auth.fbGetUid();
-    potholeToAdd.descriptionNotes = '';
-    potholeToAdd.updated = false;
-    potholeToAdd.updatedDate = '';
-    potholeToAdd.updatedUserId = '';
-    potholeToAdd.updatedTime = '';
-    this.setState({tempPothole: potholeToAdd});
-    this.showModal();
+    if (this.state.canAddPoint) {
+      this.mapRef.current.leafletElement.locate();
+      const potholeToAdd = {};
+      potholeToAdd.isComplete = false;
+      potholeToAdd.status = "Newly Added";
+      potholeToAdd.coordLat = e.latlng.lat;
+      potholeToAdd.coordLong = e.latlng.lng;
+      potholeToAdd.createdDate = new Date().toLocaleDateString('en-US');
+      potholeToAdd.createdBy = auth.fbGetUid();
+      potholeToAdd.descriptionNotes = '';
+      potholeToAdd.updated = false;
+      potholeToAdd.updatedDate = '';
+      potholeToAdd.updatedUserId = '';
+      potholeToAdd.updatedTime = '';
+      this.addPointFalse();
+      this.setState({tempPothole: potholeToAdd});
+      this.showModal();
+    } else {
+      console.log('nope');
+    }
+
   };
 
   handleLocationFound = e => {
@@ -78,10 +84,12 @@ class MapMain extends Component {
   }
 
   modalBtnCancel = () => {
+    this.addPointFalse();
     this.hideModal();
     this.setState({tempPothole: {}});
   };
   modalBtnSave = () => {
+    this.addPointFalse();
     this.hideModal();
     potholeRequests
       .potholePOST(this.state.tempPothole)

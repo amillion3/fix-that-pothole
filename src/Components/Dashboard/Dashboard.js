@@ -31,6 +31,7 @@ class Dashboard extends React.Component {
           createdDate={pothole.createdDate}
           severity={pothole.severity}
           descriptionNotes={pothole.descriptionNotes}
+          updated={pothole.updated}
           firebaseId={pothole.id}
         />
       );
@@ -45,7 +46,8 @@ class Dashboard extends React.Component {
               <th>Date</th>
               <th>Severity</th>
               <th>Notes</th>
-              <th>More...</th>
+              <th>Updated</th>
+              <th>Full Details</th>
             </tr>
           </thead>
           <tbody>

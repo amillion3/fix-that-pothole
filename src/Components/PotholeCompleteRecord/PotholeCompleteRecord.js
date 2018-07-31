@@ -102,7 +102,6 @@ class PotholeCompleteRecord extends React.Component {
             {isEditing === false
               ? (
                 <div>
-                  <p><strong>Id: </strong>{p.itemId}</p>
                   <p><strong>Created Date: </strong>{p.createdDate}</p>
                   <p><strong>Created By: </strong>{p.createdBy}</p>
                   <p><strong>Status: </strong>{p.status}</p>
@@ -137,15 +136,6 @@ class PotholeCompleteRecord extends React.Component {
                 <div>
                   <h3 className='text-center'>Edit This Pothole Record</h3>
                   <form className="">
-                    <div className="form-group">
-                      <label htmlFor="firebaseId">Id:</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="firebaseId"
-                        value={p.itemId}
-                        readOnly/>
-                    </div>
                     <div className="form-group">
                       <label htmlFor="createdDate">Created Date:</label>
                       <input
