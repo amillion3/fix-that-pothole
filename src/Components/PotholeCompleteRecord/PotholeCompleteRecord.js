@@ -103,7 +103,6 @@ class PotholeCompleteRecord extends React.Component {
             {isEditing === false
               ? (
                 <div>
-                  <p><strong>Id: </strong>{p.itemId}</p>
                   <p><strong>Created Date: </strong>{p.createdDate}</p>
                   <p><strong>Created By: </strong>{p.createdBy}</p>
                   <p><strong>Status: </strong>{p.status}</p>
@@ -122,7 +121,8 @@ class PotholeCompleteRecord extends React.Component {
                     : <p><strong>No updates for this record.</strong></p>}
                   <div className='col-xs-3'>
                     <Link to='/dashboard'>
-                      <button className='btn btn-info col-xs-12'>
+                      <button className='btn col-xs-12'>
+                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
                         Go Back
                       </button>
                     </Link>
@@ -130,15 +130,17 @@ class PotholeCompleteRecord extends React.Component {
                   </div>
                   <div className='col-xs-3'>
                     <button
-                      className='btn btn-info col-xs-12'
-                      onClick={clickEditButton}
-                    >Edit Record</button>
+                      className='btn col-xs-12'
+                      onClick={clickEditButton}>
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    Edit Record</button>
                   </div>
                   <div className='col-xs-3'>
                     <button
-                      className='btn btn-danger col-xs-12'
-                      onClick={clickDeleteButton}
-                    >Delete Record</button>
+                      className='btn col-xs-12'
+                      onClick={clickDeleteButton}>
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                    Delete Record</button>
                   </div>
                 </div>
               )
@@ -248,14 +250,17 @@ class PotholeCompleteRecord extends React.Component {
                   <div className='col-xs-6'>
                     <button
                       className='btn btn-info col-xs-12'
-                      onClick={clickSaveButton}
-                    >Save Changes</button>
+                      onClick={clickSaveButton}>
+                      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    Save Changes
+                    </button>
                   </div>
                   <div className='col-xs-6'>
                     <button
                       className='btn btn-danger col-xs-12'
-                      onClick={clickCancelButton}
-                    >Cancel</button>
+                      onClick={clickCancelButton}>
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                      Cancel</button>
                   </div>
                 </div>
               )
