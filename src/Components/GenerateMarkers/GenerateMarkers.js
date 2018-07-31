@@ -1,6 +1,8 @@
 import React from 'react';
 import { Marker, Popup} from 'react-leaflet';
 
+import './GenerateMarkers.css';
+
 class GenerateMarkers extends React.Component {
   render () {
     const {details} = this.props;
