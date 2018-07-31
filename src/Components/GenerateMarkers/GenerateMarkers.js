@@ -1,12 +1,7 @@
 import React from 'react';
 import { Marker, Popup} from 'react-leaflet';
 
-import 'MarkerCluster.css';
-
-// var markers = L.markerClusterGroup();
-// markers.addLayer(L.marker(getRandomLatLng(map)));
-// ... Add more layers ...
-// map.addLayer(markers);
+import './GenerateMarkers.css';
 
 class GenerateMarkers extends React.Component {
   render () {

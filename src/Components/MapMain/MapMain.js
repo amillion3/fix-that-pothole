@@ -1,4 +1,4 @@
-import React, { createRef, Component } from 'react';
+import React, { createRef, Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Map, TileLayer} from 'react-leaflet';
 import {Modal, Button} from 'react-bootstrap';
