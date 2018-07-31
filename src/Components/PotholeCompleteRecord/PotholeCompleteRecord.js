@@ -119,7 +119,7 @@ class PotholeCompleteRecord extends React.Component {
                       <p><strong>Updated By: </strong>{p.updatedUserId}</p>
                     </div>
                     : <p><strong>No updates for this record.</strong></p>}
-                  <div className='col-xs-3'>
+                  <div className='col-xs-12 col-md-3 pothole-record-btn'>
                     <Link to='/dashboard'>
                       <button className='btn col-xs-12'>
                         <span className="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
@@ -128,14 +128,14 @@ class PotholeCompleteRecord extends React.Component {
                     </Link>
 
                   </div>
-                  <div className='col-xs-3'>
+                  <div className='col-xs-12 col-md-3 pothole-record-btn'>
                     <button
                       className='btn col-xs-12'
                       onClick={clickEditButton}>
                       <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     Edit Record</button>
                   </div>
-                  <div className='col-xs-3'>
+                  <div className='col-xs-12 col-md-3 pothole-record-btn'>
                     <button
                       className='btn col-xs-12'
                       onClick={clickDeleteButton}>

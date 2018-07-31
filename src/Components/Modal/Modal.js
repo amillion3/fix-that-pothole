@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './modal.css';
+
 const Modal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 

@@ -7,6 +7,10 @@ const constants = {
     storageBucket: '',
     messagingSenderId: '',
   },
+  mapbox: {
+    apiKey: '',
+    customNashville: '',
+  },
 };
 
 export default constants;

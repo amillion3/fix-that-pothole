@@ -10,14 +10,17 @@
   margin-bottom: 0;
   overflow: visible;
   z-index: 100000000000000;
-  background-color: #222629;
+  background-color: #17252A;
 }
 
 #navbar-brand-text {
   font-size: 24px;
-  color: #86C232;
+  color: #DEF2F1;
   padding: 0;
   margin: 5% 0 5% 25px;
+}
+.brand-bold {
+  font-family: "League Mono Bold";
 }
 
 .navbar-brand {
@@ -33,36 +36,28 @@
 }
 
 .navbar-collapse.out {
-  background-color: #222629;
+  background-color: #17252A;
   overflow: inherit;
 }
 .navbar-collapse.in {
-  background-color: #222629;
+  background-color: #17252A;
   overflow-x: hidden;
   font-size: 18px;
-  color: black;
+  color: #DEF2F1;
 }
 a {
-  color: #61892F;
+  color: #DEF2F1;
   font-size: 18px;
 }
 a:hover,
 a:active,
 a:focus {
-  color: #86C232;
+  color: #DEF2F1;
   text-decoration: none;
 }
-// a:active {
-//   color: #86C232;
-//   text-decoration: none;
-// }
-// a:focus {
-//   color: #86C232;
-//   text-decoration: none;
-// }
 
 .collapsing {
-  background-color: #222629;
+  background-color: #17252A;
 }
 // ul>.navbar-navbar {
 //   margin: 0.5px -15px !important;
@@ -70,16 +65,16 @@ a:focus {
 
 // hambuger menu line colors
 .navbar-inverse .navbar-toggle .icon-bar {
-  background-color: #86C232;
+  background-color: #DEF2F1;
 }
 // hambuger menu background colors
 .navbar-inverse .navbar-toggle:focus {
-  background-color: #222629;
+  background-color: #17252A;
 }
 
 li {
   text-align: center;
-  color:black;
+  color:#DEF2F1;
 }
 li:last-of-type {
   // border-bottom: 1px solid black;
