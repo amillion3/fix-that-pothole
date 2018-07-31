@@ -1,9 +1,9 @@
 import React, { createRef, Component } from 'react';
+import {Link} from 'react-router-dom';
 import { Map, TileLayer} from 'react-leaflet';
 import {Modal, Button} from 'react-bootstrap';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
-import MenuItemAddPothole from '../MenuItemAddPothole/MenuItemAddPothole';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
 
@@ -20,11 +20,23 @@ class MapMain extends Component {
         lng: '' },
       tempPothole: {},
       show: false,
+      canAddPoint: false,
+      style: {cursor: 'default'},
     };
   }
 
   showModal = () => this.setState({ show: true });
   hideModal = () => this.setState({ show: false });
+
+  // Can user add a new point by clicking on the map?
+  addPointTrue = () => {
+    this.setState({canAddPoint: true});
+    this.setState({style: {cursor: 'crosshair'}});
+  };
+  addPointFalse = () => {
+    this.setState({canAddPoint: false});
+    this.setState({style: {cursor: 'default'}});
+  };
 
   componentWillMount () {
     potholeRequests
@@ -41,21 +53,25 @@ class MapMain extends Component {
   mapRef = createRef();
 
   handleClick = e => {
-    this.mapRef.current.leafletElement.locate();
-    const potholeToAdd = {};
-    potholeToAdd.isComplete = false;
-    potholeToAdd.status = "Newly Added";
-    potholeToAdd.coordLat = e.latlng.lat;
-    potholeToAdd.coordLong = e.latlng.lng;
-    potholeToAdd.createdDate = new Date().toLocaleDateString('en-US');
-    potholeToAdd.createdBy = auth.fbGetUid();
-    potholeToAdd.descriptionNotes = '';
-    potholeToAdd.updated = false;
-    potholeToAdd.updatedDate = '';
-    potholeToAdd.updatedUserId = '';
-    potholeToAdd.updatedTime = '';
-    this.setState({tempPothole: potholeToAdd});
-    this.showModal();
+    if (this.state.canAddPoint) {
+      this.mapRef.current.leafletElement.locate();
+      const potholeToAdd = {};
+      potholeToAdd.isComplete = false;
+      potholeToAdd.status = "Newly Added";
+      potholeToAdd.coordLat = e.latlng.lat;
+      potholeToAdd.coordLong = e.latlng.lng;
+      potholeToAdd.createdDate = new Date().toLocaleDateString('en-US');
+      potholeToAdd.createdBy = auth.fbGetUid();
+      potholeToAdd.descriptionNotes = '';
+      potholeToAdd.updated = false;
+      potholeToAdd.updatedDate = '';
+      potholeToAdd.updatedUserId = '';
+      potholeToAdd.updatedTime = '';
+      potholeToAdd.id = Math.random();
+      this.addPointFalse();
+      this.setState({tempPothole: potholeToAdd});
+      this.showModal();
+    }
   };
 
   handleLocationFound = e => {
@@ -66,15 +82,25 @@ class MapMain extends Component {
   }
 
   modalBtnCancel = () => {
+    this.addPointFalse(); // user cannot add points now
     this.hideModal();
     this.setState({tempPothole: {}});
   };
   modalBtnSave = () => {
+    this.addPointFalse(); // user cannot add points now
     this.hideModal();
+    const {tempPothole} = this.state;
     potholeRequests
-      .potholePOST(this.state.tempPothole)
+      .potholePOST(tempPothole)
       .then(() => {
         alert('saved');
+      })
+      .then(() => {
+        // Adds newly added pothole to state
+        const temp = [...this.state.potholes];
+        temp.push(tempPothole);
+        this.setState({potholes: temp});
+
       })
       .catch(err => console.error('Error during save', err));
   };
@@ -88,6 +114,10 @@ class MapMain extends Component {
     const tempVal = {...this.state.tempPothole};
     tempVal.descriptionNotes = e.target.value;
     this.setState({tempPothole: tempVal});
+  };
+
+  eventAddNewPothole = e => {
+    this.addPointTrue(); // user CAN add points now
   };
 
   render () {
@@ -133,19 +163,30 @@ class MapMain extends Component {
         </Modal>
         <Map
           center={[36.1491592, -86.7703593]}
-          zoom={10}
+          zoom={15}
           length={4}
           ref={this.mapRef}
           onLocationfound={this.handleLocationFound}
+          id="Map"
           className='mappityMap'
-          onClick={this.handleClick}>
+          onClick={this.handleClick}
+          style={this.state.style}>
           <TileLayer
             url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'/>
           <div className="">
             {potholeComponents}
           </div>
         </Map>
-        <MenuItemAddPothole />
+        <div className='col-xs-12 menu-items'>
+          <button
+            className = 'col-xs-5 btn btn-large btn-warning menu-items-btn'
+            onClick={this.eventAddNewPothole}
+          >Report New Pothole</button>
+          <button
+            className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
+            onClick={this.eventDashboard}
+          ><Link to='/dashboard'>View Dashboard</Link></button>
+        </div>
       </div>
     );
   }

@@ -1,9 +1,14 @@
+.Map {
+  height: 100%;
+  width: 100%;
+}
+
 .mappityMap {
   box-shadow: 0px 4px 4px #666;
   text-align: center;
-  height: 92%;
-  margin: 7px;
-  z-index: 1;
+  height: 90%;
+  margin: 7px 7px 15px 7px;
+  z-index: 0;
 }
 
 .mappityMap:after {
@@ -13,7 +18,7 @@
   height: 10px;
   top: 0;
   left: 0;
-  position: absolute;
+  position: relative;
   z-index: -10;
   box-shadow: 0px -1px 4px #aaa;
 }
@@ -22,10 +27,21 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  height: 93vh;
+  height: 100%;
+  width: 100%;
+  background-image: none;
   background-color: whitesmoke;
 }
 
 .input-label {
   font-size: 18px;
+}
+
+// Buttons at bottom of page
+.menu-items {
+  height: 38px;
+}
+
+.menu-items-btn {
+  padding: 7px;
 }

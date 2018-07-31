@@ -4,7 +4,7 @@ import firebase from 'firebase';
 
 import Register from '../Components/Register/Register';
 import Login from '../Components/Login/Login';
-import Navbar from '../Components/Navbar/Navbar';
+import NavigationBar from '../Components/NavigationBar/NavigationBar';
 import Dashboard from '../Components/Dashboard/Dashboard';
 import PotholeCompleteRecord from '../Components/PotholeCompleteRecord/PotholeCompleteRecord';
 import firebaseApp from '../firebaseRequests/connection';
@@ -75,9 +75,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className='page-wrapper'>
-          <Navbar
+          <NavigationBar
             authed={this.state.authed}
             userWantsToLogOut={this.userWantsToLogOut}
+            className='clearfix'
           />
           <div className='overall-container'>
             <Switch>

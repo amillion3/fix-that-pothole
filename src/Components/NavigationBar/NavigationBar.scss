@@ -1,0 +1,70 @@
+.Navbar {
+  z-index: 100000000000000;
+}
+
+.navbar {
+  height: 55px;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 0 0 5px 5px;
+  margin-bottom: 0;
+  overflow: visible;
+  z-index: 100000000000000;
+  background-color: whitesmoke;
+}
+
+#navbar-brand-text {
+  font-size: 24px;
+  color: black;
+  padding: 0;
+  margin: 5% 0 5% 25px;
+}
+
+.navbar-brand {
+  padding: 5px 10px 5px 10px;
+  margin: 0;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar-collapse.out {
+  background-color: whitesmoke;
+  overflow: inherit;
+}
+.navbar-collapse.in {
+  background-color: whitesmoke;
+  overflow-x: hidden;
+  font-size: 18px;
+  color: black;
+}
+a {
+  color: black
+}
+.collapsing {
+  background-color: whitesmoke;
+}
+// ul>.navbar-navbar {
+//   margin: 0.5px -15px !important;
+// }
+
+// hambuger menu line colors
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: black;
+}
+// hambuger menu background colors
+.navbar-inverse .navbar-toggle:focus {
+  background-color: whitesmoke;
+}
+
+li {
+  text-align: center;
+  color:black;
+}
+li:last-of-type {
+  // border-bottom: 1px solid black;
+}
