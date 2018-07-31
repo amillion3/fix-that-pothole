@@ -64,7 +64,8 @@ class Register extends React.Component {
         <button
           type="submit"
           className='btn btn-default btn-lg col-xs-12 landing-page-button'
-          onClick={this.handleButtonClick} >
+          onClick={this.handleButtonClick}>
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
           Register
         </button>
         <div className='text-center'>
