@@ -23,6 +23,7 @@ class DashPothole extends React.Component {
             type="button"
             className="btn btn-primary"
             onClick={clickSinglePothole}>
+            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
             Full Record
           </button>
         </td>

@@ -5,17 +5,17 @@
 .navbar {
   height: 55px;
   border: none;
-  border-bottom: 1px solid black;
-  border-radius: 0 0 5px 5px;
+  // border-bottom: 1px solid black;
+  border-radius: 0 0 8px 8px;
   margin-bottom: 0;
   overflow: visible;
   z-index: 100000000000000;
-  background-color: whitesmoke;
+  background-color: #222629;
 }
 
 #navbar-brand-text {
   font-size: 24px;
-  color: black;
+  color: #86C232;
   padding: 0;
   margin: 5% 0 5% 25px;
 }
@@ -33,20 +33,36 @@
 }
 
 .navbar-collapse.out {
-  background-color: whitesmoke;
+  background-color: #222629;
   overflow: inherit;
 }
 .navbar-collapse.in {
-  background-color: whitesmoke;
+  background-color: #222629;
   overflow-x: hidden;
   font-size: 18px;
   color: black;
 }
 a {
-  color: black
+  color: #61892F;
+  font-size: 18px;
 }
+a:hover,
+a:active,
+a:focus {
+  color: #86C232;
+  text-decoration: none;
+}
+// a:active {
+//   color: #86C232;
+//   text-decoration: none;
+// }
+// a:focus {
+//   color: #86C232;
+//   text-decoration: none;
+// }
+
 .collapsing {
-  background-color: whitesmoke;
+  background-color: #222629;
 }
 // ul>.navbar-navbar {
 //   margin: 0.5px -15px !important;
@@ -54,11 +70,11 @@ a {
 
 // hambuger menu line colors
 .navbar-inverse .navbar-toggle .icon-bar {
-  background-color: black;
+  background-color: #86C232;
 }
 // hambuger menu background colors
 .navbar-inverse .navbar-toggle:focus {
-  background-color: whitesmoke;
+  background-color: #222629;
 }
 
 li {

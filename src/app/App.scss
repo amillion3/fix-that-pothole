@@ -2,17 +2,40 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: #6B6E70;
 }
 
 .page-wrapper {
   height: 100%;
   // position: absolute;
   z-index: 1;
-
+  background-color: #6B6E70;
 }
 
 .overall-container {
   height: calc(100% - 56px);
   z-index: 0;
   margin-bottom: 0;
+  background-color: #6B6E70;
+}
+
+.btn {
+  color: white;
+  background-color: #61892F;
+  border: none;
+  border-radius: 30px;
+}
+.btn:hover,
+.btn:active,
+.btn:active:focus,
+.btn:focus,
+.btn:link,
+.btn:visited,
+.btn:target {
+  background-color:#86C232;
+  outline: none;
+}
+
+.glyphicon {
+  padding-right: 10px;
 }

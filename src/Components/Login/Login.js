@@ -65,6 +65,7 @@ class Login extends React.Component {
           type="submit"
           className='btn btn-default btn-lg col-xs-12 landing-page-button'
           onClick={this.handleButtonClick}>
+          <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
           Login
         </button>
         <div className='text-center'>

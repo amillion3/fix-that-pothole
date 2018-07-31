@@ -157,8 +157,18 @@ class MapMain extends Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button className='btn btn-primary' onClick={this.modalBtnSave}>Save This Pothole</Button>
-            <Button className='btn btn-danger' onClick={this.modalBtnCancel}>Cancel and Clear</Button>
+            <Button
+              className='btn btn-primary'
+              onClick={this.modalBtnSave}>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            Save This Pothole
+            </Button>
+            <Button
+              className='btn btn-danger'
+              onClick={this.modalBtnCancel}>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            Cancel and Clear
+            </Button>
           </Modal.Footer>
         </Modal>
         <Map
@@ -181,14 +191,16 @@ class MapMain extends Component {
           <button
             className = 'col-xs-5 btn btn-large btn-warning menu-items-btn'
             onClick={this.eventAddNewPothole}>
-            Report New Pothole
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+              Report New Pothole
           </button>
 
           <Link to='/dashboard'>
             <button
               className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
               onClick={this.eventDashboard}>
-              View Dashboard
+              <span class="glyphicon glyphicon-th-list" aria-hidden="true"> </span>
+               View Dashboard
             </button>
           </Link>
         </div>

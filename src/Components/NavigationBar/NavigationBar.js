@@ -41,13 +41,19 @@ class NavigationBar extends React.Component {
                   <NavItem>
                     <Link to='/dashboard'>Dashboard</Link></NavItem>
                   <NavItem onClick={logoutClicked}>
-                    <Link to='/login'>Logout</Link>
+                    <Link to='/login'>
+                      <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                    Logout
+                    </Link>
                   </NavItem>
                 </Nav>
               ) : (
                 // USER IS NOT LOGGED IN
                 <Nav className="nav navbar-nav navbar-right">
-                  <NavItem><Link to='/login'>Login</Link></NavItem>
+                  <NavItem><Link to='/login'>
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                  Login
+                  </Link></NavItem>
                 </Nav>
               )
             }
