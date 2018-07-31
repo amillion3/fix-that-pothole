@@ -180,12 +180,17 @@ class MapMain extends Component {
         <div className='col-xs-12 menu-items'>
           <button
             className = 'col-xs-5 btn btn-large btn-warning menu-items-btn'
-            onClick={this.eventAddNewPothole}
-          >Report New Pothole</button>
-          <button
-            className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
-            onClick={this.eventDashboard}
-          ><Link to='/dashboard'>View Dashboard</Link></button>
+            onClick={this.eventAddNewPothole}>
+            Report New Pothole
+          </button>
+
+          <Link to='/dashboard'>
+            <button
+              className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
+              onClick={this.eventDashboard}>
+              View Dashboard
+            </button>
+          </Link>
         </div>
       </div>
     );

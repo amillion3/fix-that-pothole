@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 
@@ -102,6 +103,7 @@ class PotholeCompleteRecord extends React.Component {
             {isEditing === false
               ? (
                 <div>
+                  <p><strong>Id: </strong>{p.itemId}</p>
                   <p><strong>Created Date: </strong>{p.createdDate}</p>
                   <p><strong>Created By: </strong>{p.createdBy}</p>
                   <p><strong>Status: </strong>{p.status}</p>
@@ -118,13 +120,21 @@ class PotholeCompleteRecord extends React.Component {
                       <p><strong>Updated By: </strong>{p.updatedUserId}</p>
                     </div>
                     : <p><strong>No updates for this record.</strong></p>}
-                  <div className='col-xs-6'>
+                  <div className='col-xs-3'>
+                    <Link to='/dashboard'>
+                      <button className='btn btn-info col-xs-12'>
+                        Go Back
+                      </button>
+                    </Link>
+
+                  </div>
+                  <div className='col-xs-3'>
                     <button
                       className='btn btn-info col-xs-12'
                       onClick={clickEditButton}
                     >Edit Record</button>
                   </div>
-                  <div className='col-xs-6'>
+                  <div className='col-xs-3'>
                     <button
                       className='btn btn-danger col-xs-12'
                       onClick={clickDeleteButton}
@@ -137,6 +147,15 @@ class PotholeCompleteRecord extends React.Component {
                   <h3 className='text-center'>Edit This Pothole Record</h3>
                   <form className="">
                     <div className="form-group">
+                      <label htmlFor="firebaseId">Id:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="firebaseId"
+                        value={p.itemId}
+                        readOnly/>
+                    </div>
+                    <div className="form-group">
                       <label htmlFor="createdDate">Created Date:</label>
                       <input
                         type="text"
@@ -147,45 +166,19 @@ class PotholeCompleteRecord extends React.Component {
                     </div>
                     <div>
                       <label>Status:</label><br/>
-                      <select
-                        value={this.state.status}
-                        onChange={this.changeStatus}>
-                        <option
-                          value="Newly Added"
-                          onChange={this.changeStatus}>
-                          Newly Added</option>
-                        <option
-                          value="Pothole Assigned"
-                          onChange={this.changeStatus}>
-                          Pothole Assigned</option>
-                        <option
-                          value="Pothole Fixed"
-                          onChange={this.changeStatus}>
-                        Pothole Fixed</option>
-                        <option
-                          value="Problem With Repair"
-                          onChange={this.changeStatus}>
-                        Problem With Repair</option>
+                      <select value={this.state.status} onChange={this.changeStatus}>
+                        <option value="Newly Added" onChange={this.changeStatus}>Newly Added</option>
+                        <option value="Pothole Assigned" onChange={this.changeStatus}>Pothole Assigned</option>
+                        <option value="Pothole Fixed" onChange={this.changeStatus}>Pothole Fixed</option>
+                        <option value="Problem With Repair" onChange={this.changeStatus}>Problem With Repair</option>
                       </select>
                     </div>
                     <div>
                       <label>Severity:</label><br/>
-                      <select
-                        value={this.state.severity}
-                        onChange={this.changeSeverity}
-                        className='dropdown-selector'>
-                        <option
-                          value="Low"
-                          onChange={this.changeSeverity}>
-                          Low</option>
-                        <option
-                          value="Moderate"
-                          onChange={this.changeSeverity}>
-                          Moderate</option>
-                        <option
-                          value="Severe"
-                          onChange={this.changeSeverity}>
-                          Severe</option>
+                      <select value={this.state.severity} onChange={this.changeSeverity}>
+                        <option value="Low" onChange={this.changeSeverity}>Low</option>
+                        <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
+                        <option value="Severe" onChange={this.changeSeverity}>Severe</option>
                       </select>
                     </div>
                     <div className="form-group">
