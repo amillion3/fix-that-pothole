@@ -59,7 +59,6 @@ class PotholeCompleteRecord extends React.Component {
     const clickEditButton = () => {
       this.setState({isEditing: true});
     };
-
     const clickDeleteButton = () => {
       const {firebaseId} = this.state;
       potholeRequests
@@ -232,20 +231,20 @@ class PotholeCompleteRecord extends React.Component {
                         readOnly/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputName2">Latitude</label>
+                      <label htmlFor="latitude">Latitude</label>
                       <input
                         type="text"
                         className="form-control"
-                        id="exampleInputName2"
+                        id="latitude"
                         value={p.coordLat}
                         onChange={this.changeLatitude}/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputName2">Longitude</label>
+                      <label htmlFor="longitude">Longitude</label>
                       <input
                         type="text"
                         className="form-control"
-                        id="exampleInputName2"
+                        id="longitude"
                         value={p.coordLong}
                         onChange={this.changeLongitude}/>
                     </div>
