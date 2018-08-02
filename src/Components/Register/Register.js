@@ -21,9 +21,7 @@ class Register extends React.Component {
       .then(() => {
         this.props.history.push('/login');
       })
-      .catch(error => {
-        console.error('Error with registering, ', error);
-      });
+      .catch(err => console.error('Error with registering: ', err));
   };
 
   emailChange = e => {

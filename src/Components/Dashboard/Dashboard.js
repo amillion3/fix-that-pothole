@@ -16,9 +16,7 @@ class Dashboard extends React.Component {
       .then(a => {
         this.setState({potholes: a});
       })
-      .catch(err => {
-        console.error('Error with getting pothole records: ', err);
-      });
+      .catch(err => console.error('Error with getting all potholes.', err));
   }
 
   render () {

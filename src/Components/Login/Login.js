@@ -21,9 +21,7 @@ class Login extends React.Component {
       .then(() => {
         this.props.history.push('/map');
       })
-      .catch(error => {
-        console.error('Error logging in, ', error);
-      });
+      .catch(err => console.error('Error logging in:', err));
   };
 
   emailChange = e => {
