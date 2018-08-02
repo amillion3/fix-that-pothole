@@ -79,3 +79,29 @@ li {
 li:last-of-type {
   // border-bottom: 1px solid black;
 }
+
+@media screen and (max-width: 385px) {
+  #navbar-brand-text {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  #navbar-brand-text {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  #navbar-brand-text {
+    font-size: 12px;
+    letter-spacing: 0px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .nav-item-wrapper {
+    padding: 10px;
+    font-size: 18px;
+  }
+}
