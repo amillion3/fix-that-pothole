@@ -5,19 +5,20 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './PotholeCompleteRecord.css';
 
-// TO DO remove alert('') with modals or something
-
-let firebaseId = '';
+// let firebaseId = '';
 class PotholeCompleteRecord extends React.Component {
   state = {
     isEditing: false,
+    firebaseId: '',
   }
 
   componentDidMount () {
-    firebaseId = this.props.match.params.id;
-    // this gets the firebaseId
+    const {firebaseId} = this.state;
+    // this gets the firebaseId and saves to this.state
+    console.log(this.props.match.params.id);
+    this.setState({firebaseId: (this.props.match.params.id)});
     potholeRequests
-      .potholeGETSingle(firebaseId)
+      .potholeGETSingle(JSON.stringify({firebaseId}))
       .then(response => {
         this.setState(response);
       })
@@ -51,6 +52,7 @@ class PotholeCompleteRecord extends React.Component {
 
   render () {
     const p = this.state;
+    console.log('p', p);
     const isEditing = this.state.isEditing;
 
     const clickEditButton = () => {
@@ -58,8 +60,9 @@ class PotholeCompleteRecord extends React.Component {
     };
 
     const clickDeleteButton = () => {
+      const {firebaseId} = this.state;
       potholeRequests
-        .potholeDELETE(firebaseId)
+        .potholeDELETE({firebaseId})
         .then(() => {
           this.setState({isEditing: false});
         })
@@ -70,8 +73,9 @@ class PotholeCompleteRecord extends React.Component {
         .catch(err => console.error('Error during delete: ', err));
     };
     const clickCancelButton = () => {
+      const {firebaseId} = this.state;
       potholeRequests
-        .potholeGETSingle(firebaseId)
+        .potholeGETSingle({firebaseId})
         .then(response => {
           this.setState(response);
           this.setState({isEditing: false});
@@ -82,8 +86,9 @@ class PotholeCompleteRecord extends React.Component {
         .catch(err => console.error('Error with cancel request: ', err));
     };
     const clickSaveButton = () => {
+      const {firebaseId} = this.state;
       potholeRequests
-        .potholePUT(firebaseId, this.state)
+        .potholePUT({firebaseId}, this.state)
         .then(() => {
           this.setState({isEditing: false});
         })

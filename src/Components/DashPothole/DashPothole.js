@@ -5,8 +5,11 @@ import './DashPothole.css';
 
 class DashPothole extends React.Component {
   state = {};
+
   render () {
+    // {details} passed in via props, contains individual pothole object
     const {details} = this.props;
+    // button click, takes user to a new route, based on the firebase id
     const clickSinglePothole = () => {
       this.props.history.push(`/pothole/${details.id}`);
     };
@@ -16,7 +19,9 @@ class DashPothole extends React.Component {
         <td>{details.status}</td>
         <td>{details.createdDate}</td>
         <td>{details.severity}</td>
-        <td className='overflow-hidden'>    {details.descriptionNotes}</td>
+        <td className='overflow-hidden'>
+          {details.descriptionNotes}
+        </td>
         <td>{JSON.stringify(details.updated)}</td>
         <td>
           <button
@@ -32,4 +37,5 @@ class DashPothole extends React.Component {
   }
 };
 
+// withRouter was the key to fixing the clickSinglePothole function
 export default withRouter(DashPothole);

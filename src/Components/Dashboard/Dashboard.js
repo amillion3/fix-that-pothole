@@ -10,6 +10,7 @@ class Dashboard extends React.Component {
     potholes: [],
   };
 
+  // loads ALL potholes into this.state via Axios promise
   componentDidMount () {
     potholeRequests
       .potholesGETAll()
@@ -20,6 +21,7 @@ class Dashboard extends React.Component {
   }
 
   render () {
+    // .map through ALL potholes
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
         <DashPothole
@@ -39,7 +41,7 @@ class Dashboard extends React.Component {
       <div className='dashboard'>
         <table className='table table-hover'>
           <thead>
-            <tr className=''>
+            <tr>
               <th>Status</th>
               <th>Date</th>
               <th>Severity</th>

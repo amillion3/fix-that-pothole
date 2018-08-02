@@ -13,6 +13,7 @@ class Register extends React.Component {
     },
   };
 
+  // Register button clicked
   handleButtonClick = e => {
     const { user } = this.state;
     e.preventDefault();
@@ -24,12 +25,14 @@ class Register extends React.Component {
       .catch(err => console.error('Error with registering: ', err));
   };
 
+  // Dynamicaly updating email in this.state
   emailChange = e => {
     const tempUser = { ...this.state.user };
     tempUser.email = e.target.value;
     this.setState({ user: tempUser });
   };
 
+  // Dynamicaly updating password in this.state
   passwordChange = e => {
     const tempUser = { ...this.state.user };
     tempUser.password = e.target.value;

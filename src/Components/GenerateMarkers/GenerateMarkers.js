@@ -6,7 +6,8 @@ import './GenerateMarkers.css';
 
 class GenerateMarkers extends React.Component {
   render () {
-    const {details} = this.props;
+    const {details} = this.props; // Single pothole object
+    // https://leafletjs.com/reference-1.3.2.html#icon
     const redMarker = new Icon({
       iconUrl: ('https://www.andymillion.com/fix-that-pothole/marker-red.png'),
       iconSize: [32, 32],
