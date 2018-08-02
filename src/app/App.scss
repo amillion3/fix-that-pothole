@@ -11,6 +11,18 @@
   src: url("../styles/fonts/otf/LeagueMono-Thin.otf");
 }
 
+// Color theme:
+// #17252A
+//    dark green/blue
+// #2B7A78
+//    medium teal
+// #3AAFA9
+//    teal
+// #DEF2F1
+//    light teal
+// #FEFFFF
+//    almost white
+
 * {
   font-family: 'League Mono Thin';
 }
@@ -24,7 +36,6 @@ body {
 
 .page-wrapper {
   height: 100%;
-  // position: absolute;
   z-index: 1;
   background-color: #3AAFA9;
 }
@@ -33,7 +44,6 @@ body {
   height: calc(100% - 56px);
   z-index: 0;
   margin-bottom: 0;
-  // background-color: #DEF2F1;
 }
 
 .btn {

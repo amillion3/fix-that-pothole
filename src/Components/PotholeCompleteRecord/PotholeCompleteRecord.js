@@ -5,17 +5,20 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './PotholeCompleteRecord.css';
 
-// TO DO remove alert('') with modals or something
-
-let firebaseId = '';
+// let firebaseId = '';
 class PotholeCompleteRecord extends React.Component {
   state = {
     isEditing: false,
+    firebaseId: '',
+  }
+
+  componentWillMount () {
+    // Grabs firebaseId from URL and sets state
+    this.setState({firebaseId: (this.props.match.params.id)});
   }
 
   componentDidMount () {
-    firebaseId = this.props.match.params.id;
-    // this gets the firebaseId
+    const {firebaseId} = this.state;
     potholeRequests
       .potholeGETSingle(firebaseId)
       .then(response => {
@@ -24,9 +27,7 @@ class PotholeCompleteRecord extends React.Component {
       .then(() => {
         this.setState({isEditing: false});
       })
-      .catch(err => {
-        console.error(err);
-      });
+      .catch(err => console.error('Error getting single pothole:', err));
   }
 
   changeStatus = e => {
@@ -58,8 +59,8 @@ class PotholeCompleteRecord extends React.Component {
     const clickEditButton = () => {
       this.setState({isEditing: true});
     };
-
     const clickDeleteButton = () => {
+      const {firebaseId} = this.state;
       potholeRequests
         .potholeDELETE(firebaseId)
         .then(() => {
@@ -68,9 +69,11 @@ class PotholeCompleteRecord extends React.Component {
         .then(response => {
           this.props.history.push(`/dashboard`);
           alert('Record deleted');
-        });
+        })
+        .catch(err => console.error('Error during delete: ', err));
     };
     const clickCancelButton = () => {
+      const {firebaseId} = this.state;
       potholeRequests
         .potholeGETSingle(firebaseId)
         .then(response => {
@@ -80,11 +83,10 @@ class PotholeCompleteRecord extends React.Component {
         .then(() => {
           this.props.history.push(`/dashboard`);
         })
-        .catch(err => {
-          console.error('Error with cancel request', err);
-        });
+        .catch(err => console.error('Error with cancel request: ', err));
     };
     const clickSaveButton = () => {
+      const {firebaseId} = this.state;
       potholeRequests
         .potholePUT(firebaseId, this.state)
         .then(() => {
@@ -229,20 +231,20 @@ class PotholeCompleteRecord extends React.Component {
                         readOnly/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputName2">Latitude</label>
+                      <label htmlFor="latitude">Latitude</label>
                       <input
                         type="text"
                         className="form-control"
-                        id="exampleInputName2"
+                        id="latitude"
                         value={p.coordLat}
                         onChange={this.changeLatitude}/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputName2">Longitude</label>
+                      <label htmlFor="longitude">Longitude</label>
                       <input
                         type="text"
                         className="form-control"
-                        id="exampleInputName2"
+                        id="longitude"
                         value={p.coordLong}
                         onChange={this.changeLongitude}/>
                     </div>

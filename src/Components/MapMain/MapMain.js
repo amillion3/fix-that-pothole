@@ -1,10 +1,9 @@
 import React, { createRef, Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Map, TileLayer} from 'react-leaflet';
-import {Modal, Button, Alert} from 'react-bootstrap';
+import {Modal, Button} from 'react-bootstrap';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
-import UserAlerts from '../UserAlerts/UserAlerts';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
@@ -47,9 +46,7 @@ class MapMain extends Component {
         this.setState({potholes: potholes});
         // this.setState({potholes});  ES6 shorthand
       })
-      .catch(err => {
-        console.error('Error with pothole GET request ', err);
-      });
+      .catch(err => console.error('Error with pothole get request: ', err));
   }
 
   mapRef = createRef();
@@ -88,19 +85,6 @@ class MapMain extends Component {
     this.hideModal();
     this.setState({tempPothole: {}});
   };
-  test = () => {
-    return (
-      // alert('hi')
-      // <UserAlerts
-      //   message="New pothole record saved"
-      //   className="alert-pothole success"
-      // >
-      // </UserAlerts>
-      <Alert bsStyle='danger'>
-        Pothole saved.
-      </Alert>
-    );
-  };
   modalBtnSave = () => {
     this.addPointFalse(); // user cannot add points now
     this.hideModal();
@@ -108,10 +92,7 @@ class MapMain extends Component {
     potholeRequests
       .potholePOST(tempPothole)
       .then(() => {
-        // alert('saved');
-        console.log('.then -- saved');
-        this.test();
-
+        alert('saved');
       })
       .then(() => {
         // Adds newly added pothole to state
