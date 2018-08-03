@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Marker, Popup} from 'react-leaflet';
 import {Icon} from 'leaflet';
 
@@ -27,6 +28,10 @@ class GenerateMarkers extends React.Component {
       </Marker>
     );
   }
+};
+
+GenerateMarkers.propTypes = {
+  details: PropTypes.object.isRequired,
 };
 
 export default GenerateMarkers;

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import authRequests from '../../firebaseRequests/auth';
 
@@ -75,6 +76,10 @@ class Register extends React.Component {
       </div>
     );
   }
+};
+
+Register.propTypes = {
+  history: PropTypes.object.isRequired,
 };
 
 export default Register;

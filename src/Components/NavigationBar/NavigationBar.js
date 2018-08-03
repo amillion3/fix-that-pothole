@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
@@ -73,6 +74,11 @@ class NavigationBar extends React.Component {
       </Navbar>
     );
   }
+};
+
+NavigationBar.propTypes = {
+  authed: PropTypes.bool.isRequired,
+  userWantsToLogOut: PropTypes.func.isRequired,
 };
 
 export default NavigationBar;
