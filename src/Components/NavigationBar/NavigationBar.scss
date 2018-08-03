@@ -59,9 +59,11 @@ a:focus {
 .collapsing {
   background-color: #17252A;
 }
-// ul>.navbar-navbar {
-//   margin: 0.5px -15px !important;
-// }
+.navbar-nav span[role=button] {
+  padding: 15px;
+  display: inline-block;
+  line-height: 20px;
+}
 
 // hambuger menu line colors
 .navbar-inverse .navbar-toggle .icon-bar {
@@ -75,9 +77,6 @@ a:focus {
 li {
   text-align: center;
   color:#DEF2F1;
-}
-li:last-of-type {
-  // border-bottom: 1px solid black;
 }
 
 @media screen and (max-width: 385px) {
