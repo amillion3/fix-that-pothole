@@ -36,19 +36,20 @@ class NavigationBar extends React.Component {
               authed ? (
               // USER IS LOGGED IN
                 <Nav className="nav navbar-nav navbar-right">
-                  <NavItem componentClass='span'>
+                  <NavItem componentClass='span' className='nav-item-wrapper'>
                     <Link to='/map'>
                       <span className="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                     Map
                     </Link>
                   </NavItem>
-                  <NavItem componentClass='span'>
+                  <NavItem componentClass='span'  className='nav-item-wrapper'>
                     <Link to='/dashboard'>
                       <span className="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                     Dashboard
                     </Link>
                   </NavItem>
-                  <NavItem componentClass='span' onClick={logoutClicked}>
+                  <NavItem componentClass='span'
+                    className='nav-item-wrapper' onClick={logoutClicked}>
                     <Link to='/login'>
                       <span className="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                     Logout

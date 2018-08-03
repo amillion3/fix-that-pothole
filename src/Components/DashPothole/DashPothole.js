@@ -16,13 +16,13 @@ class DashPothole extends React.Component {
 
     return (
       <tr>
-        <td>{details.status}</td>
-        <td>{details.createdDate}</td>
-        <td>{details.severity}</td>
+        <td className='dash-pothole-mobile'>{details.status}</td>
+        <td className='dash-pothole-mobile'>{details.createdDate}</td>
+        <td className='dash-pothole-mobile'>{details.severity}</td>
         <td className='overflow-hidden'>
           {details.descriptionNotes}
         </td>
-        <td>{JSON.stringify(details.updated)}</td>
+        <td className='dash-pothole-mobile'>{JSON.stringify(details.updated)}</td>
         <td>
           <button
             type="button"

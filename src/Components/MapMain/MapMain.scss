@@ -49,3 +49,14 @@
 .menu-items-btn {
   padding: 7px;
 }
+
+@media screen and (max-width: 400px) {
+.menu-items-btn {
+  font-size: 8px;
+
+}
+span>.glyphicon-plus,
+span>.glyphicon-th-list, {
+  display: none;
+}
+}
