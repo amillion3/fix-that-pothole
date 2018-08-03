@@ -7,6 +7,7 @@ import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
+import constants from '../../constants';
 
 import './MapMain.css';
 class MapMain extends Component {
@@ -23,6 +24,7 @@ class MapMain extends Component {
       show: false,
       canAddPoint: false,
       style: {cursor: 'default'},
+      customNashville: '',
     };
   }
 
@@ -43,8 +45,10 @@ class MapMain extends Component {
     potholeRequests
       .potholesGETAll()
       .then(potholes => {
-        this.setState({potholes: potholes});
-        // this.setState({potholes});  ES6 shorthand
+        const {customNashville} = constants;
+        this.setState({customNashville});
+        this.setState({potholes});
+        // this.setState({potholes: potholes});  ES5 long form
       })
       .catch(err => console.error('Error with pothole get request: ', err));
   }
@@ -181,7 +185,7 @@ class MapMain extends Component {
           onClick={this.handleClick}
           style={this.state.style}>
           <TileLayer
-            url='https://api.mapbox.com/styles/v1/ajmillion/cjk9sg5nv72zw2rqrnoj56sn7/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWptaWxsaW9uIiwiYSI6ImNpbDlzYWM1ZzAwZXZ1ZWx6Y3J4ZGc1OTQifQ.DzbGiAn3-DEOKOueazBt1g'/>
+            url={this.state.customNashville}/>
           <div className="">
             {potholeComponents}
           </div>
