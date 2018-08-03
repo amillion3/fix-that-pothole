@@ -1,5 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import './DashPothole.css';
 
@@ -35,6 +36,11 @@ class DashPothole extends React.Component {
       </tr>
     );
   }
+};
+
+DashPothole.propTypes = {
+  details: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 // withRouter was the key to fixing the clickSinglePothole function
