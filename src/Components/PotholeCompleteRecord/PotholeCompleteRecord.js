@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
@@ -274,7 +275,9 @@ class PotholeCompleteRecord extends React.Component {
   }
 }
 
-// back button would be nice
-// collapse with a map marker
+PotholeCompleteRecord.propTypes = {
+  firebaseId: PropTypes.string,
+  history: PropTypes.object.isRequired,
+};
 
 export default PotholeCompleteRecord;
