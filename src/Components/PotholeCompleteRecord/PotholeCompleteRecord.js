@@ -6,11 +6,11 @@ import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './PotholeCompleteRecord.css';
 
-// let firebaseId = '';
 class PotholeCompleteRecord extends React.Component {
   state = {
     isEditing: false,
     firebaseId: '',
+    showAlert: false,
   }
 
   componentWillMount () {
@@ -67,7 +67,7 @@ class PotholeCompleteRecord extends React.Component {
         .then(() => {
           this.setState({isEditing: false});
         })
-        .then(response => {
+        .then(() => {
           this.props.history.push(`/dashboard`);
           alert('Record deleted');
         })

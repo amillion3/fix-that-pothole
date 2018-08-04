@@ -31,6 +31,7 @@
   width: 100%;
   background-image: none;
   background-color: #3AAFA9;
+  // position: fixed;
 }
 
 .input-label {
@@ -59,4 +60,11 @@ span>.glyphicon-plus,
 span>.glyphicon-th-list, {
   display: none;
 }
+}
+
+#currentAlert {
+  margin: 0 10% 0 10%;
+  z-index: 10;
+  overflow: hidden;
+  position: relative;
 }
