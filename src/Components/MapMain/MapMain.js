@@ -1,10 +1,11 @@
 import React, { createRef, Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Map, TileLayer} from 'react-leaflet';
-import {Modal, Button} from 'react-bootstrap';
+// import {Modal, Button} from 'react-bootstrap';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
+import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
@@ -86,40 +87,40 @@ class MapMain extends Component {
     });
   }
 
-  modalBtnCancel = () => {
-    this.addPointFalse(); // user cannot add points now
-    this.hideModal();
-    this.setState({tempPothole: {}});
-  };
-  modalBtnSave = () => {
-    this.addPointFalse(); // user cannot add points now
-    this.hideModal();
-    const {tempPothole} = this.state;
-    potholeRequests
-      .potholePOST(tempPothole)
-      .then(() => {
-        // change state and show Alert component
-        this.setState({alertShow: true});
-      })
-      .then(() => {
-        // Adds newly added pothole to state
-        const temp = [...this.state.potholes];
-        temp.push(tempPothole);
-        this.setState({potholes: temp});
-      })
-      .catch(err => console.error('Error during save', err));
-  };
+  // modalBtnCancel = () => {
+  //   this.addPointFalse(); // user cannot add points now
+  //   this.hideModal();
+  //   this.setState({tempPothole: {}});
+  // };
+  // modalBtnSave = () => {
+  //   this.addPointFalse(); // user cannot add points now
+  //   this.hideModal();
+  //   const {tempPothole} = this.state;
+  //   potholeRequests
+  //     .potholePOST(tempPothole)
+  //     .then(() => {
+  //       // change state and show Alert component
+  //       this.setState({alertShow: true});
+  //     })
+  //     .then(() => {
+  //       // Adds newly added pothole to state
+  //       const temp = [...this.state.potholes];
+  //       temp.push(tempPothole);
+  //       this.setState({potholes: temp});
+  //     })
+  //     .catch(err => console.error('Error during save', err));
+  // };
 
-  changeSeverity = e => {
-    const tempVal = {...this.state.tempPothole};
-    tempVal.severity = e.target.value;
-    this.setState({tempPothole: tempVal});
-  };
-  changeDescriptionNotes = e => {
-    const tempVal = {...this.state.tempPothole};
-    tempVal.descriptionNotes = e.target.value;
-    this.setState({tempPothole: tempVal});
-  };
+  // changeSeverity = e => {
+  //   const tempVal = {...this.state.tempPothole};
+  //   tempVal.severity = e.target.value;
+  //   this.setState({tempPothole: tempVal});
+  // };
+  // changeDescriptionNotes = e => {
+  //   const tempVal = {...this.state.tempPothole};
+  //   tempVal.descriptionNotes = e.target.value;
+  //   this.setState({tempPothole: tempVal});
+  // };
 
   eventAddNewPothole = e => {
     this.addPointTrue(); // user CAN add points now
@@ -136,7 +137,11 @@ class MapMain extends Component {
     });
     return (
       <div className='map-container'>
-        <Modal show={this.state.show} onHide={this.hideModal}>
+        <ModalAddPothole
+          tempPothole={this.state.tempPothole}
+          show = {this.state.show}
+        />
+        {/* <Modal show={this.state.show} onHide={this.hideModal}>
           <Modal.Header closeButton>
             <Modal.Title>Add New Pothole</Modal.Title>
           </Modal.Header>
@@ -175,7 +180,7 @@ class MapMain extends Component {
             Cancel and Clear
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
         {
           (this.state.alertShow) ?
             <Alerts
