@@ -4,6 +4,7 @@ import { Map, TileLayer} from 'react-leaflet';
 import {Modal, Button} from 'react-bootstrap';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
+import Alerts from '../Alerts/Alerts';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
@@ -25,6 +26,7 @@ class MapMain extends Component {
       canAddPoint: false,
       style: {cursor: 'default'},
       customNashville: '',
+      alertShow: false,
     };
   }
 
@@ -96,14 +98,14 @@ class MapMain extends Component {
     potholeRequests
       .potholePOST(tempPothole)
       .then(() => {
-        alert('saved');
+        // change state and show Alert component
+        this.setState({alertShow: true});
       })
       .then(() => {
         // Adds newly added pothole to state
         const temp = [...this.state.potholes];
         temp.push(tempPothole);
         this.setState({potholes: temp});
-
       })
       .catch(err => console.error('Error during save', err));
   };
@@ -174,6 +176,14 @@ class MapMain extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
+        {
+          (this.state.alertShow) ?
+            <Alerts
+              bsStyle="warning"
+              alertText="New pothole record saved, thank you!"
+              show={true} ></Alerts>
+            : <div></div>
+        }
         <Map
           center={[36.1491592, -86.7703593]}
           zoom={15}
@@ -197,7 +207,6 @@ class MapMain extends Component {
             <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
               Add New Pothole
           </button>
-
           <Link to='/dashboard'>
             <button
               className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
