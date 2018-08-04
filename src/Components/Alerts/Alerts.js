@@ -9,7 +9,6 @@ class Alerts extends React.Component {
     this.setState({show: false});
   }
   render () {
-    // this.setState({show: this.props.show});
     if (this.state.show) {
       return (
         <Alert

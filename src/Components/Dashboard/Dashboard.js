@@ -8,6 +8,7 @@ import './Dashboard.css';
 class Dashboard extends React.Component {
   state = {
     potholes: [],
+    showAlert: false,
   };
 
   // loads ALL potholes into this.state via Axios promise

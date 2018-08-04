@@ -182,7 +182,7 @@ class MapMain extends Component {
               bsStyle="warning"
               alertText="New pothole record saved, thank you!"
             ></Alerts>
-            : <div></div>
+            : null
         }
         <Map
           center={[36.1491592, -86.7703593]}
