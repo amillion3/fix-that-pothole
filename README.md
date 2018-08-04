@@ -10,13 +10,14 @@
 
 ## Technology
 - HTML5
-- CSS3/React-Bootstrap
+- CSS3/Sass/React-Bootstrap
 - JavaScript/ES6/JSX
 - React 16 / Webpack
 - [react-leaflet](https://github.com/PaulLeCam/react-leaflet)
 - [Mapbox API](https://www.mapbox.com/maps/)
 - [Firebase (database & authentication)](https://firebase.google.com/)
 - [Create React App](https://github.com/facebookincubator/create-react-app)
+- [react-router-dom](https://reacttraining.com/react-router/core/guides/philosophy)
 
 ## Screenshots
 
@@ -40,7 +41,7 @@ When a user wishes to add a new pothole to the system, they simply have to click
 ___
 
 
-Users have access to a dashboard, where the a summary table of each pothole is displayed. A nearly complete record of each pothole is shown, but the user can click the `Full Record` button to get every single detail if they wish.
+Users have access to a dashboard, where the a summary table of each pothole is displayed. A nearly complete record of each pothole is shown, but the user can click the `Full Record` button to complete details and further actions.
 ![Dashboard main](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/dashboard-main.png)
 ___
 
@@ -65,14 +66,17 @@ ___
 - Geocoding to attribute the closest address to each pothole automatically.
 - Allow admin users to generate standardized work orders for workers (including latitude and longitude, Google maps link and further information).
 - Allow users to upload images of potholes when adding new ones.
-- Upvote/like feature for other citizens to echo existing potholes.
-- Multiple levels of permissions (admin, worker, public citizen).
+- Upvote/like feature for other citizens to echo existing pothole complaints.
+- Multiple levels of permissions (IE, `admin`, `worker`, `public citizen`).
 - Create dashboard for users (as opposed to the existing dashboard, which is for administrators).
 - Enhance dashboard for admin (add a locator map, ability to notify workers, etc)
 - Google / Facebook / Twitter login functionality.
 - Display markers and legend, based on pothole status.
 - Base map layer switcher.
 - Spam control (only allow users to add, say, 5 points a day).
+- Filters to control what pothole markers are displayed:
+    - Date filter (say, only show potholes from the past month, etc.).
+    - Pothole type filter (only displayed potholes in need of repair, or potholes fixed, etc).
 - Measuring tool, to measure distances.
 - Ability to add line and polygon features.
 - Ability to load GeoJSON/SHP files.
@@ -80,7 +84,6 @@ ___
 ## v3.0 and beyond:
 - Scale this into an open-source solution for anyone to use.
     - Such as solid waste pickup, opiod overdose mapping, etc.
-
 
 ___
 ## Running The Project
