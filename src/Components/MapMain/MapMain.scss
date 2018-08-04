@@ -31,7 +31,7 @@
   width: 100%;
   background-image: none;
   background-color: #3AAFA9;
-
+  // position: fixed;
 }
 
 .input-label {
@@ -45,6 +45,9 @@
 // Buttons at bottom of page
 .menu-items {
   height: 38px;
+  position: absolute;
+  height: 38px;
+  margin-top: -38px;
 }
 
 .menu-items-btn {
@@ -60,4 +63,11 @@ span>.glyphicon-plus,
 span>.glyphicon-th-list, {
   display: none;
 }
+}
+
+#currentAlert {
+  margin: 0 10% 0 10%;
+  z-index: 10;
+  overflow: hidden;
+  position: relative;
 }

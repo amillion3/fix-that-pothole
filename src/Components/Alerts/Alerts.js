@@ -9,11 +9,13 @@ class Alerts extends React.Component {
     this.setState({show: false});
   }
   render () {
+    // this.setState({show: this.props.show});
     if (this.state.show) {
       return (
         <Alert
+          className='Alerts text-center'
+          id="currentAlert"
           bsStyle={this.props.bsStyle}
-          className='Alerts text-left'
           alertText={this.props.alertText} >
 
           {this.props.alertText}
@@ -27,7 +29,7 @@ class Alerts extends React.Component {
       );
     } else {
       return (
-        <div></div>
+        null
       );
     }
   }

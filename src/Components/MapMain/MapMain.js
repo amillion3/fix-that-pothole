@@ -181,7 +181,7 @@ class MapMain extends Component {
             <Alerts
               bsStyle="warning"
               alertText="New pothole record saved, thank you!"
-              show={true} ></Alerts>
+            ></Alerts>
             : <div></div>
         }
         <Map
