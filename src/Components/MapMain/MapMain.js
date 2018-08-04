@@ -22,16 +22,16 @@ class MapMain extends Component {
         lat: '',
         lng: '' },
       tempPothole: {},
-      show: false,
+      showModal: false,
       canAddPoint: false,
       style: {cursor: 'default'},
       customNashville: '',
-      alertShow: false,
+      showAlert: false,
     };
   }
 
-  showModal = () => this.setState({ show: true });
-  hideModal = () => this.setState({ show: false });
+  showModal = () => this.setState({ showModal: true });
+  hideModal = () => this.setState({ showModal: false });
 
   // Can user add a new point by clicking on the map?
   addPointTrue = () => {
@@ -99,7 +99,7 @@ class MapMain extends Component {
       .potholePOST(tempPothole)
       .then(() => {
         // change state and show Alert component
-        this.setState({alertShow: true});
+        this.setState({showAlert: true});
       })
       .then(() => {
         // Adds newly added pothole to state
@@ -125,6 +125,10 @@ class MapMain extends Component {
     this.addPointTrue(); // user CAN add points now
   };
 
+  onDismiss = () => {
+    this.setState({showAlert: false});
+  }
+
   render () {
     const {tempPothole} = this.state;
     const potholeComponents = this.state.potholes.map(pothole => {
@@ -136,7 +140,7 @@ class MapMain extends Component {
     });
     return (
       <div className='map-container'>
-        <Modal show={this.state.show} onHide={this.hideModal}>
+        <Modal show={this.state.showModal} onHide={this.hideModal}>
           <Modal.Header closeButton>
             <Modal.Title>Add New Pothole</Modal.Title>
           </Modal.Header>
@@ -176,14 +180,11 @@ class MapMain extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-        {
-          (this.state.alertShow) ?
-            <Alerts
-              bsStyle="warning"
-              alertText="New pothole record saved, thank you!"
-            ></Alerts>
-            : null
-        }
+        <Alerts
+          alertText="Pothole record saved."
+          showAlert={this.state.showAlert}
+          onDismiss={this.onDismiss}
+        />
         <Map
           center={[36.1491592, -86.7703593]}
           zoom={15}

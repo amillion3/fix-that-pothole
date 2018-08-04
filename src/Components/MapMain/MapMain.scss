@@ -68,3 +68,8 @@ span>.glyphicon-th-list, {
   overflow: hidden;
   position: relative;
 }
+
+.mp-alert {
+  position: absolute;
+  z-index: 1000;
+}
