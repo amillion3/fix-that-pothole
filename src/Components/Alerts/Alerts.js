@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Alert, Button} from 'react-bootstrap';
 
 class Alerts extends React.Component {
@@ -14,8 +15,7 @@ class Alerts extends React.Component {
         <Alert
           className='Alerts text-center'
           id="currentAlert"
-          bsStyle={this.props.bsStyle}
-          alertText={this.props.alertText} >
+          bsStyle={this.props.bsStyle} >
 
           {this.props.alertText}
 
@@ -33,5 +33,10 @@ class Alerts extends React.Component {
     }
   }
 }
+
+Alerts.propTypes = {
+  bsStyle: PropTypes.string.isRequired,
+  alertText: PropTypes.string.isRequired,
+};
 
 export default Alerts;
