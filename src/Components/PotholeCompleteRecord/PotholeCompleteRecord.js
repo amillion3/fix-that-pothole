@@ -76,10 +76,6 @@ class PotholeCompleteRecord extends React.Component {
           this.setState({isEditing: false});
           this.setState({showAlertDeleted: true});
         })
-        .then(() => {
-          // this.props.history.push(`/dashboard`);
-          // alert('Record deleted');
-        })
         .catch(err => console.error('Error during delete: ', err));
     };
     const clickCancelButton = () => {
@@ -103,10 +99,7 @@ class PotholeCompleteRecord extends React.Component {
           this.setState({isEditing: false});
           this.setState({showAlertUpdated: true});
         })
-        .then(() => {
-          // this.props.history.push(`/dashboard`);
-          // alert('Record saved');
-        });
+        .catch(err => console.error('Error during update: ', err));
     };
 
     return (
