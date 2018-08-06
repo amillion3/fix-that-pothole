@@ -1,18 +1,20 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {Alert, Button} from 'react-bootstrap';
 
 class Alerts extends React.Component {
   render () {
-    const { alertText, showAlert, onDismiss } = this.props;
+    const { alertText, showAlert, onDismiss, bsStyle } = this.props;
     if (showAlert) {
       return (
-        <Alert className="mp-alert col-sm-4 col-sm-offset-4 col-xs-12">
+        <Alert
+          className="mp-alert col-sm-6 col-sm-offset-3 col-xs-12"
+          bsStyle={bsStyle}>
           <div className="row">
-            <div className="col-sm-6 text-left">
+            <div className="col-sm-8 text-left">
               { alertText }
             </div>
-            <div className="col-sm-6 text-right">
+            <div className="col-sm-4 text-right">
               <Button onClick={onDismiss}>&times;</Button>
             </div>
           </div>
@@ -24,9 +26,10 @@ class Alerts extends React.Component {
   }
 }
 
-// Alerts.propTypes = {
-//   bsStyle: PropTypes.string.isRequired,
-//   alertText: PropTypes.string.isRequired,
-// };
+Alerts.propTypes = {
+  alertText: PropTypes.string.isRequired,
+  showAlert: PropTypes.bool.isRequired,
+  onDismiss: PropTypes.func.isRequired,
+};
 
 export default Alerts;

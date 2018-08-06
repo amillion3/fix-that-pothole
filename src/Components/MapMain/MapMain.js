@@ -184,6 +184,7 @@ class MapMain extends Component {
           alertText="Pothole record saved."
           showAlert={this.state.showAlert}
           onDismiss={this.onDismiss}
+          bsStyle="success"
         />
         <Map
           center={[36.1491592, -86.7703593]}
