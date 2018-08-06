@@ -15,7 +15,7 @@
 - React 16 / Webpack
 - [react-leaflet](https://github.com/PaulLeCam/react-leaflet)
 - [Mapbox API](https://www.mapbox.com/maps/)
-- [Firebase (database & authentication)](https://firebase.google.com/)
+- [Firebase (database, auth, hosting)](https://firebase.google.com/)
 - [Create React App](https://github.com/facebookincubator/create-react-app)
 - [react-router-dom](https://reacttraining.com/react-router/core/guides/philosophy)
 
@@ -98,3 +98,11 @@ ___
 
 ## Contributors
 [Andy Million](https://github.com/amillion3)
+
+With support from 
+
+[Lauren Rouse](https://github.com/rousell)
+
+[Callan Morrison](https://github.com/morecallan)
+
+[Zoë Ames](https://github.com/zoeames)
