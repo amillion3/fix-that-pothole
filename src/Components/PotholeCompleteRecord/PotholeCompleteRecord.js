@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
+import Alerts from '../Alerts/Alerts';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './PotholeCompleteRecord.css';
@@ -10,7 +11,8 @@ class PotholeCompleteRecord extends React.Component {
   state = {
     isEditing: false,
     firebaseId: '',
-    showAlert: false,
+    showAlertDeleted: false,
+    showAlertUpdated: false,
   }
 
   componentWillMount () {
@@ -53,6 +55,12 @@ class PotholeCompleteRecord extends React.Component {
     this.setState({coordLong: tempVal.coordLong});
   };
 
+  onDismiss = () => {
+    this.setState({showAlertDeleted: false});
+    this.setState({showAlertUpdated: false});
+    this.props.history.push(`/dashboard`);
+  }
+
   render () {
     const p = this.state;
     const isEditing = this.state.isEditing;
@@ -66,10 +74,11 @@ class PotholeCompleteRecord extends React.Component {
         .potholeDELETE(firebaseId)
         .then(() => {
           this.setState({isEditing: false});
+          this.setState({showAlertDeleted: true});
         })
         .then(() => {
-          this.props.history.push(`/dashboard`);
-          alert('Record deleted');
+          // this.props.history.push(`/dashboard`);
+          // alert('Record deleted');
         })
         .catch(err => console.error('Error during delete: ', err));
     };
@@ -92,15 +101,28 @@ class PotholeCompleteRecord extends React.Component {
         .potholePUT(firebaseId, this.state)
         .then(() => {
           this.setState({isEditing: false});
+          this.setState({showAlertUpdated: true});
         })
         .then(() => {
-          this.props.history.push(`/dashboard`);
-          alert('Record saved');
+          // this.props.history.push(`/dashboard`);
+          // alert('Record saved');
         });
     };
 
     return (
       <div className=''>
+        <Alerts
+          alertText="Pothole record deleted."
+          showAlert={this.state.showAlertDeleted}
+          onDismiss={this.onDismiss}
+          bsStyle="danger"
+        />
+        <Alerts
+          alertText="Pothole record updated."
+          showAlert={this.state.showAlertUpdated}
+          onDismiss={this.onDismiss}
+          bsStyle="success"
+        />
         <div className="panel panel-default pothole-complete-record">
           <div className="panel-body">
             {isEditing === false

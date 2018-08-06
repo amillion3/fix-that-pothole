@@ -3,40 +3,33 @@ import PropTypes from 'prop-types';
 import {Alert, Button} from 'react-bootstrap';
 
 class Alerts extends React.Component {
-  state = {
-    show: true,
-  }
-  removeAlert = () => {
-    this.setState({show: false});
-  }
   render () {
-    if (this.state.show) {
+    const { alertText, showAlert, onDismiss, bsStyle } = this.props;
+    if (showAlert) {
       return (
         <Alert
-          className='Alerts text-center'
-          id="currentAlert"
-          bsStyle={this.props.bsStyle} >
-
-          {this.props.alertText}
-
-          <Button
-            className='text-right'
-            onClick={this.removeAlert}>
-            Dismiss
-          </Button>
+          className="mp-alert col-sm-6 col-sm-offset-3 col-xs-12"
+          bsStyle={bsStyle}>
+          <div className="row">
+            <div className="col-sm-8 text-left">
+              { alertText }
+            </div>
+            <div className="col-sm-4 text-right">
+              <Button onClick={onDismiss}>&times;</Button>
+            </div>
+          </div>
         </Alert>
       );
     } else {
-      return (
-        null
-      );
+      return null;
     }
   }
 }
 
 Alerts.propTypes = {
-  bsStyle: PropTypes.string.isRequired,
   alertText: PropTypes.string.isRequired,
+  showAlert: PropTypes.bool.isRequired,
+  onDismiss: PropTypes.func.isRequired,
 };
 
 export default Alerts;
