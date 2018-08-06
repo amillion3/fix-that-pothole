@@ -1,7 +1,6 @@
 import React from 'react';
 
 import DashPothole from '../DashPothole/DashPothole';
-import Alerts from '../Alerts/Alerts';
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 
 import './Dashboard.css';
@@ -9,8 +8,6 @@ import './Dashboard.css';
 class Dashboard extends React.Component {
   state = {
     potholes: [],
-    showAlertDeleted: false,
-    showAlertUpdated: false,
   };
 
   // loads ALL potholes into this.state via Axios promise
@@ -21,11 +18,6 @@ class Dashboard extends React.Component {
         this.setState({potholes: a});
       })
       .catch(err => console.error('Error with getting all potholes.', err));
-  }
-
-  onDismiss = () => {
-    this.setState({showAlertDeleted: false});
-    this.setState({showAlertUpdated: false});
   }
 
   render () {
@@ -47,18 +39,6 @@ class Dashboard extends React.Component {
 
     return (
       <div className='dashboard'>
-        <Alerts
-          alertText="Pothole record deleted."
-          showAlert={this.state.showAlertDeleted}
-          onDismiss={this.onDismiss}
-          bsStyle="danger"
-        />
-        <Alerts
-          alertText="Pothole record updated."
-          showAlert={this.state.showAlertUpdated}
-          onDismiss={this.onDismiss}
-          bsStyle="success"
-        />
         <table className='table table-hover'>
           <thead>
             <tr>
