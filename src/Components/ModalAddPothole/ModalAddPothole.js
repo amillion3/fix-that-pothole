@@ -8,17 +8,21 @@ import './ModalAddPothole.css';
 class ModalAddPothole extends React.Component {
   state = {
     modalTempPothole: {},
+    // showModal: false,
   }
 
-  componentWillMount () {
-    const {showModal, tempPothole} = this.props;
-    this.setState({modalTempPothole: tempPothole});
-  };
+  // componentWillReceiveProps () {
+  //   const {showModal, tempPothole} = this.props;
+  //   this.setState({modalTempPothole: tempPothole});
+  //   this.setState({showModal});
+  //   console.log('this.state.showModal', this.state.showModal);
+  // };
 
   modalBtnCancel = () => {
     this.addPointFalse(); // user cannot add points now
     this.hideModal();
     this.setState({modalTempPothole: {}});
+    this.setState({showModal: false});
   };
   modalBtnSave = () => {
     this.addPointFalse(); // user cannot add points now
@@ -27,7 +31,7 @@ class ModalAddPothole extends React.Component {
     potholeRequests
       .potholePOST(modalTempPothole)
       .then(() => {
-        // change state and show Alert component
+        // change state and show 'saved' Alert component
         this.setState({showAlert: true});
       })
       .then(() => {
@@ -37,7 +41,7 @@ class ModalAddPothole extends React.Component {
         this.setState({potholes: temp});
       })
       .then(() => {
-
+        this.setState({showModal: false});
       })
       .catch(err => console.error('Error during save', err));
   };
@@ -54,13 +58,13 @@ class ModalAddPothole extends React.Component {
   };
 
   render () {
-    // const {showModal, tempPothole} = this.props;
-    const {showModal} = this.props;
+    const {showModal, tempPothole} = this.props;
+    // this.setState({modalTempPothole: tempPothole});
+    console.log('pre if statement, showModal:', showModal);
     if (showModal) {
-      // this.setState({modalTempPothole: tempPothole});
       return (
         <Modal>
-          <Modal.Header closeButton>
+          <Modal.Header>
             <Modal.Title>Add New Pothole</Modal.Title>
           </Modal.Header>
           <Modal.Body>

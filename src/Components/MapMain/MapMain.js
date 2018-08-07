@@ -59,6 +59,7 @@ class MapMain extends Component {
 
   handleClick = e => {
     if (this.state.canAddPoint) {
+      this.showModal();
       this.mapRef.current.leafletElement.locate();
       const potholeToAdd = {};
       potholeToAdd.isComplete = false;
@@ -75,7 +76,6 @@ class MapMain extends Component {
       potholeToAdd.id = Math.random();
       this.addPointFalse();
       this.setState({tempPothole: potholeToAdd});
-      this.showModal();
     }
   };
 
@@ -98,7 +98,6 @@ class MapMain extends Component {
   }
 
   render () {
-    const {tempPothole} = this.state;
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
         <GenerateMarkers
