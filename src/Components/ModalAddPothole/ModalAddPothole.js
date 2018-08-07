@@ -8,25 +8,12 @@ import './ModalAddPothole.css';
 class ModalAddPothole extends React.Component {
   state = {
     modalTempPothole: {},
-    // showModal: false,
   }
 
-  // componentWillReceiveProps () {
-  //   const {showModal, tempPothole} = this.props;
-  //   this.setState({modalTempPothole: tempPothole});
-  //   this.setState({showModal});
-  //   console.log('this.state.showModal', this.state.showModal);
-  // };
-
   modalBtnCancel = () => {
-    this.addPointFalse(); // user cannot add points now
-    this.hideModal();
     this.setState({modalTempPothole: {}});
-    this.setState({showModal: false});
   };
   modalBtnSave = () => {
-    this.addPointFalse(); // user cannot add points now
-    this.hideModal();
     const {modalTempPothole} = this.state;
     potholeRequests
       .potholePOST(modalTempPothole)
@@ -61,52 +48,49 @@ class ModalAddPothole extends React.Component {
     const {showModal, tempPothole} = this.props;
     // this.setState({modalTempPothole: tempPothole});
     console.log('pre if statement, showModal:', showModal);
-    if (showModal) {
-      return (
-        <Modal>
-          <Modal.Header>
-            <Modal.Title>Add New Pothole</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form>
-              <div>
-                <label>Severity:</label><br/>
-                <select value={this.state.modalTempPothole.severity} onChange={this.changeSeverity}>
-                  <option value="Low" onChange={this.changeSeverity}>Low</option>
-                  <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
-                  <option value="Severe" onChange={this.changeSeverity}>Severe</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="descriptionNotes">Notes:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="descriptionNotes"
-                  // value={tempPothole.descriptionNotes}
-                  onChange={this.changeDescriptionNotes}/>
-              </div>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              className='btn btn-primary'
-              onClick={this.modalBtnSave}>
-              <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            Save This Pothole
-            </Button>
-            <Button
-              className='btn btn-danger'
-              onClick={this.modalBtnCancel}>
-              <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            Cancel and Clear
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      );
-    } else {
-      return null;
-    }
+    // if (showModal) {
+    return (
+      <Modal show={this.props.showModal}>
+        <Modal.Header>
+          <Modal.Title>Add New Pothole</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form>
+            <div>
+              <label>Severity:</label><br/>
+              <select value={this.state.modalTempPothole.severity} onChange={this.changeSeverity}>
+                <option value="Low" onChange={this.changeSeverity}>Low</option>
+                <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
+                <option value="Severe" onChange={this.changeSeverity}>Severe</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="descriptionNotes">Notes:</label>
+              <input
+                type="text"
+                className="form-control"
+                id="descriptionNotes"
+                // value={tempPothole.descriptionNotes}
+                onChange={this.changeDescriptionNotes}/>
+            </div>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className='btn btn-primary'
+            onClick={this.modalBtnSave}>
+            <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          Save This Pothole
+          </Button>
+          <Button
+            className='btn btn-danger'
+            onClick={this.modalBtnCancel}>
+            <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          Cancel and Clear
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    );
   }
 }
 

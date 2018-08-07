@@ -95,6 +95,7 @@ class MapMain extends Component {
   }
   onDismissModal = () => {
     this.setState({showModal: false});
+    this.addPointFalse();
   }
 
   render () {
