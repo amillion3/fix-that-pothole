@@ -23,7 +23,7 @@ class MapMain extends Component {
       tempPothole: {},
       canAddPoint: false,
       style: {cursor: 'default'},
-      customNashville: '',
+      basemap: '',
       showModal: false,
       showAlert: false,
     };
@@ -47,7 +47,7 @@ class MapMain extends Component {
       .potholesGETAll()
       .then(potholes => {
         const {customNashville} = constants;
-        this.setState({customNashville});
+        this.setState({basemap: customNashville});
         this.setState({potholes});
         // this.setState({potholes: potholes});  ES5 long form
       })
@@ -108,6 +108,27 @@ class MapMain extends Component {
     this.addPointFalse();
   }
 
+  basemapNashville = () => {
+    if (this.state.canAddPoint === false) {
+      const {customNashville} = constants;
+      this.setState({basemap: customNashville});
+    }
+  }
+
+  basemapStreets = () => {
+    if (this.state.canAddPoint === false) {
+      const {customStreets} = constants;
+      this.setState({basemap: customStreets});
+    }
+  }
+
+  basemapSatelliteStreets = () => {
+    if (this.state.canAddPoint === false) {
+      const {customSatelliteStreets} = constants;
+      this.setState({basemap: customSatelliteStreets});
+    }
+  }
+
   render () {
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
@@ -140,10 +161,32 @@ class MapMain extends Component {
           onClick={this.handleClick}
           style={this.state.style}>
           <TileLayer
-            url={this.state.customNashville}/>
+            url={this.state.basemap}/>
           <div className="">
             {potholeComponents}
           </div>
+          <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
+            <button type="button" className="btn btn-default" onClick={this.basemapNashville}>Default</button>
+            <button type="button" className="btn btn-default" onClick={this.basemapStreets}>Streets</button>
+            <button type="button" className="btn btn-default" onClick={this.basemapSatelliteStreets}>Satellite</button>
+          </div>
+          {/* <ButtonGroup bsSize="large" className='leaflet-bottom leaflet-left BASEMAP-BG' id="basemap-buttons">
+            <Button
+              className='BASEMAP'
+              onClick={this.basemapNashville}>
+              Default
+            </Button>
+            <Button
+              className='BASEMAP'
+              onClick={this.basemapStreets}>
+              Streets
+            </Button>
+            <Button
+              className='BASEMAP'
+              onClick={this.basemapSatelliteStreets}>
+              Satellite
+            </Button>
+          </ButtonGroup> */}
         </Map>
         <div className='col-xs-12 menu-items'>
           <button

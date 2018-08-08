@@ -10,6 +10,8 @@ const constants = {
   mapbox: {
     apiKey: '',
     customNashville: '',
+    customStreets: '',
+    customSatelliteStreets: '',
   },
 };
 
