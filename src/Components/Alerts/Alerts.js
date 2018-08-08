@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Alert, Button} from 'react-bootstrap';
 
+import './Alerts.css';
+
 class Alerts extends React.Component {
   render () {
     const { alertText, showAlert, onDismiss, bsStyle } = this.props;

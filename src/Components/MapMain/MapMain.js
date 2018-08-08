@@ -1,10 +1,10 @@
 import React, { createRef, Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Map, TileLayer} from 'react-leaflet';
-import {Modal, Button} from 'react-bootstrap';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
+import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
@@ -14,7 +14,6 @@ import './MapMain.css';
 class MapMain extends Component {
   constructor (props) {
     super (props);
-    // Don't call this.setState() here!
     this.state = {
       potholes: [],
       hasLocation: false,
@@ -22,10 +21,10 @@ class MapMain extends Component {
         lat: '',
         lng: '' },
       tempPothole: {},
-      showModal: false,
       canAddPoint: false,
       style: {cursor: 'default'},
       customNashville: '',
+      showModal: false,
       showAlert: false,
     };
   }
@@ -73,9 +72,9 @@ class MapMain extends Component {
       potholeToAdd.updatedUserId = '';
       potholeToAdd.updatedTime = '';
       potholeToAdd.id = Math.random();
+      this.showModal();
       this.addPointFalse();
       this.setState({tempPothole: potholeToAdd});
-      this.showModal();
     }
   };
 
@@ -86,41 +85,6 @@ class MapMain extends Component {
     });
   }
 
-  modalBtnCancel = () => {
-    this.addPointFalse(); // user cannot add points now
-    this.hideModal();
-    this.setState({tempPothole: {}});
-  };
-  modalBtnSave = () => {
-    this.addPointFalse(); // user cannot add points now
-    this.hideModal();
-    const {tempPothole} = this.state;
-    potholeRequests
-      .potholePOST(tempPothole)
-      .then(() => {
-        // change state and show Alert component
-        this.setState({showAlert: true});
-      })
-      .then(() => {
-        // Adds newly added pothole to state
-        const temp = [...this.state.potholes];
-        temp.push(tempPothole);
-        this.setState({potholes: temp});
-      })
-      .catch(err => console.error('Error during save', err));
-  };
-
-  changeSeverity = e => {
-    const tempVal = {...this.state.tempPothole};
-    tempVal.severity = e.target.value;
-    this.setState({tempPothole: tempVal});
-  };
-  changeDescriptionNotes = e => {
-    const tempVal = {...this.state.tempPothole};
-    tempVal.descriptionNotes = e.target.value;
-    this.setState({tempPothole: tempVal});
-  };
-
   eventAddNewPothole = e => {
     this.addPointTrue(); // user CAN add points now
   };
@@ -128,9 +92,23 @@ class MapMain extends Component {
   onDismiss = () => {
     this.setState({showAlert: false});
   }
+  onSaveModal = () => {
+    potholeRequests
+      .potholesGETAll()
+      .then(potholes => {
+        this.setState({potholes});
+      })
+      .catch(err => console.error('Error with pothole get request after save: ', err));
+    this.setState({showAlert: true});
+    this.setState({showModal: false});
+    this.addPointFalse();
+  }
+  onCancelModal = () => {
+    this.setState({showModal: false});
+    this.addPointFalse();
+  }
 
   render () {
-    const {tempPothole} = this.state;
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
         <GenerateMarkers
@@ -140,52 +118,17 @@ class MapMain extends Component {
     });
     return (
       <div className='map-container'>
-        <Modal show={this.state.showModal} onHide={this.hideModal}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add New Pothole</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form className="">
-              <div>
-                <label>Severity:</label><br/>
-                <select value={this.state.tempPothole.severity} onChange={this.changeSeverity}>
-                  <option value="Low" onChange={this.changeSeverity}>Low</option>
-                  <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
-                  <option value="Severe" onChange={this.changeSeverity}>Severe</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="descriptionNotes">Notes:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="descriptionNotes"
-                  value={tempPothole.descriptionNotes}
-                  onChange={this.changeDescriptionNotes}/>
-              </div>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              className='btn btn-primary'
-              onClick={this.modalBtnSave}>
-              <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
-            Save This Pothole
-            </Button>
-            <Button
-              className='btn btn-danger'
-              onClick={this.modalBtnCancel}>
-              <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
-            Cancel and Clear
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <ModalAddPothole
+          showModal={this.state.showModal}
+          tempPothole={this.state.tempPothole}
+          onSave={this.onSaveModal}
+          onCancel={this.onCancelModal}
+        ></ModalAddPothole>
         <Alerts
           alertText="Pothole record saved."
           showAlert={this.state.showAlert}
           onDismiss={this.onDismiss}
-          bsStyle="success"
-        />
+          bsStyle="success" />
         <Map
           center={[36.1491592, -86.7703593]}
           zoom={15}
