@@ -43,6 +43,10 @@
 }
 
 // Buttons at bottom of page
+#basemap-buttons {
+  z-index: 100000000000000000;
+}
+
 .menu-items {
   height: 38px;
 }

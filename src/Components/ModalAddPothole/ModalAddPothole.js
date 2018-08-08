@@ -21,7 +21,6 @@ class ModalAddPothole extends React.Component {
     this.setState({modalTempPothole: {}});
   };
   modalBtnSave = () => {
-    // check to see if 'notes' is empty
     const {modalTempPothole} = this.state;
     potholeRequests
       .potholePOST(modalTempPothole)
