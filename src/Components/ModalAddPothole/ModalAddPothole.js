@@ -10,22 +10,22 @@ class ModalAddPothole extends React.Component {
     modalTempPothole: {},
   }
 
+  componentWillReceiveProps () {
+    this.setState({modalTempPothole: this.props.tempPothole});
+  }
+
   modalBtnCancel = () => {
     this.setState({modalTempPothole: {}});
   };
   modalBtnSave = () => {
+    // check to see if 'notes' is empty
     const {modalTempPothole} = this.state;
     potholeRequests
       .potholePOST(modalTempPothole)
       .then(() => {
-        // change state and show 'saved' Alert component
-        this.setState({showAlert: true});
-      })
-      .then(() => {
         // Adds newly added pothole to state
-        const temp = [...this.state.potholes];
-        temp.push(modalTempPothole);
-        this.setState({potholes: temp});
+        const temp = {...this.state.modalTempPothole};
+        this.setState({modalTempPothole: temp});
       })
       .then(() => {
         this.setState({showModal: false});
@@ -45,12 +45,9 @@ class ModalAddPothole extends React.Component {
   };
 
   render () {
-    const {showModal, tempPothole} = this.props;
-    // this.setState({modalTempPothole: tempPothole});
-    console.log('pre if statement, showModal:', showModal);
-    // if (showModal) {
+    const {showModal} = this.props;
     return (
-      <Modal show={this.props.showModal}>
+      <Modal show={showModal}>
         <Modal.Header>
           <Modal.Title>Add New Pothole</Modal.Title>
         </Modal.Header>

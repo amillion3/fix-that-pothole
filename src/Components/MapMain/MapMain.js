@@ -111,9 +111,7 @@ class MapMain extends Component {
         <ModalAddPothole
           showModal={this.state.showModal}
           tempPothole={this.state.tempPothole}
-          onDismiss={this.onDismiss}
-          // onBtnSave={this.onBtnSave}
-          // onBtnCancel={this.onBtnCancel}
+          onDismiss={this.onDismissModal}
         ></ModalAddPothole>
         <Alerts
           alertText="Pothole record saved."
