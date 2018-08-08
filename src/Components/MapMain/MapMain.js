@@ -14,7 +14,6 @@ import './MapMain.css';
 class MapMain extends Component {
   constructor (props) {
     super (props);
-    // Don't call this.setState() here!
     this.state = {
       potholes: [],
       hasLocation: false,
@@ -59,7 +58,6 @@ class MapMain extends Component {
 
   handleClick = e => {
     if (this.state.canAddPoint) {
-      this.showModal();
       this.mapRef.current.leafletElement.locate();
       const potholeToAdd = {};
       potholeToAdd.isComplete = false;
@@ -74,6 +72,7 @@ class MapMain extends Component {
       potholeToAdd.updatedUserId = '';
       potholeToAdd.updatedTime = '';
       potholeToAdd.id = Math.random();
+      this.showModal();
       this.addPointFalse();
       this.setState({tempPothole: potholeToAdd});
     }
@@ -93,7 +92,18 @@ class MapMain extends Component {
   onDismiss = () => {
     this.setState({showAlert: false});
   }
-  onDismissModal = () => {
+  onSaveModal = () => {
+    potholeRequests
+      .potholesGETAll()
+      .then(potholes => {
+        this.setState({potholes});
+      })
+      .catch(err => console.error('Error with pothole get request after save: ', err));
+    this.setState({showAlert: true});
+    this.setState({showModal: false});
+    this.addPointFalse();
+  }
+  onCancelModal = () => {
     this.setState({showModal: false});
     this.addPointFalse();
   }
@@ -111,7 +121,8 @@ class MapMain extends Component {
         <ModalAddPothole
           showModal={this.state.showModal}
           tempPothole={this.state.tempPothole}
-          onDismiss={this.onDismissModal}
+          onSave={this.onSaveModal}
+          onCancel={this.onCancelModal}
         ></ModalAddPothole>
         <Alerts
           alertText="Pothole record saved."

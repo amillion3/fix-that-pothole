@@ -8,13 +8,16 @@ import './ModalAddPothole.css';
 class ModalAddPothole extends React.Component {
   state = {
     modalTempPothole: {},
+    showModal: false,
   }
 
   componentWillReceiveProps () {
     this.setState({modalTempPothole: this.props.tempPothole});
+    this.setState({showModal: this.props.showModal});
   }
 
   modalBtnCancel = () => {
+    this.props.onCancel();
     this.setState({modalTempPothole: {}});
   };
   modalBtnSave = () => {
@@ -22,6 +25,9 @@ class ModalAddPothole extends React.Component {
     const {modalTempPothole} = this.state;
     potholeRequests
       .potholePOST(modalTempPothole)
+      .then(() => {
+        this.props.onSave();
+      })
       .then(() => {
         // Adds newly added pothole to state
         const temp = {...this.state.modalTempPothole};
@@ -45,7 +51,7 @@ class ModalAddPothole extends React.Component {
   };
 
   render () {
-    const {showModal} = this.props;
+    const {showModal} = this.state;
     return (
       <Modal show={showModal}>
         <Modal.Header>
@@ -67,7 +73,6 @@ class ModalAddPothole extends React.Component {
                 type="text"
                 className="form-control"
                 id="descriptionNotes"
-                // value={tempPothole.descriptionNotes}
                 onChange={this.changeDescriptionNotes}/>
             </div>
           </form>
