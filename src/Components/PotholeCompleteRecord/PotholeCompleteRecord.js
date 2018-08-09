@@ -122,6 +122,7 @@ class PotholeCompleteRecord extends React.Component {
               ? (
                 <div>
                   <p><strong>Created Date: </strong>{p.createdDate}</p>
+                  <p><strong>Created Time: </strong>{p.createdTime}</p>
                   <p><strong>Created By: </strong>{p.createdBy}</p>
                   <p><strong>Status: </strong>{p.status}</p>
                   <p><strong>Severity: </strong>{p.severity}</p>

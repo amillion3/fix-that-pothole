@@ -4,6 +4,8 @@ import auth from './auth';
 
 const potholePOST = newPothole => {
   return new Promise((resolve, reject) => {
+    newPothole.createdDate = new Date().toLocaleDateString('en-US');
+    newPothole.createdTime = new Date().toLocaleTimeString('en-US');
     axios
       .post(`${constants.firebaseConfig.databaseURL}/potholes.json`, newPothole)
       .then(response => {
