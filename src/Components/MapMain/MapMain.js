@@ -154,6 +154,7 @@ class MapMain extends Component {
         <Map
           center={[36.1491592, -86.7703593]}
           zoom={15}
+          maxZoom={20}
           length={4}
           ref={this.mapRef}
           onLocationfound={this.handleLocationFound}
@@ -162,7 +163,8 @@ class MapMain extends Component {
           onClick={this.handleClick}
           style={this.state.style}>
           <TileLayer
-            url={this.state.basemap}/>
+            url={this.state.basemap}
+            maxZoom={20}/>
           <div className="">
             {potholeComponents}
           </div>

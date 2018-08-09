@@ -9,15 +9,45 @@ class GenerateMarkers extends React.Component {
   render () {
     const {details} = this.props; // Single pothole object
     // https://leafletjs.com/reference-1.3.2.html#icon
-    const redMarker = new Icon({
-      iconUrl: ('https://www.andymillion.com/fix-that-pothole/marker-red.png'),
-      iconSize: [32, 32],
-    });
+    const chooseColorIcon = () => {
+      if (details.status === 'Newly Added') {
+        return (
+          new Icon({
+            iconUrl: ('https://www.andymillion.com/fix-that-pothole/red.svg'),
+            iconSize: [32, 32],
+          })
+        );
+      } else if (details.status === 'Pothole Assigned') {
+        return (
+          new Icon({
+            iconUrl: ('https://www.andymillion.com/fix-that-pothole/purple.svg'),
+            iconSize: [32, 32],
+          })
+        );
+      } else if (details.status === 'Pothole Fixed') {
+        return (
+          new Icon({
+            iconUrl: ('https://www.andymillion.com/fix-that-pothole/orange.svg'),
+            iconSize: [32, 32],
+          })
+        );
+      } else {
+        return (
+          new Icon({
+            iconUrl: ('https://www.andymillion.com/fix-that-pothole/yellow.svg'),
+            iconSize: [32, 32],
+          })
+        );
+      }
+    };
+
+    const markerIcon = chooseColorIcon();
+    //
     return (
       <Marker
         position={[(details.coordLat * 1), (details.coordLong * 1)]}
         riseOnHover={true}
-        icon={redMarker}>
+        icon={markerIcon}>
         <Popup>
           <p><strong>Status: </strong>{details.status}</p>
           <p><strong>Severity: </strong>{details.severity}</p>
