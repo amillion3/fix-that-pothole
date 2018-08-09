@@ -5,6 +5,7 @@ import { Map, TileLayer} from 'react-leaflet';
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
 import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
+import ModalLegend from '../ModalLegend/ModalLegend';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
@@ -26,6 +27,7 @@ class MapMain extends Component {
       basemap: '',
       showModal: false,
       showAlert: false,
+      showLegend: false,
     };
   }
 
@@ -90,6 +92,14 @@ class MapMain extends Component {
     this.addPointTrue(); // user CAN add points now
   };
 
+  onCancelModalLegend = () => {
+    this.setState({showLegend: false});
+  }
+
+  eventLegend = e => {
+    this.setState({showLegend: true});
+  }
+
   onDismiss = () => {
     this.setState({showAlert: false});
   }
@@ -146,13 +156,17 @@ class MapMain extends Component {
           onSave={this.onSaveModal}
           onCancel={this.onCancelModal}
         ></ModalAddPothole>
+        <ModalLegend
+          showLegend={this.state.showLegend}
+          onCancelModalLegend={this.onCancelModalLegend}
+        ></ModalLegend>
         <Alerts
           alertText="Pothole record saved."
           showAlert={this.state.showAlert}
           onDismiss={this.onDismiss}
           bsStyle="success" />
         <Map
-          center={[36.1491592, -86.7703593]}
+          center={[36.1531592, -86.7703593]}
           zoom={15}
           maxZoom={20}
           length={4}
@@ -195,14 +209,20 @@ class MapMain extends Component {
             <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
               Add New Pothole
           </button>
-          <Link to='/dashboard'>
+          <button
+            className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
+            onClick={this.eventLegend}>
+            <span className="glyphicon glyphicon-list-alt" aria-hidden="true"> </span>
+              Legend
+          </button>
+          {/* <Link to='/dashboard'>
             <button
               className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
               onClick={this.eventDashboard}>
               <span className="glyphicon glyphicon-th-list" aria-hidden="true"> </span>
                View Dashboard
             </button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     );

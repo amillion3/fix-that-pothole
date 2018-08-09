@@ -17,7 +17,7 @@ class ModalAddPothole extends React.Component {
   }
 
   modalBtnCancel = () => {
-    this.props.onCancel();
+    this.props.onCancelModal();
     this.setState({modalTempPothole: {}});
   };
   modalBtnSave = () => {
@@ -78,13 +78,13 @@ class ModalAddPothole extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            className='btn btn-primary'
+            className='btn'
             onClick={this.modalBtnSave}>
             <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
           Save This Pothole
           </Button>
           <Button
-            className='btn btn-danger'
+            className='btn'
             onClick={this.modalBtnCancel}>
             <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
           Cancel and Clear
