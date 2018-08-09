@@ -8,7 +8,7 @@ import './ModalAddPothole.css';
 class ModalAddPothole extends React.Component {
   state = {
     modalTempPothole: {},
-    showModal: false,
+    // showModal: false,
   }
 
   componentWillReceiveProps () {
@@ -17,15 +17,16 @@ class ModalAddPothole extends React.Component {
   }
 
   modalBtnCancel = () => {
-    this.props.onCancel();
     this.setState({modalTempPothole: {}});
+    this.setState({showModal: false});
+    this.props.onCancelModal();
   };
   modalBtnSave = () => {
     const {modalTempPothole} = this.state;
     potholeRequests
       .potholePOST(modalTempPothole)
       .then(() => {
-        this.props.onSave();
+        this.props.onSaveModal();
       })
       .then(() => {
         // Adds newly added pothole to state
@@ -50,7 +51,7 @@ class ModalAddPothole extends React.Component {
   };
 
   render () {
-    const {showModal} = this.state;
+    const {showModal} = this.props;
     return (
       <Modal show={showModal}>
         <Modal.Header>
@@ -78,14 +79,16 @@ class ModalAddPothole extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            className='btn btn-primary'
-            onClick={this.modalBtnSave}>
+            type="button"
+            className='btn'
+            onMouseUp={this.modalBtnSave}>
             <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
           Save This Pothole
           </Button>
           <Button
-            className='btn btn-danger'
-            onClick={this.modalBtnCancel}>
+            type="button"
+            className='btn'
+            onMouseUp={this.modalBtnCancel}>
             <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
           Cancel and Clear
           </Button>

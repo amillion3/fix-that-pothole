@@ -1,10 +1,10 @@
 import React, { createRef, Component} from 'react';
-import {Link} from 'react-router-dom';
 import { Map, TileLayer} from 'react-leaflet';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
 import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
+import ModalLegend from '../ModalLegend/ModalLegend';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import auth from '../../firebaseRequests/auth';
@@ -26,6 +26,7 @@ class MapMain extends Component {
       basemap: '',
       showModal: false,
       showAlert: false,
+      showLegend: false,
     };
   }
 
@@ -72,7 +73,7 @@ class MapMain extends Component {
       potholeToAdd.updatedUserId = '';
       potholeToAdd.updatedTime = '';
       potholeToAdd.id = Math.random();
-      setTimeout(1000);
+      setTimeout(200);
       this.setState({tempPothole: potholeToAdd});
       this.addPointFalse();
       this.showModal();
@@ -86,9 +87,18 @@ class MapMain extends Component {
     });
   }
 
-  eventAddNewPothole = e => {
+  eventAddNewPothole = () => {
     this.addPointTrue(); // user CAN add points now
   };
+
+  onCancelModalLegend = () => {
+    this.setState({showLegend: false});
+  }
+
+  eventLegend = e => {
+    e.preventDefault();
+    this.setState({showLegend: true});
+  }
 
   onDismiss = () => {
     this.setState({showAlert: false});
@@ -100,13 +110,13 @@ class MapMain extends Component {
         this.setState({potholes});
       })
       .catch(err => console.error('Error with pothole get request after save: ', err));
+    this.addPointFalse();
     this.setState({showAlert: true});
     this.setState({showModal: false});
-    this.addPointFalse();
   }
   onCancelModal = () => {
-    this.setState({showModal: false});
     this.addPointFalse();
+    this.setState({showModal: false});
   }
 
   basemapNashville = () => {
@@ -143,17 +153,22 @@ class MapMain extends Component {
         <ModalAddPothole
           showModal={this.state.showModal}
           tempPothole={this.state.tempPothole}
-          onSave={this.onSaveModal}
-          onCancel={this.onCancelModal}
+          onSaveModal={this.onSaveModal}
+          onCancelModal={this.onCancelModal}
         ></ModalAddPothole>
+        <ModalLegend
+          showLegend={this.state.showLegend}
+          onCancelModalLegend={this.onCancelModalLegend}
+        ></ModalLegend>
         <Alerts
           alertText="Pothole record saved."
           showAlert={this.state.showAlert}
           onDismiss={this.onDismiss}
           bsStyle="success" />
         <Map
-          center={[36.1491592, -86.7703593]}
+          center={[36.1531592, -86.7703593]}
           zoom={15}
+          maxZoom={20}
           length={4}
           ref={this.mapRef}
           onLocationfound={this.handleLocationFound}
@@ -162,25 +177,26 @@ class MapMain extends Component {
           onClick={this.handleClick}
           style={this.state.style}>
           <TileLayer
-            url={this.state.basemap}/>
+            url={this.state.basemap}
+            maxZoom={20}/>
           <div className="">
             {potholeComponents}
           </div>
           <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
             <button
               type="button"
-              className="btn btn-default"
+              className="btn"
               onClick={this.basemapNashville} >
               Default
             </button>
             <button
               type="button"
-              className="btn btn-default"
+              className="btn"
               onClick={this.basemapStreets} >
               Streets</button>
             <button
               type="button"
-              className="btn btn-default"
+              className="btn"
               onClick={this.basemapSatelliteStreets} >
               Satellite
             </button>
@@ -188,19 +204,19 @@ class MapMain extends Component {
         </Map>
         <div className='col-xs-12 menu-items'>
           <button
+            type="button"
             className = 'col-xs-5 btn btn-large btn-warning menu-items-btn'
-            onClick={this.eventAddNewPothole}>
+            onMouseUp={this.eventAddNewPothole}>
             <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
               Add New Pothole
           </button>
-          <Link to='/dashboard'>
-            <button
-              className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
-              onClick={this.eventDashboard}>
-              <span className="glyphicon glyphicon-th-list" aria-hidden="true"> </span>
-               View Dashboard
-            </button>
-          </Link>
+          <button
+            type="button"
+            className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
+            onMouseUp={() => this.setState({showLegend: true})}>
+            <span className="glyphicon glyphicon-list-alt" > </span>
+              Legend
+          </button>
         </div>
       </div>
     );
