@@ -72,9 +72,10 @@ class MapMain extends Component {
       potholeToAdd.updatedUserId = '';
       potholeToAdd.updatedTime = '';
       potholeToAdd.id = Math.random();
-      this.showModal();
-      this.addPointFalse();
+      setTimeout(1000);
       this.setState({tempPothole: potholeToAdd});
+      this.addPointFalse();
+      this.showModal();
     }
   };
 
@@ -166,27 +167,24 @@ class MapMain extends Component {
             {potholeComponents}
           </div>
           <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
-            <button type="button" className="btn btn-default" onClick={this.basemapNashville}>Default</button>
-            <button type="button" className="btn btn-default" onClick={this.basemapStreets}>Streets</button>
-            <button type="button" className="btn btn-default" onClick={this.basemapSatelliteStreets}>Satellite</button>
-          </div>
-          {/* <ButtonGroup bsSize="large" className='leaflet-bottom leaflet-left BASEMAP-BG' id="basemap-buttons">
-            <Button
-              className='BASEMAP'
-              onClick={this.basemapNashville}>
+            <button
+              type="button"
+              className="btn btn-default"
+              onClick={this.basemapNashville} >
               Default
-            </Button>
-            <Button
-              className='BASEMAP'
-              onClick={this.basemapStreets}>
-              Streets
-            </Button>
-            <Button
-              className='BASEMAP'
-              onClick={this.basemapSatelliteStreets}>
+            </button>
+            <button
+              type="button"
+              className="btn btn-default"
+              onClick={this.basemapStreets} >
+              Streets</button>
+            <button
+              type="button"
+              className="btn btn-default"
+              onClick={this.basemapSatelliteStreets} >
               Satellite
-            </Button>
-          </ButtonGroup> */}
+            </button>
+          </div>
         </Map>
         <div className='col-xs-12 menu-items'>
           <button
