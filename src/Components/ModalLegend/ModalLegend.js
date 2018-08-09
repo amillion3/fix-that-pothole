@@ -4,20 +4,12 @@ import {Button, Modal} from 'react-bootstrap';
 import './ModalLegend.css';
 
 class ModalLegend extends React.Component {
-  state = {
-    showLegend: false,
-  }
-
-  componentWillReceiveProps () {
-    this.setState({showLegend: this.props.showLegend});
-  }
-
   modalBtnCloseLegend = () => {
     this.props.onCancelModalLegend();
   };
 
   render () {
-    const {showLegend} = this.state;
+    const {showLegend} = this.props;
     return (
       <Modal show={showLegend}>
         <h2 id="title-legend" className='text-center'>Legend</h2>
