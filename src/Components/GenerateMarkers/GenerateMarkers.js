@@ -8,7 +8,7 @@ import './GenerateMarkers.css';
 class GenerateMarkers extends React.Component {
   render () {
     const {details} = this.props; // Single pothole object
-    // https://leafletjs.com/reference-1.3.2.html#icon
+    console.log(details);
     const chooseColorIcon = () => {
       if (details.status === 'Newly Added') {
         return (
@@ -52,12 +52,21 @@ class GenerateMarkers extends React.Component {
         position={[(details.coordLat * 1), (details.coordLong * 1)]}
         riseOnHover={true}
         icon={markerIcon}>
+        {/* <Popup>
+          <span>hihi</span>
+          <span>hihi</span>
+          <span>hihi</span>
+          <span>hihi</span>
+          <span>hihi</span>
+        </Popup> */}
         <Popup>
-          <p><strong>Status: </strong>{details.status}</p>
-          <p><strong>Severity: </strong>{details.severity}</p>
-          <p><strong>Created Date: </strong>{details.createdDate}</p>
-          <p><strong>Updated ? </strong>{JSON.stringify(details.updated)}</p>
-          <p><strong>Notes: </strong>{details.descriptionNotes}</p>
+          <div className='single-marker-popup'>
+            <p><strong>Status: </strong>{details.status}</p>
+            <p><strong>Severity: </strong>{details.severity}</p>
+            <p><strong>Created Date: </strong>{details.createdDate}</p>
+            <p><strong>Is Updated? </strong>{JSON.stringify(details.updated)}</p>
+            <p><strong>Notes: </strong>{details.descriptionNotes}</p>
+          </div>
         </Popup>
       </Marker>
     );

@@ -1,5 +1,5 @@
 import React, { createRef} from 'react';
-import { Map, TileLayer, Marker } from 'react-leaflet';
+import { Map, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
@@ -182,13 +182,8 @@ class MapMain extends React.Component {
             url={this.state.basemap}
             maxZoom={20}/>
           <MarkerClusterGroup>
-            <Marker position={[49.8397, 24.0297]} />
-            <Marker position={[52.2297, 21.0122]} />
-            <Marker position={[51.5074, -0.0901]} />
-          </MarkerClusterGroup>
-          <div className="">
             {potholeComponents}
-          </div>
+          </MarkerClusterGroup>
           <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
             <button
               type="button"
