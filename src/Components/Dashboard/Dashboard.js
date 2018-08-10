@@ -42,12 +42,12 @@ class Dashboard extends React.Component {
         <table className='table table-hover'>
           <thead>
             <tr>
+              <th>More Info</th>
               <th className='dash-pothole-mobile'>Status</th>
               <th className='dash-pothole-mobile'>Date</th>
               <th className='dash-pothole-mobile'>Severity</th>
               <th>Notes</th>
               <th className='dash-pothole-mobile'>Updated</th>
-              <th>More Info</th>
             </tr>
           </thead>
           <tbody>

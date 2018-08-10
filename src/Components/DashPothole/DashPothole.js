@@ -17,13 +17,6 @@ class DashPothole extends React.Component {
 
     return (
       <tr>
-        <td className='dash-pothole-mobile'>{details.status}</td>
-        <td className='dash-pothole-mobile'>{details.createdDate}</td>
-        <td className='dash-pothole-mobile'>{details.severity}</td>
-        <td className='overflow-hidden'>
-          {details.descriptionNotes}
-        </td>
-        <td className='dash-pothole-mobile'>{JSON.stringify(details.updated)}</td>
         <td>
           <button
             type="button"
@@ -33,6 +26,13 @@ class DashPothole extends React.Component {
             Full Record
           </button>
         </td>
+        <td className='dash-pothole-mobile'>{details.status}</td>
+        <td className='dash-pothole-mobile'>{details.createdDate}</td>
+        <td className='dash-pothole-mobile'>{details.severity}</td>
+        <td className='overflow-hidden'>
+          {details.descriptionNotes}
+        </td>
+        <td className='dash-pothole-mobile'>{JSON.stringify(details.updated)}</td>
       </tr>
     );
   }

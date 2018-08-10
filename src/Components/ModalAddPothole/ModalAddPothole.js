@@ -1,5 +1,6 @@
 import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 
@@ -61,10 +62,10 @@ class ModalAddPothole extends React.Component {
           <form>
             <div>
               <label>Severity:</label><br/>
-              <select value={this.state.modalTempPothole.severity} onChange={this.changeSeverity}>
-                <option value="Low" onChange={this.changeSeverity}>Low</option>
-                <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
-                <option value="Severe" onChange={this.changeSeverity}>Severe</option>
+              <select value="Low" onChange={this.changeSeverity}>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="Severe">Severe</option>
               </select>
             </div>
             <div className="form-group">
@@ -97,5 +98,10 @@ class ModalAddPothole extends React.Component {
     );
   }
 }
+
+ModalAddPothole.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  tempPothole: PropTypes.object.isRequired,
+};
 
 export default ModalAddPothole;
