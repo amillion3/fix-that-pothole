@@ -196,7 +196,7 @@ class PotholeCompleteRecord extends React.Component {
                     </div>
                     <div>
                       <label>Severity:</label><br/>
-                      <select value={this.state.severity} onChange={this.changeSeverity}>
+                      <select defaultValue={this.state.severity} onChange={this.changeSeverity}>
                         <option value="Low" onChange={this.changeSeverity}>Low</option>
                         <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
                         <option value="Severe" onChange={this.changeSeverity}>Severe</option>
