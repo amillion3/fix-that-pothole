@@ -23,9 +23,10 @@ class MapMain extends React.Component {
         lat: '',
         lng: '' },
       tempPothole: {},
+      basemap: '',
+      collectedZoomLevel: 0,
       canAddPoint: false,
       style: {cursor: 'default'},
-      basemap: '',
       showModal: false,
       showAlert: false,
       showLegend: false,
@@ -75,6 +76,8 @@ class MapMain extends React.Component {
       potholeToAdd.updatedUserId = '';
       potholeToAdd.updatedTime = '';
       potholeToAdd.id = Math.random();
+      potholeToAdd.collectedBasemap = this.state.basemap;
+      potholeToAdd.collectedZoomLevel = this.state.collectedZoomLevel;
       setTimeout(200);
       this.setState({tempPothole: potholeToAdd});
       this.addPointFalse();
@@ -83,9 +86,12 @@ class MapMain extends React.Component {
   };
 
   handleLocationFound = e => {
+    console.log('e.target', e.target);
+    console.log('zoom', e.target._zoom);
     this.setState({
       hasLocation: true,
       latlng: e.latlng,
+      collectedZoomLevel: e.target._zoom,
     });
   }
 
@@ -121,20 +127,19 @@ class MapMain extends React.Component {
     this.setState({showModal: false});
   }
 
+  // These control the basemaps used
   basemapNashville = () => {
     if (this.state.canAddPoint === false) {
       const {customNashville} = constants;
       this.setState({basemap: customNashville});
     }
   }
-
   basemapStreets = () => {
     if (this.state.canAddPoint === false) {
       const {customStreets} = constants;
       this.setState({basemap: customStreets});
     }
   }
-
   basemapSatelliteStreets = () => {
     if (this.state.canAddPoint === false) {
       const {customSatelliteStreets} = constants;
