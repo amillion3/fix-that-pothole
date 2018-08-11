@@ -25,11 +25,11 @@ const potholePOST = inputPothole => {
     };
 
     if (inputPothole.collectedBasemap === constants.customNashville) {
-      newPothole.collectedBasemap = 'custom';
+      newPothole.collectedBasemap = 'Custom Basemap';
     } else if (inputPothole.collectedBasemap === constants.customStreets) {
-      newPothole.collectedBasemap = 'streets';
+      newPothole.collectedBasemap = 'Streets Basemap';
     } else {
-      newPothole.collectedBasemap = 'satellite';
+      newPothole.collectedBasemap = 'Satellite Imagery Basemap';
     }
 
     axios

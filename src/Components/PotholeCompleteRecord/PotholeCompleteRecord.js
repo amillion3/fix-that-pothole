@@ -129,6 +129,20 @@ class PotholeCompleteRecord extends React.Component {
                   <p><strong>Notes: </strong>{p.descriptionNotes}</p>
                   <p><strong>Latitude: </strong>{p.coordLat}</p>
                   <p><strong>Longitude: </strong>{p.coordLong}</p>
+                  <p><strong>Streetview: </strong>
+                    <a href={`
+                      http://maps.google.com/maps?q=&layer=c&cbll=
+                      ${p.coordLat},
+                      ${p.coordLong}
+                    `} target="_blank">
+                      <button
+                        type="button"
+                        className="btn" >
+                        <span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                        Streetview
+                      </button>
+                    </a>
+                  </p>
                   <hr/>
                   {/* Ternary below determines if record has updates or not */}
                   {p.updated ?

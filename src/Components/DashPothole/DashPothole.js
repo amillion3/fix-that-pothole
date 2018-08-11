@@ -15,12 +15,6 @@ class DashPothole extends React.Component {
       this.props.history.push(`/pothole/${details.id}`);
     };
 
-    const clickStreetView = () => {
-      return `
-      http://maps.google.com/maps?q=&layer=c&cbll=${details.coordLat},${details.coordLong}
-      `;
-    };
-
     return (
       <tr>
         <td>
@@ -33,7 +27,7 @@ class DashPothole extends React.Component {
           </button>
         </td>
         <td>
-          <a href={clickStreetView()} target="_blank">
+          <a href={`http://maps.google.com/maps?q=&layer=c&cbll=${details.coordLat},${details.coordLong}`} target="_blank">
             <button
               type="button"
               className="btn"
