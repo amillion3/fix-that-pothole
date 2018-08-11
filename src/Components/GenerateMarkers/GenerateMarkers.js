@@ -8,7 +8,6 @@ import './GenerateMarkers.css';
 class GenerateMarkers extends React.Component {
   render () {
     const {details} = this.props; // Single pothole object
-    console.log(details);
     const chooseColorIcon = () => {
       if (details.status === 'Newly Added') {
         return (

@@ -62,7 +62,7 @@ class ModalAddPothole extends React.Component {
           <form>
             <div>
               <label>Severity:</label><br/>
-              <select value="Low" onChange={this.changeSeverity}>
+              <select value={this.state.modalTempPothole.severity} onChange={this.changeSeverity}>
                 <option value="Low">Low</option>
                 <option value="Moderate">Moderate</option>
                 <option value="Severe">Severe</option>
