@@ -15,24 +15,41 @@ class DashPothole extends React.Component {
       this.props.history.push(`/pothole/${details.id}`);
     };
 
+    const clickStreetView = () => {
+      return `
+      http://maps.google.com/maps?q=&layer=c&cbll=${details.coordLat},${details.coordLong}
+      `;
+    };
+
     return (
       <tr>
         <td>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn"
             onClick={clickSinglePothole}>
             <span className="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
             Full Record
           </button>
         </td>
+        <td>
+          <a href={clickStreetView()} target="_blank">
+            <button
+              type="button"
+              className="btn"
+            >
+              <span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+              Streetview
+            </button>
+          </a>
+        </td>
         <td className='dash-pothole-mobile'>{details.status}</td>
         <td className='dash-pothole-mobile'>{details.createdDate}</td>
         <td className='dash-pothole-mobile'>{details.severity}</td>
+        <td className='dash-pothole-mobile'>{JSON.stringify(details.updated)}</td>
         <td className='overflow-hidden'>
           {details.descriptionNotes}
         </td>
-        <td className='dash-pothole-mobile'>{JSON.stringify(details.updated)}</td>
       </tr>
     );
   }
