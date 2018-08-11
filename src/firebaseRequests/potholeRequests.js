@@ -7,6 +7,7 @@ const potholePOST = inputPothole => {
     if (inputPothole.severity === undefined) {
       inputPothole.severity = "Low";
     }
+
     const newPothole = {
       "coordLat": inputPothole.coordLat,
       "coordLong": inputPothole.coordLong,
@@ -20,7 +21,16 @@ const potholePOST = inputPothole => {
       "updatedDate": inputPothole.updatedDate,
       "updatedTime": inputPothole.updatedTime,
       "updatedUserId": inputPothole.updatedUserId,
+      "collectedZoomLevel": inputPothole.collectedZoomLevel,
     };
+
+    if (inputPothole.collectedBasemap === constants.customNashville) {
+      newPothole.collectedBasemap = 'Custom Basemap';
+    } else if (inputPothole.collectedBasemap === constants.customStreets) {
+      newPothole.collectedBasemap = 'Streets Basemap';
+    } else {
+      newPothole.collectedBasemap = 'Satellite Imagery Basemap';
+    }
 
     axios
       .post(`${constants.firebaseConfig.databaseURL}/potholes.json`, newPothole)
