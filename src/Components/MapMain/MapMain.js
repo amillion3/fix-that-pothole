@@ -77,7 +77,7 @@ class MapMain extends React.Component {
       potholeToAdd.updatedTime = '';
       potholeToAdd.id = Math.random();
       potholeToAdd.collectedBasemap = this.state.basemap;
-      potholeToAdd.collectedZoomLevel = this.state.collectedZoomLevel;
+      potholeToAdd.collectedZoomLevel = e.target._zoom;
       setTimeout(200);
       this.setState({tempPothole: potholeToAdd});
       this.addPointFalse();
@@ -87,11 +87,10 @@ class MapMain extends React.Component {
 
   handleLocationFound = e => {
     console.log('e.target', e.target);
-    console.log('zoom', e.target._zoom);
+    console.log('zoom:', e.target._zoom);
     this.setState({
       hasLocation: true,
       latlng: e.latlng,
-      collectedZoomLevel: e.target._zoom,
     });
   }
 
@@ -177,6 +176,7 @@ class MapMain extends React.Component {
           center={[36.1531592, -86.7703593]}
           zoom={15}
           maxZoom={20}
+          minZoom={2}
           length={4}
           ref={this.mapRef}
           onLocationfound={this.handleLocationFound}
