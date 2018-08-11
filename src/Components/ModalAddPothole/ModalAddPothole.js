@@ -9,7 +9,6 @@ import './ModalAddPothole.css';
 class ModalAddPothole extends React.Component {
   state = {
     modalTempPothole: {},
-    // showModal: false,
   }
 
   componentWillReceiveProps () {

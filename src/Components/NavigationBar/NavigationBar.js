@@ -45,7 +45,8 @@ class NavigationBar extends React.Component {
                   </NavItem>
                   <NavItem componentClass='span'  className='nav-item-wrapper'>
                     <Link to='/dashboard'>
-                      <span className="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                      <span className="glyphicon glyphicon-th-list" aria-hidden="true"
+                      ></span>
                     Dashboard
                     </Link>
                   </NavItem>
