@@ -2,10 +2,26 @@ import constants from '../constants';
 import axios from 'axios';
 import auth from './auth';
 
-const potholePOST = newPothole => {
+const potholePOST = inputPothole => {
   return new Promise((resolve, reject) => {
-    newPothole.createdDate = new Date().toLocaleDateString('en-US');
-    newPothole.createdTime = new Date().toLocaleTimeString('en-US');
+    if (inputPothole.severity === undefined) {
+      inputPothole.severity = "Low";
+    }
+    const newPothole = {
+      "coordLat": inputPothole.coordLat,
+      "coordLong": inputPothole.coordLong,
+      "createdBy": inputPothole.createdBy,
+      "createdDate": new Date().toLocaleDateString('en-US'),
+      "createdTime": new Date().toLocaleTimeString('en-US'),
+      "descriptionNotes": inputPothole.descriptionNotes,
+      "severity": inputPothole.severity,
+      "status": inputPothole.status,
+      "updated": inputPothole.updated,
+      "updatedDate": inputPothole.updatedDate,
+      "updatedTime": inputPothole.updatedTime,
+      "updatedUserId": inputPothole.updatedUserId,
+    };
+
     axios
       .post(`${constants.firebaseConfig.databaseURL}/potholes.json`, newPothole)
       .then(response => {

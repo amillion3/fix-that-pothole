@@ -166,7 +166,8 @@ class MapMain extends React.Component {
           alertText="Pothole record saved."
           showAlert={this.state.showAlert}
           onDismiss={this.onDismiss}
-          bsStyle="success" />
+          bsStyle="success"
+          className='alert-fade' />
         <Map
           center={[36.1531592, -86.7703593]}
           zoom={15}
