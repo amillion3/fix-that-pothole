@@ -80,7 +80,7 @@ class GenerateMarkers extends React.Component {
                 className="btn"
                 onClick={clickSinglePothole}>
                 <span className="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                Full Record
+                Details
               </button>
             </div>
             {
