@@ -121,16 +121,16 @@ class PotholeCompleteRecord extends React.Component {
             {isEditing === false
               ? (
                 <div>
-                  <p><strong>Created Date: </strong>{p.createdDate}</p>
-                  <p><strong>Created Time: </strong>{p.createdTime}</p>
-                  <p><strong>Created By: </strong>{p.createdBy}</p>
-                  <p><strong>Status: </strong>{p.status}</p>
-                  <p><strong>Severity: </strong>{p.severity}</p>
-                  <p><strong>Notes: </strong>{p.descriptionNotes}</p>
-                  <p><strong>Latitude: </strong>{p.coordLat}</p>
-                  <p><strong>Longitude: </strong>{p.coordLong}</p>
-                  <p><strong>Streetview: </strong>
-                    <a href={`
+                  <p><span className="complete-pothole-attribute">Created Date:</span> {p.createdDate}</p>
+                  <p><span className="complete-pothole-attribute">Created Time:</span> {p.createdTime}</p>
+                  <p><span className="complete-pothole-attribute">Created By:</span> {p.createdBy}</p>
+                  <p><span className="complete-pothole-attribute">Status:</span> {p.status}</p>
+                  <p><span className="complete-pothole-attribute">Severity:</span> {p.severity}</p>
+                  <p><span className="complete-pothole-attribute">Notes:</span> {p.descriptionNotes}</p>
+                  <p><span className="complete-pothole-attribute">Latitude:</span> {p.coordLat}</p>
+                  <p><span className="complete-pothole-attribute">Longitude:</span> {p.coordLong}</p>
+                  <p><span className="complete-pothole-attribute">Streetview:</span>
+                      <a href={`
                       http://maps.google.com/maps?q=&layer=c&cbll=
                       ${p.coordLat},
                       ${p.coordLong}
@@ -147,16 +147,16 @@ class PotholeCompleteRecord extends React.Component {
                   {/* Ternary below determines if record has updates or not */}
                   {p.updated ?
                     <div>
-                      <p><strong>Updated Date: </strong>{p.updatedDate}</p>
-                      <p><strong>Updated Time: </strong>{p.updatedTime}</p>
-                      <p><strong>Updated By: </strong>{p.updatedUserId}</p>
+                      <p><span className="complete-pothole-attribute">Updated Date:</span> {p.updatedDate}</p>
+                      <p><span className="complete-pothole-attribute">Updated Time:</span> {p.updatedTime}</p>
+                      <p><span className="complete-pothole-attribute">Updated By:</span> {p.updatedUserId}</p>
                     </div>
-                    : <p><strong>No updates for this record.</strong></p>}
+                    : <p><span>No updates for this record.</span></p>}
                   <div className='col-xs-12 col-md-3 pothole-record-btn'>
                     <Link to='/dashboard'>
                       <button className='btn col-xs-12'>
                         <span className="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                        Go Back
+                        To Dashboard
                       </button>
                     </Link>
 
