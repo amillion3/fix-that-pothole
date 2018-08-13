@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Marker, Popup} from 'react-leaflet';
 import {Icon} from 'leaflet';
@@ -45,6 +46,11 @@ class GenerateMarkers extends React.Component {
     };
 
     const markerIcon = chooseColorIcon();
+
+    const clickSinglePothole = () => {
+      this.props.history.push(`/pothole/${details.id}`);
+    };
+
     //
     return (
       <Marker
@@ -53,15 +59,37 @@ class GenerateMarkers extends React.Component {
         icon={markerIcon}>
         <Popup>
           <div className='single-marker-popup'>
-            <p><strong>Status: </strong>{details.status}</p>
-            <p><strong>Severity: </strong>{details.severity}</p>
-            <p><strong>Created Date: </strong>{details.createdDate}</p>
+            <p><span className='popup-label'>Status:</span> {details.status}</p>
+            <p><span className='popup-label'>Severity:</span> {details.severity}</p>
+            <p><span className='popup-label'>Created Date:</span> {details.createdDate}</p>
+            <div className='popup-buttons col-xs-12'>
+              <a href={`
+                http://maps.google.com/maps?q=&layer=c&cbll=
+                ${details.coordLat},
+                ${details.coordLong}
+              `} target="_blank">
+                <button
+                  type="button"
+                  className="btn" >
+                  <span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                  Streetview
+                </button>
+              </a>
+              <button
+                type="button"
+                className="btn"
+                onClick={clickSinglePothole}>
+                <span className="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                Details
+              </button>
+            </div>
             {
               details.updated ?
-                <p><strong>Last updated </strong>{details.updatedDate}</p>
+                <p><span className='popup-label'>Last updated
+                </span> {details.updatedDate}</p>
                 : null
             }
-            <p><strong>Notes: </strong>{details.descriptionNotes}</p>
+            <p><span className='popup-label'>Notes:</span> {details.descriptionNotes}</p>
           </div>
         </Popup>
       </Marker>
@@ -73,4 +101,4 @@ GenerateMarkers.propTypes = {
   details: PropTypes.object.isRequired,
 };
 
-export default GenerateMarkers;
+export default withRouter(GenerateMarkers);
