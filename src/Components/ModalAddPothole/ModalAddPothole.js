@@ -101,6 +101,8 @@ class ModalAddPothole extends React.Component {
 ModalAddPothole.propTypes = {
   showModal: PropTypes.bool.isRequired,
   tempPothole: PropTypes.object.isRequired,
+  onCancelModal: PropTypes.func.isRequired,
+  onSaveModal: PropTypes.func.isRequired,
 };
 
 export default ModalAddPothole;
