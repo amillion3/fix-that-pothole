@@ -8,6 +8,7 @@ import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
 import ModalLegend from '../ModalLegend/ModalLegend';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
+import reverseGeocoding from '../../firebaseRequests/reverseGeocoding';
 import auth from '../../firebaseRequests/auth';
 import constants from '../../constants';
 
@@ -62,6 +63,8 @@ class MapMain extends React.Component {
 
   handleClick = e => {
     if (this.state.canAddPoint) {
+      reverseGeocoding
+        .getMailingAddress(e.latlng.lat, e.latlng.lng, 'tn');
       this.mapRef.current.leafletElement.locate();
       const potholeToAdd = {};
       potholeToAdd.isComplete = false;

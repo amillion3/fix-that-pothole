@@ -7,6 +7,7 @@ const constants = {
     storageBucket: '',
     messagingSenderId: '',
   },
+  geocoding: '',
   mapbox: {
     apiKey: '',
     customNashville: '',
