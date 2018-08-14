@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import './DashPothole.css';
 
 class DashPothole extends React.Component {
-  state = {};
+  state = {
+  };
 
   render () {
     // {details} passed in via props, contains individual pothole object
@@ -13,6 +14,10 @@ class DashPothole extends React.Component {
     // button click, takes user to a new route, based on the firebase id
     const clickSinglePothole = () => {
       this.props.history.push(`/pothole/${details.id}`);
+    };
+
+    const clickForMap = () => {
+      this.props.theModalCoordinates(details.coordLat, details.coordLong);
     };
 
     return (
@@ -37,6 +42,21 @@ class DashPothole extends React.Component {
             </button>
           </a>
         </td>
+
+        {/* <td>
+          <button
+            type="button"
+            className="btn"
+            show={this.state.mapModalVisible}
+            onClick={clickForMap}
+            lat={details.coordLat}
+            long={details.coordLong}
+          >
+            <span className="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
+            Map
+          </button>
+        </td> */}
+
         <td className='dash-pothole-mobile'>{details.status}</td>
         <td className='dash-pothole-mobile'>{details.createdDate}</td>
         <td className='dash-pothole-mobile'>{details.severity}</td>

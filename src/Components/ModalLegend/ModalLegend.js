@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Modal} from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 import './ModalLegend.css';
 
@@ -51,5 +52,10 @@ class ModalLegend extends React.Component {
     );
   }
 }
+
+ModalLegend.propTypes = {
+  onCancelModalLegend: PropTypes.func.isRequired,
+  showLegend: PropTypes.bool.isRequired,
+};
 
 export default ModalLegend;

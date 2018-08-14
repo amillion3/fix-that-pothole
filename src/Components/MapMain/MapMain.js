@@ -31,6 +31,7 @@ class MapMain extends React.Component {
       showModal: false,
       showAlert: false,
       showLegend: false,
+      showStreet: false,
     };
   }
 
@@ -89,8 +90,6 @@ class MapMain extends React.Component {
   };
 
   handleLocationFound = e => {
-    console.log('e.target', e.target);
-    console.log('zoom:', e.target._zoom);
     this.setState({
       hasLocation: true,
       latlng: e.latlng,
