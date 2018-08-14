@@ -6,14 +6,7 @@ import './DashPothole.css';
 
 class DashPothole extends React.Component {
   state = {
-    lat: 0,
-    long: 0,
   };
-
-  handleCoordinates = (a, b) => {
-    this.setState({lat: a});
-    this.setState({long: b});
-  }
 
   render () {
     // {details} passed in via props, contains individual pothole object
@@ -50,17 +43,19 @@ class DashPothole extends React.Component {
           </a>
         </td>
 
-        <td>
+        {/* <td>
           <button
             type="button"
             className="btn"
+            show={this.state.mapModalVisible}
             onClick={clickForMap}
-            handleCoordinates={}
+            lat={details.coordLat}
+            long={details.coordLong}
           >
             <span className="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
             Map
           </button>
-        </td>
+        </td> */}
 
         <td className='dash-pothole-mobile'>{details.status}</td>
         <td className='dash-pothole-mobile'>{details.createdDate}</td>
