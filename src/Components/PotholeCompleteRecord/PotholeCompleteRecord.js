@@ -44,6 +44,11 @@ class PotholeCompleteRecord extends React.Component {
     tempVal.descriptionNotes = e.target.value;
     this.setState({descriptionNotes: tempVal.descriptionNotes});
   };
+  changeDisplayAddress = e => {
+    const tempVal = {...this.state.displayAddress };
+    tempVal.displayAddress = e.target.value;
+    this.setState({displayAddress: tempVal.displayAddress});
+  };
   changeLatitude = e => {
     const tempVal = {...this.state.coordLat };
     tempVal.coordLat = e.target.value;
@@ -127,10 +132,11 @@ class PotholeCompleteRecord extends React.Component {
                   <p><span className="complete-pothole-attribute">Status:</span> {p.status}</p>
                   <p><span className="complete-pothole-attribute">Severity:</span> {p.severity}</p>
                   <p><span className="complete-pothole-attribute">Notes:</span> {p.descriptionNotes}</p>
+                  <p><span className="complete-pothole-attribute">Address Description:</span> {p.displayAddress}</p>
                   <p><span className="complete-pothole-attribute">Latitude:</span> {p.coordLat}</p>
                   <p><span className="complete-pothole-attribute">Longitude:</span> {p.coordLong}</p>
                   <p><span className="complete-pothole-attribute">Streetview:</span>
-                      <a href={`
+                    <a href={`
                       http://maps.google.com/maps?q=&layer=c&cbll=
                       ${p.coordLat},
                       ${p.coordLong}
@@ -260,6 +266,15 @@ class PotholeCompleteRecord extends React.Component {
                         id="updatedUserId"
                         value={p.updatedUserId}
                         readOnly/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="displayAddress">Address Description:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="displayAddress"
+                        value={p.displayAddress}
+                        onChange={this.changeDisplayAddress}/>
                     </div>
                     <div className="form-group">
                       <label htmlFor="latitude">Latitude</label>

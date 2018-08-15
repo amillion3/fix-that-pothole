@@ -90,6 +90,7 @@ class GenerateMarkers extends React.Component {
                 : null
             }
             <p><span className='popup-label'>Notes:</span> {details.descriptionNotes}</p>
+            <p><span className='popup-label'>Address:</span> {details.displayAddress}</p>
           </div>
         </Popup>
       </Marker>
