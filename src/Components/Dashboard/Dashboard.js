@@ -54,7 +54,7 @@ class Dashboard extends React.Component {
           <thead>
             <tr>
               <th>More Info</th>
-              <th>Streetview</th>
+              <th className='dash-pothole-mobile'>Streetview</th>
               {/* <th>Map</th> */}
               <th className='dash-pothole-mobile'>Status</th>
               <th className='dash-pothole-mobile'>Date</th>

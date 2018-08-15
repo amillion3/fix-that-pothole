@@ -16,10 +16,6 @@ class DashPothole extends React.Component {
       this.props.history.push(`/pothole/${details.id}`);
     };
 
-    const clickForMap = () => {
-      this.props.theModalCoordinates(details.coordLat, details.coordLong);
-    };
-
     return (
       <tr>
         <td>
@@ -31,7 +27,7 @@ class DashPothole extends React.Component {
             Full Record
           </button>
         </td>
-        <td>
+        <td className="dash-pothole-mobile">
           <a href={`http://maps.google.com/maps?q=&layer=c&cbll=${details.coordLat},${details.coordLong}`} target="_blank">
             <button
               type="button"
@@ -42,20 +38,6 @@ class DashPothole extends React.Component {
             </button>
           </a>
         </td>
-
-        {/* <td>
-          <button
-            type="button"
-            className="btn"
-            show={this.state.mapModalVisible}
-            onClick={clickForMap}
-            lat={details.coordLat}
-            long={details.coordLong}
-          >
-            <span className="glyphicon glyphicon-screenshot" aria-hidden="true"></span>
-            Map
-          </button>
-        </td> */}
 
         <td className='dash-pothole-mobile'>{details.status}</td>
         <td className='dash-pothole-mobile'>{details.createdDate}</td>
