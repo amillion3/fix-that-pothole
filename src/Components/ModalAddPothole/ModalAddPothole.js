@@ -61,7 +61,9 @@ class ModalAddPothole extends React.Component {
           <form>
             <div>
               <label>Severity:</label><br/>
-              <select value={this.state.modalTempPothole.severity} onChange={this.changeSeverity}>
+              <select
+                value={this.state.modalTempPothole.severity} onChange={this.changeSeverity}
+                className='add-modal-select'>
                 <option value="Low">Low</option>
                 <option value="Moderate">Moderate</option>
                 <option value="Severe">Severe</option>
@@ -77,17 +79,17 @@ class ModalAddPothole extends React.Component {
             </div>
           </form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='add-modal-footer'>
           <Button
             type="button"
-            className='btn'
+            className='btn modal-btn col-xs-12 col-sm-5 col-sm-offset-1'
             onMouseUp={this.modalBtnSave}>
             <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
           Save This Pothole
           </Button>
           <Button
             type="button"
-            className='btn'
+            className='btn modal-btn col-xs-12 col-sm-5'
             onMouseUp={this.modalBtnCancel}>
             <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
           Cancel and Clear
