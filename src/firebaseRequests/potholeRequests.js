@@ -22,6 +22,7 @@ const potholePOST = inputPothole => {
       "updatedTime": inputPothole.updatedTime,
       "updatedUserId": inputPothole.updatedUserId,
       "collectedZoomLevel": inputPothole.collectedZoomLevel,
+      "displayAddress": inputPothole.displayAddress,
     };
 
     if (inputPothole.collectedBasemap === constants.customNashville) {
