@@ -8,7 +8,7 @@ import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
 import ModalLegend from '../ModalLegend/ModalLegend';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
-import reverseGeocoding from '../../firebaseRequests/reverseGeocoding';
+import reverseGeocoding from '../geocodingRequests/reverseGeocoding';
 import auth from '../../firebaseRequests/auth';
 import constants from '../../constants';
 
@@ -64,28 +64,34 @@ class MapMain extends React.Component {
 
   handleClick = e => {
     if (this.state.canAddPoint) {
-      reverseGeocoding
-        .getMailingAddress(e.latlng.lat, e.latlng.lng, 'tn');
       this.mapRef.current.leafletElement.locate();
       const potholeToAdd = {};
-      potholeToAdd.isComplete = false;
-      potholeToAdd.status = "Newly Added";
-      potholeToAdd.coordLat = e.latlng.lat;
-      potholeToAdd.coordLong = e.latlng.lng;
-      potholeToAdd.createdDate = new Date().toLocaleDateString('en-US');
-      potholeToAdd.createdBy = auth.fbGetUid();
-      potholeToAdd.descriptionNotes = '';
-      potholeToAdd.updated = false;
-      potholeToAdd.updatedDate = '';
-      potholeToAdd.updatedUserId = '';
-      potholeToAdd.updatedTime = '';
-      potholeToAdd.id = Math.random();
-      potholeToAdd.collectedBasemap = this.state.basemap;
-      potholeToAdd.collectedZoomLevel = e.target._zoom;
-      setTimeout(200);
-      this.setState({tempPothole: potholeToAdd});
-      this.addPointFalse();
-      this.showModal();
+      reverseGeocoding
+        .getMailingAddress(e.latlng.lat, e.latlng.lng)
+        .then(incomingData => {
+          console.log('details', incomingData);
+          potholeToAdd.isComplete = false;
+          potholeToAdd.status = "Newly Added";
+          potholeToAdd.coordLat = e.latlng.lat;
+          potholeToAdd.coordLong = e.latlng.lng;
+          potholeToAdd.createdDate = new Date().toLocaleDateString('en-US');
+          potholeToAdd.createdBy = auth.fbGetUid();
+          potholeToAdd.descriptionNotes = '';
+          potholeToAdd.updated = false;
+          potholeToAdd.updatedDate = '';
+          potholeToAdd.updatedUserId = '';
+          potholeToAdd.updatedTime = '';
+          potholeToAdd.id = Math.random();
+          potholeToAdd.collectedBasemap = this.state.basemap;
+          potholeToAdd.collectedZoomLevel = e.target._zoom;
+          potholeToAdd.displayAddress = incomingData;
+          this.setState({tempPothole: potholeToAdd});
+        })
+        .then(() => {
+          setTimeout(200);
+          this.addPointFalse();
+          this.showModal();
+        });
     }
   };
 
