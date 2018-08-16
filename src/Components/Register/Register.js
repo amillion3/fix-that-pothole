@@ -23,7 +23,6 @@ class Register extends React.Component {
       formErrors: {email: '', password: ''},
       emailValid: false,
       passwordValid: false,
-      formValid: false,
     },
   };
 
@@ -55,26 +54,21 @@ class Register extends React.Component {
     switch (fieldName) {
     case 'email':
       emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
-      fieldValidationErrors.email = emailValid ? '' : ' is invalid';
+      fieldValidationErrors.email = emailValid ? '' : ' is invalid.';
       break;
     case 'password':
       passwordValid = value.length >= 6;
-      fieldValidationErrors.password = passwordValid ? '' : ' is too short';
+      fieldValidationErrors.password = passwordValid ? '' : ' is too short.';
       break;
     default:
       break;
     }
-    this.setState({
+    this.setState({user: {
       formErrors: fieldValidationErrors,
       emailValid: emailValid,
       passwordValid: passwordValid,
-    }, this.validateForm);
-  }
-
-  validateForm () {
-    this.setState({
-      formValid: this.state.user.emailValid
-      && this.state.user.passwordValid });
+    },
+    });
   }
 
   render () {
@@ -108,7 +102,6 @@ class Register extends React.Component {
         <button
           type="submit"
           className='btn btn-lg col-xs-12 landing-page-button'
-          disabled={!user.formValid}
           onClick={this.handleButtonClick}>
           <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
           Register
