@@ -2,15 +2,27 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import { FormErrors } from '../FormErrors/FormErrors';
 import authRequests from '../../firebaseRequests/auth';
 
 import './Register.css';
 
 class Register extends React.Component {
   state = {
+    // user: {
+    //   email: 'abc123@gmail.com',
+    //   password: '123456',
+    //   formErrors: {email: '', password: ''},
+    //   emailValid: false,
+    //   passwordValid: false,
+    //   formValid: false,
+    // },
     user: {
-      email: 'abc123@gmail.com',
-      password: '123456',
+      email: '',
+      password: '',
+      formErrors: {email: '', password: ''},
+      emailValid: false,
+      passwordValid: false,
     },
   };
 
@@ -26,46 +38,70 @@ class Register extends React.Component {
       .catch(err => console.error('Error with registering: ', err));
   };
 
-  // Dynamicaly updating email in this.state
-  emailChange = e => {
-    const tempUser = { ...this.state.user };
-    tempUser.email = e.target.value;
-    this.setState({ user: tempUser });
-  };
+  handleUserInput = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+    const temp = { ...this.state.user };
+    temp[name] = value;
+    this.setState({user: temp});
+    this.validateField(name, value);
+  }
+  validateField (fieldName, value) {
+    const fieldValidationErrors = this.state.user.formErrors;
+    let emailValid = this.state.user.emailValid;
+    let passwordValid = this.state.user.passwordValid;
 
-  // Dynamicaly updating password in this.state
-  passwordChange = e => {
-    const tempUser = { ...this.state.user };
-    tempUser.password = e.target.value;
-    this.setState({ user: tempUser });
-  };
+    switch (fieldName) {
+    case 'email':
+      emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+      fieldValidationErrors.email = emailValid ? '' : ' is invalid.';
+      break;
+    case 'password':
+      passwordValid = value.length >= 6;
+      fieldValidationErrors.password = passwordValid ? '' : ' is too short.';
+      break;
+    default:
+      break;
+    }
+    this.setState({user: {
+      formErrors: fieldValidationErrors,
+      emailValid: emailValid,
+      passwordValid: passwordValid,
+    },
+    });
+  }
 
   render () {
     const { user } = this.state;
     return (
       <div className='div-register-container col-xs-offset-3 col-xs-6'>
         <h3 className='text-center'>Register New User</h3>
+        <div className="panel panel-default">
+          <FormErrors formErrors={this.state.user.formErrors} />
+        </div>
         <form>
           <label htmlFor="inputEmail">Email:</label>
           <input
             type="email"
             className="form-control landing-page-input"
             id="inputEmail"
+            name="email"
             placeholder="Email to Register with"
             value={user.email}
-            onChange={this.emailChange} />
+            onChange={this.handleUserInput} />
           <label htmlFor="inputPassword">Password:</label>
           <input
             type="password"
             className="form-control landing-page-input"
             id="inputPassword"
+            name="password"
             placeholder="Enter New Password"
             value={user.password}
-            onChange={this.passwordChange} />
+            onChange={this.handleUserInput} />
         </form>
         <button
           type="submit"
-          className='btn btn-default btn-lg col-xs-12 landing-page-button'
+          className='btn btn-lg col-xs-12 landing-page-button'
           onClick={this.handleButtonClick}>
           <span className="glyphicon glyphicon-user" aria-hidden="true"></span>
           Register
