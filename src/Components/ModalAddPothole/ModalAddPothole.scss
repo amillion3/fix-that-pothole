@@ -1,3 +1,18 @@
 .Modal {
   z-index: 1000000;
 }
+
+@media screen and (max-width: 430px) {
+  .modal-footer .btn+.btn {
+    margin: 0;
+  }
+
+  .modal-btn:first-of-type {
+    margin-bottom: 10px;
+  }
+
+}
+
+.add-modal-select {
+  border: 1px solid #f1f1f1;
+}

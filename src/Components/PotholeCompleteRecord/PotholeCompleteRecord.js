@@ -207,7 +207,7 @@ class PotholeCompleteRecord extends React.Component {
                     </div>
                     <div>
                       <label>Status:</label><br/>
-                      <select value={this.state.status} onChange={this.changeStatus}>
+                      <select value={this.state.status} onChange={this.changeStatus} className="add-modal-select">
                         <option value="Newly Added" onChange={this.changeStatus}>Newly Added</option>
                         <option value="Pothole Assigned" onChange={this.changeStatus}>Pothole Assigned</option>
                         <option value="Pothole Fixed" onChange={this.changeStatus}>Pothole Fixed</option>
@@ -216,7 +216,7 @@ class PotholeCompleteRecord extends React.Component {
                     </div>
                     <div>
                       <label>Severity:</label><br/>
-                      <select defaultValue={this.state.severity} onChange={this.changeSeverity}>
+                      <select defaultValue={this.state.severity} onChange={this.changeSeverity} className="add-modal-select">
                         <option value="Low" onChange={this.changeSeverity}>Low</option>
                         <option value="Moderate" onChange={this.changeSeverity}>Moderate</option>
                         <option value="Severe" onChange={this.changeSeverity}>Severe</option>
