@@ -38,9 +38,8 @@ class DashPothole extends React.Component {
             </button>
           </a>
         </td>
-
         <td className='dash-pothole-mobile'>{details.status}</td>
-        <td className='dash-pothole-mobile'>{details.createdDate}</td>
+        <td className='dash-pothole-mobile dash-pothole-tablet'>{details.createdDate}</td>
         <td className='dash-pothole-mobile'>{details.severity}</td>
         <td className='dash-pothole-mobile'>{JSON.stringify(details.updated)}</td>
         <td className='overflow-hidden'>

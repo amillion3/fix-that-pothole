@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DashPothole from '../DashPothole/DashPothole';
-import DashModal from '../DashModal/DashModal';
+// import DashModal from '../DashModal/DashModal';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 
@@ -46,18 +46,13 @@ class Dashboard extends React.Component {
 
     return (
       <div className='dashboard'>
-        <DashModal
-          mapModalVisible={this.state.mapModalVisible}
-          mapModalClose={this.closeMapModal}
-        ></DashModal>
         <table className='table table-hover'>
           <thead>
             <tr>
               <th>More Info</th>
               <th className='dash-pothole-mobile'>Streetview</th>
-              {/* <th>Map</th> */}
               <th className='dash-pothole-mobile'>Status</th>
-              <th className='dash-pothole-mobile'>Date</th>
+              <th className='dash-pothole-mobile dash-pothole-tablet'>Date</th>
               <th className='dash-pothole-mobile'>Severity</th>
               <th className='dash-pothole-mobile'>Updated</th>
               <th>Notes</th>
