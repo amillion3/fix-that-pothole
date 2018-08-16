@@ -9,7 +9,6 @@ const getMailingAddress = (lat, long) => {
       .get(request)
       .then(response => {
         // returns {} with complete mailing address
-        console.log('response.data.display_name', response.display_name);
         resolve(response.data.display_name);
       })
       .catch(error => {

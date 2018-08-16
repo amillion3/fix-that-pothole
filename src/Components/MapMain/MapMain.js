@@ -69,7 +69,6 @@ class MapMain extends React.Component {
       reverseGeocoding
         .getMailingAddress(e.latlng.lat, e.latlng.lng)
         .then(incomingData => {
-          console.log('details', incomingData);
           potholeToAdd.isComplete = false;
           potholeToAdd.status = "Newly Added";
           potholeToAdd.coordLat = e.latlng.lat;
