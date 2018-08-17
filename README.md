@@ -14,45 +14,67 @@
 - JavaScript/ES6/JSX
 - React 16 / Webpack
 - [react-leaflet](https://github.com/PaulLeCam/react-leaflet)
-- [Mapbox API](https://www.mapbox.com/maps/)
+- [react-leaflet-markercluster](https://www.npmjs.com/package/react-leaflet-markercluster)
 - [Firebase (database, auth, hosting)](https://firebase.google.com/)
 - [Create React App](https://github.com/facebookincubator/create-react-app)
 - [react-router-dom](https://reacttraining.com/react-router/core/guides/philosophy)
 
+### APIs
+- [Mapbox](https://www.mapbox.com/maps/)
+- [LocationIQ](https://locationiq.com/)
+
 ## Screenshots
 
-Here is the main page to login or register. Users can quickly register using just an email and password.
+Here is the main page to login or register. Users can quickly register using just an email and password. During registration, users must enter a valid email and a password at least 6 characters long.
 ![Login page](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/login.png)
 ___
 
 
-After logging in, users are taken to the main view of a map. Centered on Nashville, existing potholes are displayed with obvious markers.
-![Map view](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/map-view.png)
+After logging in, users are taken to the main view of a map. Centered on Nashville, existing potholes are displayed with obvious markers. Note the green circles with numbers in them, these are clusters of points that are not shown at the current zoom level.
+![Map view](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/custom-clusters.png)
 ___
 
 
+This map uses a JavaScript library called `react-leaflet-cluster` to cluster points in close proximity. Users may hover over the cluster to see the extent of the cluster. By clicking on the cluster, users will be zoomed in much closer.
+![Cluster hover](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/cluster-boundary.png)
+___
+
+A basemap switcher allows users to switch between the custom style, streets and landmarks and satellite imagery with labels.
+![Streets and Landmarks](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/streets-markers.png)
+
+![Satellite imagery](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/satellite-markers.png)
+___
+
+A map legend is available via a button click.
+![Map Legend](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/legend.png)
+___
+
 If the user clicks on one of the markers, a small pop-up is displayed with a summary of that specific pothole.
-![Click on marker](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/marker-click.png)
+![Click on marker](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/popup.png)
 ___
 
 
 When a user wishes to add a new pothole to the system, they simply have to click the `Add New Pothole` button and click on the map. After the user clicks on the map, a small dialog box appears to enter the pothole severity and any additional notes.
 ![Add new pothole](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/add-new-pothole.png)
+After a pothole record is added, `LocationIQ` is an API called to reverse geocode and match the pothole with the closest mailing address.
 ___
 
 
-Users have access to a dashboard, where the a summary table of each pothole is displayed. A nearly complete record of each pothole is shown, but the user can click the `Full Record` button to complete details and further actions.
+Users have access to a dashboard, where the summary table of each pothole is displayed. A nearly complete record of each pothole is shown, but the user can click the `Full Record` button to complete details and further actions.
 ![Dashboard main](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/dashboard-main.png)
 ___
 
 
 When the user examines the complete record, all pertinent details are shown. After the record the user can `Go Back` to the dashboard, `Edit Record` to update the pothole, or `Delete Record` to delete the pothole entirely.
-![Dashboard complete record](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/dashboard-complete-record.png)
+![Dashboard complete record](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/dashboard-record.png)
 ___
+
+A Google Streetview link is available in numerous places throughout the app. This ingests the latitude and longitude and places users as close as possible.
+![Google Streetview](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/streetview.png)
 
 
 When the user edits a pothole record, they are taken to a new React route. Some of the fields are editable, but not all of them. When a record is updated, the last date, time and user are updated for that specific record.
-![Edit pothole record](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/dashboard-edit.png)
+![Edit pothole record](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/edit-record.png)
 ___
 
 
@@ -99,7 +121,7 @@ ___
 ## Contributors
 [Andy Million](https://github.com/amillion3)
 
-With support from 
+With support from
 
 [Lauren Rouse](https://github.com/rousell)
 
