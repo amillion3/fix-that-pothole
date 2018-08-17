@@ -40,7 +40,7 @@ This map uses a JavaScript library called `react-leaflet-cluster` to cluster poi
 ___
 
 A basemap switcher allows users to switch between the custom style, streets and landmarks and satellite imagery with labels.
-![Streets and Landmarks](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/streets-markers.png)
+![Streets and Landmarks](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/streets-markers-cluster.png)
 
 ![Satellite imagery](https://raw.githubusercontent.com/amillion3/fix-that-pothole/master/img/screenshots/satellite-markers.png)
 ___
