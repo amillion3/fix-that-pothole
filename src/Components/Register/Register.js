@@ -9,14 +9,6 @@ import './Register.css';
 
 class Register extends React.Component {
   state = {
-    // user: {
-    //   email: 'abc123@gmail.com',
-    //   password: '123456',
-    //   formErrors: {email: '', password: ''},
-    //   emailValid: false,
-    //   passwordValid: false,
-    //   formValid: false,
-    // },
     user: {
       email: '',
       password: '',
@@ -38,8 +30,9 @@ class Register extends React.Component {
       .catch(err => console.error('Error with registering: ', err));
   };
 
+  // handles all changes to register inputs
   handleUserInput = e => {
-    const name = e.target.name;
+    const name = e.target.name;  // 'email' or 'password'
     const value = e.target.value;
     const temp = { ...this.state.user };
     temp[name] = value;
@@ -53,10 +46,12 @@ class Register extends React.Component {
 
     switch (fieldName) {
     case 'email':
+      // checks to see if the user input is a valid email format
       emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
       fieldValidationErrors.email = emailValid ? '' : ' is invalid.';
       break;
     case 'password':
+      // checks to see if the user input is at least 6 characters long
       passwordValid = value.length >= 6;
       fieldValidationErrors.password = passwordValid ? '' : ' is too short.';
       break;
