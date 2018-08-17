@@ -25,7 +25,7 @@ class NavigationBar extends React.Component {
               authed ? (
                 <Link to='/map' className='navbar-brand' id='navbar-brand-text'>Fix That <span className='brand-bold'>Pothole</span></Link>
               ) : (
-                <Link to='/login' className='navbar-brand' id='navbar-brand-text'>Fix That Pothole</Link>
+                <Link to='/login' className='navbar-brand' id='navbar-brand-text'>Fix That <span className='brand-bold'>Pothole</span></Link>
               )
             }
           </Navbar.Brand>
