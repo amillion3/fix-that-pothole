@@ -220,14 +220,21 @@ class MapMain extends React.Component {
         <div className='col-xs-12 menu-items'>
           <button
             type="button"
-            className = 'col-xs-5 btn btn-large btn-warning menu-items-btn'
+            className = 'col-xs-4 btn menu-items-btn'
             onMouseUp={this.eventAddNewPothole}>
             <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
               Add New Pothole
           </button>
           <button
             type="button"
-            className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
+            className = 'col-xs-4 btn menu-items-btn'
+            onMouseUp={this.eventAddNewPothole}>
+            <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
+              Use My Location
+          </button>
+          <button
+            type="button"
+            className = 'col-xs-4 btn btn-large btn-info menu-items-btn'
             onMouseUp={() => this.setState({showLegend: true})}>
             <span className="glyphicon glyphicon-list-alt" > </span>
               Legend
