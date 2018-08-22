@@ -1,6 +1,7 @@
 import React, { createRef} from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import Geolocation from 'react-geolocation';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
@@ -196,6 +197,25 @@ class MapMain extends React.Component {
           className='mappityMap'
           onClick={this.handleClick}
           style={this.state.style}>
+          <Geolocation
+            render={({
+              fetchingPosition,
+              position: { coords: { latitude, longitude } = {} } = {},
+              error,
+              getCurrentPosition
+            }) =>
+              <div>
+                <button onClick={getCurrentPosition}>Get Position</button>
+                {error &&
+                  <div>
+                    {error.message}
+                  </div>}
+                <pre>
+                  latitude: {latitude}
+                  longitude: {longitude}
+                </pre>
+              </div>}
+          />
           <TileLayer
             url={this.state.basemap}
             maxZoom={20}/>
