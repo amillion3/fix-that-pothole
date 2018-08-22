@@ -115,9 +115,9 @@ class MapMain extends React.Component {
     this.setState({showLegend: true});
   }
 
-  eventAddViaGeolocation = e => {
-    e.preventDefault();
-  }
+  eventAddViaGeolocate = () => {
+    this.addPointTrue();
+  };
 
   onDismiss = () => {
     this.setState({showAlert: false});
@@ -197,25 +197,6 @@ class MapMain extends React.Component {
           className='mappityMap'
           onClick={this.handleClick}
           style={this.state.style}>
-          <Geolocation
-            render={({
-              fetchingPosition,
-              position: { coords: { latitude, longitude } = {} } = {},
-              error,
-              getCurrentPosition
-            }) =>
-              <div>
-                <button onClick={getCurrentPosition}>Get Position</button>
-                {error &&
-                  <div>
-                    {error.message}
-                  </div>}
-                <pre>
-                  latitude: {latitude}
-                  longitude: {longitude}
-                </pre>
-              </div>}
-          />
           <TileLayer
             url={this.state.basemap}
             maxZoom={20}/>
@@ -250,13 +231,34 @@ class MapMain extends React.Component {
             <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
               Add New Pothole
           </button>
-          <button
+          {/* <button
             type="button"
             className = 'col-xs-4 btn menu-items-btn'
             onMouseUp={this.eventAddViaGeolocation}>
             <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
               Use My Location
-          </button>
+          </button> */}
+          <Geolocation
+            render={({
+              // fetchingPosition,
+              position: { coords: { latitude, longitude } = {} } = {},
+              // error,
+              getCurrentPosition,
+            }) =>
+              <button
+                type="button"
+                className='btn-geolocate col-xs-4 btn menu-items-btn'
+                onClick={() => {
+                  getCurrentPosition();
+                  this.setState({
+                    canAddPoint: true,
+                  });
+                }} >
+                {/* onClick={getCurrentPosition}> */}
+                <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
+                  Use My Position
+              </button>}
+          />
           <button
             type="button"
             className = 'col-xs-4 btn btn-large btn-info menu-items-btn'
