@@ -114,6 +114,10 @@ class MapMain extends React.Component {
     this.setState({showLegend: true});
   }
 
+  eventAddViaGeolocation = e => {
+    e.preventDefault();
+  }
+
   onDismiss = () => {
     this.setState({showAlert: false});
   }
@@ -161,6 +165,7 @@ class MapMain extends React.Component {
           key={pothole.id} />
       );
     });
+
     return (
       <div className='map-container'>
         <ModalAddPothole
@@ -228,7 +233,7 @@ class MapMain extends React.Component {
           <button
             type="button"
             className = 'col-xs-4 btn menu-items-btn'
-            onMouseUp={this.eventAddNewPothole}>
+            onMouseUp={this.eventAddViaGeolocation}>
             <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
               Use My Location
           </button>

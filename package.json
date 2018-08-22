@@ -13,7 +13,9 @@
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
+    "react-geolocation": "^1.0.4",
     "react-leaflet": "^1.9.1",
+    "react-leaflet-locate-control": "^0.1.5",
     "react-leaflet-markercluster": "^1.1.8",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4"
