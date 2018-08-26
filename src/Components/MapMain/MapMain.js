@@ -117,8 +117,20 @@ class MapMain extends React.Component {
     this.setState({showLegend: true});
   }
 
-  eventAddViaGeolocate = () => {
+  eventAddViaGeolocation = () => {
     this.addPointTrue();
+    const showPosition = (position) => {
+      this.setState({
+        mapCenterLng: position.coords.longitude,
+        mapCenterLat: position.coords.latitude,
+      });
+    };
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert('Geolocation not enabled');
+    }
+
   };
 
   onDismiss = () => {
@@ -233,14 +245,14 @@ class MapMain extends React.Component {
             <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
               Add New Pothole
           </button>
-          {/* <button
+          <button
             type="button"
             className = 'col-xs-4 btn menu-items-btn'
             onMouseUp={this.eventAddViaGeolocation}>
             <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
               Use My Location
-          </button> */}
-          <Geolocation
+          </button>
+          {/* <Geolocation
             render={({
               // fetchingPosition,
               position: {
@@ -267,11 +279,11 @@ class MapMain extends React.Component {
                     // mapCenterLng: {position: {coords: longitude}},
                   });
                 }} >
-                {/* onClick={getCurrentPosition}> */}
+                onClick={getCurrentPosition}>
                 <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
                   Use My Position
               </button>}
-          />
+          /> */}
           <button
             type="button"
             className = 'col-xs-4 btn btn-large btn-info menu-items-btn'
