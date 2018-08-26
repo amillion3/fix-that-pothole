@@ -1,12 +1,12 @@
 import React, { createRef} from 'react';
 import { Map, TileLayer } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import Geolocation from 'react-geolocation';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
 import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
 import ModalLegend from '../ModalLegend/ModalLegend';
+import GeolocationCircle from '../GeolocationCircle/GeolocationCircle';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import reverseGeocoding from '../geocodingRequests/reverseGeocoding';
@@ -21,6 +21,8 @@ class MapMain extends React.Component {
     this.state = {
       mapCenterLat: 36.1581592,
       mapCenterLng: -86.7703593,
+      circleLat: 0,
+      circleLng: 0,
       potholes: [],
       hasLocation: false,
       latlng: {
@@ -116,17 +118,20 @@ class MapMain extends React.Component {
     e.preventDefault();
     this.setState({showLegend: true});
   }
-
+  // takes lat/long and updates the state (the map center)
+  showPosition = (position) => {
+    console.log(position);
+    this.setState({
+      mapCenterLat: position.coords.latitude,
+      mapCenterLng: position.coords.longitude,
+      circleLat: position.coords.latitude,
+      circleLng: position.coords.longitude,
+    });
+  };
   eventAddViaGeolocation = () => {
     this.addPointTrue();
-    const showPosition = (position) => {
-      this.setState({
-        mapCenterLng: position.coords.longitude,
-        mapCenterLat: position.coords.latitude,
-      });
-    };
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
+      navigator.geolocation.getCurrentPosition(this.showPosition);
     } else {
       alert('Geolocation not enabled');
     }
@@ -210,13 +215,18 @@ class MapMain extends React.Component {
           id="Map"
           className='mappityMap'
           onClick={this.handleClick}
-          style={this.state.style} >
+          style={this.state.style}
+          useFlyTo={true} >
           <TileLayer
             url={this.state.basemap}
             maxZoom={20}/>
           <MarkerClusterGroup>
             {potholeComponents}
           </MarkerClusterGroup>
+          {/* <GeolocationCircle
+            circleLat={this.state.circleLat}
+            circleLng={this.state.circleLng}
+          ></GeolocationCircle> */}
           <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
             <button
               type="button"
@@ -252,38 +262,6 @@ class MapMain extends React.Component {
             <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
               Use My Location
           </button>
-          {/* <Geolocation
-            render={({
-              // fetchingPosition,
-              position: {
-                coords: {
-                  latitude, longitude,
-                } = {},
-              } = {},
-              // error,
-              getCurrentPosition = () => {
-                this.setState({
-                  mapCenterLat: {position: {coords: latitude}},
-                  mapCenterLng: {position: {coords: longitude}},
-                });
-              },
-            }) =>
-              <button
-                type="button"
-                className='btn-geolocate col-xs-4 btn menu-items-btn'
-                onClick={() => {
-                  getCurrentPosition();
-                  this.setState({
-                    canAddPoint: true,
-                    // mapCenterLat: {position: {coords: latitude}},
-                    // mapCenterLng: {position: {coords: longitude}},
-                  });
-                }} >
-                onClick={getCurrentPosition}>
-                <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
-                  Use My Position
-              </button>}
-          /> */}
           <button
             type="button"
             className = 'col-xs-4 btn btn-large btn-info menu-items-btn'
