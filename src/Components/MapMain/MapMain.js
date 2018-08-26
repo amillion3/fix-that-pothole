@@ -19,6 +19,8 @@ class MapMain extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
+      mapCenterLat: 36.1581592,
+      mapCenterLng: -86.7703593,
       potholes: [],
       hasLocation: false,
       latlng: {
@@ -186,7 +188,7 @@ class MapMain extends React.Component {
           bsStyle="success"
           className='alert-fade' />
         <Map
-          center={[36.1581592, -86.7703593]}
+          center={[this.state.mapCenterLat, this.state.mapCenterLng]}
           zoom={15}
           maxZoom={20}
           minZoom={2}
@@ -196,7 +198,7 @@ class MapMain extends React.Component {
           id="Map"
           className='mappityMap'
           onClick={this.handleClick}
-          style={this.state.style}>
+          style={this.state.style} >
           <TileLayer
             url={this.state.basemap}
             maxZoom={20}/>
@@ -241,9 +243,18 @@ class MapMain extends React.Component {
           <Geolocation
             render={({
               // fetchingPosition,
-              position: { coords: { latitude, longitude } = {} } = {},
+              position: {
+                coords: {
+                  latitude, longitude,
+                } = {},
+              } = {},
               // error,
-              getCurrentPosition,
+              getCurrentPosition = () => {
+                this.setState({
+                  mapCenterLat: {position: {coords: latitude}},
+                  mapCenterLng: {position: {coords: longitude}},
+                });
+              },
             }) =>
               <button
                 type="button"
@@ -252,6 +263,8 @@ class MapMain extends React.Component {
                   getCurrentPosition();
                   this.setState({
                     canAddPoint: true,
+                    // mapCenterLat: {position: {coords: latitude}},
+                    // mapCenterLng: {position: {coords: longitude}},
                   });
                 }} >
                 {/* onClick={getCurrentPosition}> */}
