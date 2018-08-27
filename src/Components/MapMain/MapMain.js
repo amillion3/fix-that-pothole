@@ -1,5 +1,5 @@
 import React, { createRef} from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, Circle } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
@@ -18,6 +18,11 @@ class MapMain extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
+      mapCenterLat: 36.1581592,
+      mapCenterLng: -86.7703593,
+      mapZoom: 15,
+      circleLat: 0,
+      circleLng: 0,
       potholes: [],
       hasLocation: false,
       latlng: {
@@ -26,6 +31,7 @@ class MapMain extends React.Component {
       tempPothole: {},
       basemap: '',
       collectedZoomLevel: 0,
+      collectedGeolocation: false,
       canAddPoint: false,
       style: {cursor: 'default'},
       showModal: false,
@@ -44,8 +50,10 @@ class MapMain extends React.Component {
     this.setState({style: {cursor: 'crosshair'}});
   };
   addPointFalse = () => {
-    this.setState({canAddPoint: false});
-    this.setState({style: {cursor: 'default'}});
+    this.setState({
+      canAddPoint: false,
+      style: {cursor: 'default'},
+    });
   };
 
   componentWillMount () {
@@ -53,8 +61,10 @@ class MapMain extends React.Component {
       .potholesGETAll()
       .then(potholes => {
         const {customNashville} = constants;
-        this.setState({basemap: customNashville});
-        this.setState({potholes});
+        this.setState({
+          basemap: customNashville,
+          potholes,
+        });
         // this.setState({potholes: potholes});  ES5 long form
       })
       .catch(err => console.error('Error with pothole get request: ', err));
@@ -83,6 +93,7 @@ class MapMain extends React.Component {
           potholeToAdd.id = Math.random();
           potholeToAdd.collectedBasemap = this.state.basemap;
           potholeToAdd.collectedZoomLevel = e.target._zoom;
+          potholeToAdd.collectedGeolocation = this.state.collectedGeolocation;
           potholeToAdd.displayAddress = incomingData;
           this.setState({tempPothole: potholeToAdd});
         })
@@ -113,6 +124,27 @@ class MapMain extends React.Component {
     e.preventDefault();
     this.setState({showLegend: true});
   }
+  // takes lat/long and updates the state (the map center)
+  showPosition = (position) => {
+    this.setState({
+      mapCenterLat: position.coords.latitude,
+      mapCenterLng: position.coords.longitude,
+      mapZoom: 19,
+      circleLat: position.coords.latitude,
+      circleLng: position.coords.longitude,
+    });
+  };
+  eventAddViaGeolocation = () => {
+    this.basemapSatelliteStreets();
+    this.setState({collectedGeolocation: true});
+    this.addPointTrue();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.showPosition);
+    } else {
+      alert('Geolocation not enabled');
+    }
+
+  };
 
   onDismiss = () => {
     this.setState({showAlert: false});
@@ -125,12 +157,22 @@ class MapMain extends React.Component {
       })
       .catch(err => console.error('Error with pothole get request after save: ', err));
     this.addPointFalse();
-    this.setState({showAlert: true});
-    this.setState({showModal: false});
+    this.setState({
+      showAlert: true,
+      showModal: false,
+      circleLat: 0,
+      circleLng: 0,
+      collectedGeolocation: false,
+    });
   }
   onCancelModal = () => {
     this.addPointFalse();
-    this.setState({showModal: false});
+    this.setState({
+      showModal: false,
+      circleLat: 0,
+      circleLng: 0,
+      collectedGeolocation: false,
+    });
   }
 
   // These control the basemaps used
@@ -161,6 +203,7 @@ class MapMain extends React.Component {
           key={pothole.id} />
       );
     });
+
     return (
       <div className='map-container'>
         <ModalAddPothole
@@ -180,8 +223,8 @@ class MapMain extends React.Component {
           bsStyle="success"
           className='alert-fade' />
         <Map
-          center={[36.1581592, -86.7703593]}
-          zoom={15}
+          center={[this.state.mapCenterLat, this.state.mapCenterLng]}
+          zoom={this.state.mapZoom}
           maxZoom={20}
           minZoom={2}
           length={4}
@@ -190,13 +233,18 @@ class MapMain extends React.Component {
           id="Map"
           className='mappityMap'
           onClick={this.handleClick}
-          style={this.state.style}>
+          style={this.state.style}
+          useFlyTo={true} >
           <TileLayer
             url={this.state.basemap}
             maxZoom={20}/>
           <MarkerClusterGroup>
             {potholeComponents}
           </MarkerClusterGroup>
+          <Circle
+            center = {[this.state.circleLat, this.state.circleLng]}
+            radius = {60}
+          ></Circle>
           <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
             <button
               type="button"
@@ -220,14 +268,21 @@ class MapMain extends React.Component {
         <div className='col-xs-12 menu-items'>
           <button
             type="button"
-            className = 'col-xs-5 btn btn-large btn-warning menu-items-btn'
+            className = 'col-xs-4 btn menu-items-btn'
             onMouseUp={this.eventAddNewPothole}>
             <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
               Add New Pothole
           </button>
           <button
             type="button"
-            className = 'col-xs-5 col-xs-offset-2 btn btn-large btn-info menu-items-btn'
+            className = 'col-xs-4 btn menu-items-btn'
+            onMouseUp={this.eventAddViaGeolocation}>
+            <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
+              Use My Location
+          </button>
+          <button
+            type="button"
+            className = 'col-xs-4 btn btn-large btn-info menu-items-btn'
             onMouseUp={() => this.setState({showLegend: true})}>
             <span className="glyphicon glyphicon-list-alt" > </span>
               Legend

@@ -15,8 +15,10 @@ class DashModal extends React.Component {
   };
 
   handleCoordinates = (a, b) => {
-    this.setState({lat: a});
-    this.setState({long: b});
+    this.setState({
+      lat: a,
+      long: b,
+    });
   }
 
   render () {

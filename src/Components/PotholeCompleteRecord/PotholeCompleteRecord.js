@@ -61,8 +61,10 @@ class PotholeCompleteRecord extends React.Component {
   };
 
   onDismiss = () => {
-    this.setState({showAlertDeleted: false});
-    this.setState({showAlertUpdated: false});
+    this.setState({
+      showAlertDeleted: false,
+      showAlertUpdated: false,
+    });
     this.props.history.push(`/dashboard`);
   }
 
@@ -78,8 +80,10 @@ class PotholeCompleteRecord extends React.Component {
       potholeRequests
         .potholeDELETE(firebaseId)
         .then(() => {
-          this.setState({isEditing: false});
-          this.setState({showAlertDeleted: true});
+          this.setState({
+            isEditing: false,
+            showAlertDeleted: true,
+          });
         })
         .catch(err => console.error('Error during delete: ', err));
     };
@@ -88,8 +92,10 @@ class PotholeCompleteRecord extends React.Component {
       potholeRequests
         .potholeGETSingle(firebaseId)
         .then(response => {
-          this.setState(response);
-          this.setState({isEditing: false});
+          this.setState({
+            isEditing: false,
+            response,
+          });
         })
         .then(() => {
           this.props.history.push(`/dashboard`);
@@ -101,8 +107,10 @@ class PotholeCompleteRecord extends React.Component {
       potholeRequests
         .potholePUT(firebaseId, this.state)
         .then(() => {
-          this.setState({isEditing: false});
-          this.setState({showAlertUpdated: true});
+          this.setState({
+            isEditing: false,
+            showAlertUpdated: true,
+          });
         })
         .catch(err => console.error('Error during update: ', err));
     };
@@ -135,6 +143,9 @@ class PotholeCompleteRecord extends React.Component {
                   <p><span className="complete-pothole-attribute">Address Description:</span> {p.displayAddress}</p>
                   <p><span className="complete-pothole-attribute">Latitude:</span> {p.coordLat}</p>
                   <p><span className="complete-pothole-attribute">Longitude:</span> {p.coordLong}</p>
+                  <p><span className="complete-pothole-attribute">Basemap:</span> {p.collectedBasemap}</p>
+                  <p><span className="complete-pothole-attribute">Zoom Level:</span> {p.collectedZoomLevel}</p>
+                  <p><span className="complete-pothole-attribute">Geolocation used?</span> {JSON.stringify(p.collectedGeolocation)}</p>
                   <p><span className="complete-pothole-attribute">Streetview:</span>
                     <a href={`
                       http://maps.google.com/maps?q=&layer=c&cbll=
@@ -144,7 +155,7 @@ class PotholeCompleteRecord extends React.Component {
                       <button
                         type="button"
                         className="btn" >
-                        <span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                        <span className="glyphicon glyphicon-camera" aria-hidden="true"> </span>
                         Streetview
                       </button>
                     </a>
@@ -277,7 +288,7 @@ class PotholeCompleteRecord extends React.Component {
                         onChange={this.changeDisplayAddress}/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="latitude">Latitude</label>
+                      <label htmlFor="latitude">Latitude:</label>
                       <input
                         type="text"
                         className="form-control"
@@ -286,7 +297,7 @@ class PotholeCompleteRecord extends React.Component {
                         onChange={this.changeLatitude}/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="longitude">Longitude</label>
+                      <label htmlFor="longitude">Longitude:</label>
                       <input
                         type="text"
                         className="form-control"
@@ -294,6 +305,35 @@ class PotholeCompleteRecord extends React.Component {
                         value={p.coordLong}
                         onChange={this.changeLongitude}/>
                     </div>
+
+                    <div className="form-group">
+                      <label htmlFor="updatedUserId">Basemap:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="collectedBasemap"
+                        value={p.collectedBasemap}
+                        readOnly/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="updatedUserId">Zoom Level:</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="zoomLevel"
+                        value={p.collectedZoomLevel}
+                        readOnly/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="updatedUserId">Geolocation Used?</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="geolocationUsed"
+                        value={p.collectedGeolocation}
+                        readOnly/>
+                    </div>
+
                   </form>
                   <div className='col-xs-6'>
                     <button

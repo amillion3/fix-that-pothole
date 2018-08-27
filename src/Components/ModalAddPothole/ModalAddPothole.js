@@ -12,13 +12,17 @@ class ModalAddPothole extends React.Component {
   }
 
   componentWillReceiveProps () {
-    this.setState({modalTempPothole: this.props.tempPothole});
-    this.setState({showModal: this.props.showModal});
+    this.setState({
+      modalTempPothole: this.props.tempPothole,
+      showModal: this.props.showModal,
+    });
   }
 
   modalBtnCancel = () => {
-    this.setState({modalTempPothole: {}});
-    this.setState({showModal: false});
+    this.setState({
+      modalTempPothole: {},
+      showModal: false,
+    });
     this.props.onCancelModal();
   };
   modalBtnSave = () => {
