@@ -1,12 +1,11 @@
 import React, { createRef} from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import { Map, TileLayer, Circle } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
 import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
 import ModalLegend from '../ModalLegend/ModalLegend';
-import GeolocationCircle from '../GeolocationCircle/GeolocationCircle';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import reverseGeocoding from '../geocodingRequests/reverseGeocoding';
@@ -21,6 +20,7 @@ class MapMain extends React.Component {
     this.state = {
       mapCenterLat: 36.1581592,
       mapCenterLng: -86.7703593,
+      mapZoom: 15,
       circleLat: 0,
       circleLng: 0,
       potholes: [],
@@ -124,11 +124,13 @@ class MapMain extends React.Component {
     this.setState({
       mapCenterLat: position.coords.latitude,
       mapCenterLng: position.coords.longitude,
+      mapZoom: 19,
       circleLat: position.coords.latitude,
       circleLng: position.coords.longitude,
     });
   };
   eventAddViaGeolocation = () => {
+    this.basemapSatelliteStreets();
     this.addPointTrue();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
@@ -149,12 +151,20 @@ class MapMain extends React.Component {
       })
       .catch(err => console.error('Error with pothole get request after save: ', err));
     this.addPointFalse();
-    this.setState({showAlert: true});
-    this.setState({showModal: false});
+    this.setState({
+      showAlert: true,
+      showModal: false,
+      circleLat: 0,
+      circleLng: 0,
+    });
   }
   onCancelModal = () => {
     this.addPointFalse();
-    this.setState({showModal: false});
+    this.setState({
+      showModal: false,
+      circleLat: 0,
+      circleLng: 0,
+    });
   }
 
   // These control the basemaps used
@@ -206,7 +216,7 @@ class MapMain extends React.Component {
           className='alert-fade' />
         <Map
           center={[this.state.mapCenterLat, this.state.mapCenterLng]}
-          zoom={15}
+          zoom={this.state.mapZoom}
           maxZoom={20}
           minZoom={2}
           length={4}
@@ -223,10 +233,10 @@ class MapMain extends React.Component {
           <MarkerClusterGroup>
             {potholeComponents}
           </MarkerClusterGroup>
-          {/* <GeolocationCircle
-            circleLat={this.state.circleLat}
-            circleLng={this.state.circleLng}
-          ></GeolocationCircle> */}
+          <Circle
+            center = {[this.state.circleLat, this.state.circleLng]}
+            radius = {60}
+          ></Circle>
           <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
             <button
               type="button"
