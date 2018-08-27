@@ -61,8 +61,10 @@ class PotholeCompleteRecord extends React.Component {
   };
 
   onDismiss = () => {
-    this.setState({showAlertDeleted: false});
-    this.setState({showAlertUpdated: false});
+    this.setState({
+      showAlertDeleted: false,
+      showAlertUpdated: false,
+    });
     this.props.history.push(`/dashboard`);
   }
 
@@ -78,8 +80,10 @@ class PotholeCompleteRecord extends React.Component {
       potholeRequests
         .potholeDELETE(firebaseId)
         .then(() => {
-          this.setState({isEditing: false});
-          this.setState({showAlertDeleted: true});
+          this.setState({
+            isEditing: false,
+            showAlertDeleted: true,
+          });
         })
         .catch(err => console.error('Error during delete: ', err));
     };
@@ -88,8 +92,10 @@ class PotholeCompleteRecord extends React.Component {
       potholeRequests
         .potholeGETSingle(firebaseId)
         .then(response => {
-          this.setState(response);
-          this.setState({isEditing: false});
+          this.setState({
+            isEditing: false,
+            response,
+          });
         })
         .then(() => {
           this.props.history.push(`/dashboard`);
@@ -101,8 +107,10 @@ class PotholeCompleteRecord extends React.Component {
       potholeRequests
         .potholePUT(firebaseId, this.state)
         .then(() => {
-          this.setState({isEditing: false});
-          this.setState({showAlertUpdated: true});
+          this.setState({
+            isEditing: false,
+            showAlertUpdated: true,
+          });
         })
         .catch(err => console.error('Error during update: ', err));
     };

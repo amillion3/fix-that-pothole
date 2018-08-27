@@ -31,6 +31,7 @@ class MapMain extends React.Component {
       tempPothole: {},
       basemap: '',
       collectedZoomLevel: 0,
+      collectedGeolocation: false,
       canAddPoint: false,
       style: {cursor: 'default'},
       showModal: false,
@@ -49,8 +50,10 @@ class MapMain extends React.Component {
     this.setState({style: {cursor: 'crosshair'}});
   };
   addPointFalse = () => {
-    this.setState({canAddPoint: false});
-    this.setState({style: {cursor: 'default'}});
+    this.setState({
+      canAddPoint: false,
+      style: {cursor: 'default'},
+    });
   };
 
   componentWillMount () {
@@ -58,8 +61,10 @@ class MapMain extends React.Component {
       .potholesGETAll()
       .then(potholes => {
         const {customNashville} = constants;
-        this.setState({basemap: customNashville});
-        this.setState({potholes});
+        this.setState({
+          basemap: customNashville,
+          potholes,
+        });
         // this.setState({potholes: potholes});  ES5 long form
       })
       .catch(err => console.error('Error with pothole get request: ', err));
@@ -88,6 +93,7 @@ class MapMain extends React.Component {
           potholeToAdd.id = Math.random();
           potholeToAdd.collectedBasemap = this.state.basemap;
           potholeToAdd.collectedZoomLevel = e.target._zoom;
+          potholeToAdd.collectedGeolocation = this.state.collectedGeolocation;
           potholeToAdd.displayAddress = incomingData;
           this.setState({tempPothole: potholeToAdd});
         })
@@ -120,7 +126,6 @@ class MapMain extends React.Component {
   }
   // takes lat/long and updates the state (the map center)
   showPosition = (position) => {
-    console.log(position);
     this.setState({
       mapCenterLat: position.coords.latitude,
       mapCenterLng: position.coords.longitude,
@@ -131,6 +136,7 @@ class MapMain extends React.Component {
   };
   eventAddViaGeolocation = () => {
     this.basemapSatelliteStreets();
+    this.setState({collectedGeolocation: true});
     this.addPointTrue();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
@@ -156,6 +162,7 @@ class MapMain extends React.Component {
       showModal: false,
       circleLat: 0,
       circleLng: 0,
+      collectedGeolocation: false,
     });
   }
   onCancelModal = () => {
@@ -164,6 +171,7 @@ class MapMain extends React.Component {
       showModal: false,
       circleLat: 0,
       circleLng: 0,
+      collectedGeolocation: false,
     });
   }
 
