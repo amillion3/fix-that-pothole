@@ -4,6 +4,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
+import AlertGeolocation from '../AlertGeolocation/AlertGeolocation';
 import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
 import ModalLegend from '../ModalLegend/ModalLegend';
 
@@ -36,6 +37,7 @@ class MapMain extends React.Component {
       style: {cursor: 'default'},
       showModal: false,
       showAlert: false,
+      showGeolocationAlert: false,
       showLegend: false,
       showStreet: false,
     };
@@ -136,7 +138,10 @@ class MapMain extends React.Component {
   };
   eventAddViaGeolocation = () => {
     this.basemapSatelliteStreets();
-    this.setState({collectedGeolocation: true});
+    this.setState({
+      collectedGeolocation: true,
+      AlertGeolocation: true,
+    });
     this.addPointTrue();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
@@ -147,7 +152,10 @@ class MapMain extends React.Component {
   };
 
   onDismiss = () => {
-    this.setState({showAlert: false});
+    this.setState({
+      showAlert: false,
+      showGeolocationAlert: false,
+    });
   }
   onSaveModal = () => {
     potholeRequests
@@ -221,6 +229,12 @@ class MapMain extends React.Component {
           showAlert={this.state.showAlert}
           onDismiss={this.onDismiss}
           bsStyle="success"
+          className='alert-fade' />
+        <AlertGeolocation
+          alertText="Geolocation enabled. Please click/tap on the specific pothole location."
+          showAlert={this.state.showGeolocationAlert}
+          onDismiss={this.onDismiss}
+          bsStyle="warning"
           className='alert-fade' />
         <Map
           center={[this.state.mapCenterLat, this.state.mapCenterLng]}
