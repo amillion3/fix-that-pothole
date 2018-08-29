@@ -4,7 +4,7 @@ import {Alert, Button} from 'react-bootstrap';
 
 import './AlertGeolocation.css';
 
-class Alerts extends React.Component {
+class AlertGeolocation extends React.Component {
   render () {
     const { alertText, showAlert, onDismiss, bsStyle } = this.props;
     if (showAlert) {
@@ -28,10 +28,10 @@ class Alerts extends React.Component {
   }
 }
 
-Alerts.propTypes = {
+AlertGeolocation.propTypes = {
   alertText: PropTypes.string.isRequired,
   showAlert: PropTypes.bool.isRequired,
   onDismiss: PropTypes.func.isRequired,
 };
 
-export default Alerts;
+export default AlertGeolocation;

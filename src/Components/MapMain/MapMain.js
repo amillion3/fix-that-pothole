@@ -24,6 +24,7 @@ class MapMain extends React.Component {
       mapZoom: 15,
       circleLat: 0,
       circleLng: 0,
+      circleRad: 0,
       potholes: [],
       hasLocation: false,
       latlng: {
@@ -66,8 +67,8 @@ class MapMain extends React.Component {
         this.setState({
           basemap: customNashville,
           potholes,
+          // this.setState({potholes: potholes});  ES5 long form
         });
-        // this.setState({potholes: potholes});  ES5 long form
       })
       .catch(err => console.error('Error with pothole get request: ', err));
   }
@@ -128,12 +129,14 @@ class MapMain extends React.Component {
   }
   // takes lat/long and updates the state (the map center)
   showPosition = (position) => {
+    console.log(position);
     this.setState({
       mapCenterLat: position.coords.latitude,
       mapCenterLng: position.coords.longitude,
       mapZoom: 19,
       circleLat: position.coords.latitude,
       circleLng: position.coords.longitude,
+      circleRad: position.coords.accuracy,
     });
   };
   eventAddViaGeolocation = () => {
@@ -257,7 +260,7 @@ class MapMain extends React.Component {
           </MarkerClusterGroup>
           <Circle
             center = {[this.state.circleLat, this.state.circleLng]}
-            radius = {60}
+            radius = {this.state.circleRad}
           ></Circle>
           <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
             <button
