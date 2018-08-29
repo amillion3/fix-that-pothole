@@ -143,7 +143,7 @@ class MapMain extends React.Component {
     this.basemapSatelliteStreets();
     this.setState({
       collectedGeolocation: true,
-      AlertGeolocation: true,
+      showGeolocationAlert: true,
     });
     this.addPointTrue();
     if (navigator.geolocation) {
@@ -234,7 +234,7 @@ class MapMain extends React.Component {
           bsStyle="success"
           className='alert-fade' />
         <AlertGeolocation
-          alertText="Geolocation enabled. Please click/tap on the specific pothole location."
+          alertText="Geolocation enabled. After a moment, please click/tap on the map to identify the pothole."
           showAlert={this.state.showGeolocationAlert}
           onDismiss={this.onDismiss}
           bsStyle="warning"
