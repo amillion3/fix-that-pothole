@@ -4,6 +4,7 @@ import MarkerClusterGroup from 'react-leaflet-markercluster';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
+import AlertGeolocation from '../AlertGeolocation/AlertGeolocation';
 import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
 import ModalLegend from '../ModalLegend/ModalLegend';
 
@@ -23,6 +24,7 @@ class MapMain extends React.Component {
       mapZoom: 15,
       circleLat: 0,
       circleLng: 0,
+      circleRad: 0,
       potholes: [],
       hasLocation: false,
       latlng: {
@@ -36,6 +38,7 @@ class MapMain extends React.Component {
       style: {cursor: 'default'},
       showModal: false,
       showAlert: false,
+      showGeolocationAlert: false,
       showLegend: false,
       showStreet: false,
     };
@@ -64,8 +67,8 @@ class MapMain extends React.Component {
         this.setState({
           basemap: customNashville,
           potholes,
+          // this.setState({potholes: potholes});  ES5 long form
         });
-        // this.setState({potholes: potholes});  ES5 long form
       })
       .catch(err => console.error('Error with pothole get request: ', err));
   }
@@ -126,17 +129,22 @@ class MapMain extends React.Component {
   }
   // takes lat/long and updates the state (the map center)
   showPosition = (position) => {
+    console.log(position);
     this.setState({
       mapCenterLat: position.coords.latitude,
       mapCenterLng: position.coords.longitude,
       mapZoom: 19,
       circleLat: position.coords.latitude,
       circleLng: position.coords.longitude,
+      circleRad: position.coords.accuracy,
     });
   };
   eventAddViaGeolocation = () => {
     this.basemapSatelliteStreets();
-    this.setState({collectedGeolocation: true});
+    this.setState({
+      collectedGeolocation: true,
+      showGeolocationAlert: true,
+    });
     this.addPointTrue();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);
@@ -147,7 +155,10 @@ class MapMain extends React.Component {
   };
 
   onDismiss = () => {
-    this.setState({showAlert: false});
+    this.setState({
+      showAlert: false,
+      showGeolocationAlert: false,
+    });
   }
   onSaveModal = () => {
     potholeRequests
@@ -222,6 +233,12 @@ class MapMain extends React.Component {
           onDismiss={this.onDismiss}
           bsStyle="success"
           className='alert-fade' />
+        <AlertGeolocation
+          alertText="Geolocation enabled. After a moment, please click/tap on the map to identify the pothole."
+          showAlert={this.state.showGeolocationAlert}
+          onDismiss={this.onDismiss}
+          bsStyle="warning"
+          className='alert-fade' />
         <Map
           center={[this.state.mapCenterLat, this.state.mapCenterLng]}
           zoom={this.state.mapZoom}
@@ -243,7 +260,7 @@ class MapMain extends React.Component {
           </MarkerClusterGroup>
           <Circle
             center = {[this.state.circleLat, this.state.circleLng]}
-            radius = {60}
+            radius = {this.state.circleRad}
           ></Circle>
           <div className="btn-group" id="basemap-buttons" role="group" aria-label="">
             <button

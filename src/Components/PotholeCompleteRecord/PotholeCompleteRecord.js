@@ -154,7 +154,7 @@ class PotholeCompleteRecord extends React.Component {
                     `} target="_blank">
                       <button
                         type="button"
-                        className="btn" >
+                        className="btn street-view" >
                         <span className="glyphicon glyphicon-camera" aria-hidden="true"> </span>
                         Streetview
                       </button>
