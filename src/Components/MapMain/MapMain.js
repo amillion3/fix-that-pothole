@@ -128,8 +128,8 @@ class MapMain extends React.Component {
     this.setState({showLegend: true});
   }
   // takes lat/long and updates the state (the map center)
-  showPosition = (position) => {
-    console.log(position);
+  showPosition = position => {
+    console.log('position', position);
     this.setState({
       mapCenterLat: position.coords.latitude,
       mapCenterLng: position.coords.longitude,
@@ -140,30 +140,49 @@ class MapMain extends React.Component {
     });
   };
   eventAddViaGeolocation = () => {
-    navigator.permissions.query({name: 'geolocation'})
-      .then(result => {
-        while (result.state === 'prompt') {
-
-        }
-        console.log(result.state);
-        if (result.state === 'granted') {
-          console.log('granted');
-        } else if (result.state === 'denied') {
-          console.log('denied');
-        }
-      });
-    if (navigator.geolocation) {
-      console.log('true', navigator);
-      this.basemapSatelliteStreets();
-      this.setState({
-        collectedGeolocation: true,
-        showGeolocationAlert: true,
-      });
-      this.addPointTrue();
-      navigator.geolocation.getCurrentPosition(this.showPosition);
+    if ("geolocation" in navigator) {
+      // check if geolocation enabled
+      navigator.geolocation.getCurrentPosition(() => {
+        this.basemapSatelliteStreets();
+        this.setState({
+          collectedGeolocation: true,
+          showGeolocationAlert: true,
+        });
+        this.addPointTrue();
+        navigator.geolocation.getCurrentPosition(this.showPosition);
+      },
+      function error (err) {
+        // geolocation error(s)
+        console.error('An error has occured while retrieving location', err);
+      }
+      );
     } else {
-      alert('Geolocation not enabled');
+      // geolocation is not supported
+      // get your location some other way
+      console.log('geolocation is not enabled on this browser');
     }
+
+    // navigator.permissions.query({name: 'geolocation'})
+    //   .then(result => {
+    //     console.log(result.state);
+    //     if (result.state === 'granted') {
+    //       console.log('granted');
+    //     } else if (result.state === 'denied') {
+    //       console.log('denied');
+    //     }
+    //   });
+    // if (navigator.geolocation) {
+    //   console.log('true', navigator);
+    //   this.basemapSatelliteStreets();
+    //   this.setState({
+    //     collectedGeolocation: true,
+    //     showGeolocationAlert: true,
+    //   });
+    //   this.addPointTrue();
+    //   navigator.geolocation.getCurrentPosition(this.showPosition);
+    // } else {
+    //   alert('Geolocation not enabled');
+    // }
   };
 
   onDismiss = () => {
