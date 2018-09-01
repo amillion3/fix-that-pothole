@@ -140,18 +140,30 @@ class MapMain extends React.Component {
     });
   };
   eventAddViaGeolocation = () => {
-    this.basemapSatelliteStreets();
-    this.setState({
-      collectedGeolocation: true,
-      showGeolocationAlert: true,
-    });
-    this.addPointTrue();
+    navigator.permissions.query({name: 'geolocation'})
+      .then(result => {
+        while (result.state === 'prompt') {
+
+        }
+        console.log(result.state);
+        if (result.state === 'granted') {
+          console.log('granted');
+        } else if (result.state === 'denied') {
+          console.log('denied');
+        }
+      });
     if (navigator.geolocation) {
+      console.log('true', navigator);
+      this.basemapSatelliteStreets();
+      this.setState({
+        collectedGeolocation: true,
+        showGeolocationAlert: true,
+      });
+      this.addPointTrue();
       navigator.geolocation.getCurrentPosition(this.showPosition);
     } else {
       alert('Geolocation not enabled');
     }
-
   };
 
   onDismiss = () => {
