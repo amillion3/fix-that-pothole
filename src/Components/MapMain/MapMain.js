@@ -146,9 +146,12 @@ class MapMain extends React.Component {
         this.basemapSatelliteStreets();
         this.setState({
           collectedGeolocation: true,
-          showGeolocationAlert: true,
+          // showGeolocationAlert: true,
         });
         this.addPointTrue();
+        navigator.geolocation.getCurrentPosition(results => {
+          console.log('geolocation', results);
+        });
         navigator.geolocation.getCurrentPosition(this.showPosition);
       },
       function error (err) {
