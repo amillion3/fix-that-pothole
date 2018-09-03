@@ -142,17 +142,14 @@ class MapMain extends React.Component {
   eventAddViaGeolocation = () => {
     if ("geolocation" in navigator) {
       // check if geolocation enabled
-      navigator.geolocation.getCurrentPosition(() => {
+      navigator.geolocation.getCurrentPosition(position => {
         this.basemapSatelliteStreets();
+        this.addPointTrue();
         this.setState({
           collectedGeolocation: true,
-          // showGeolocationAlert: true,
+          showGeolocationAlert: true,
         });
-        this.addPointTrue();
-        navigator.geolocation.getCurrentPosition(results => {
-          console.log('geolocation', results);
-        });
-        navigator.geolocation.getCurrentPosition(this.showPosition);
+        this.showPosition(position);
       },
       function error (err) {
         // geolocation error(s)
