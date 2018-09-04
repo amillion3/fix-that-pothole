@@ -159,30 +159,8 @@ class MapMain extends React.Component {
     } else {
       // geolocation is not supported
       // get your location some other way
-      console.log('geolocation is not enabled on this browser');
+      console.log('Geolocation is not enabled on this browser');
     }
-
-    // navigator.permissions.query({name: 'geolocation'})
-    //   .then(result => {
-    //     console.log(result.state);
-    //     if (result.state === 'granted') {
-    //       console.log('granted');
-    //     } else if (result.state === 'denied') {
-    //       console.log('denied');
-    //     }
-    //   });
-    // if (navigator.geolocation) {
-    //   console.log('true', navigator);
-    //   this.basemapSatelliteStreets();
-    //   this.setState({
-    //     collectedGeolocation: true,
-    //     showGeolocationAlert: true,
-    //   });
-    //   this.addPointTrue();
-    //   navigator.geolocation.getCurrentPosition(this.showPosition);
-    // } else {
-    //   alert('Geolocation not enabled');
-    // }
   };
 
   onDismiss = () => {
@@ -265,7 +243,7 @@ class MapMain extends React.Component {
           bsStyle="success"
           className='alert-fade' />
         <AlertGeolocation
-          alertText="Geolocation enabled. After a moment, please click/tap on the map to identify the pothole."
+          alertText="Geolocation enabled. After the map zooms to your location, please click/tap on the map to identify the pothole."
           showAlert={this.state.showGeolocationAlert}
           onDismiss={this.onDismiss}
           bsStyle="warning"

@@ -10,13 +10,13 @@ class AlertGeolocation extends React.Component {
     if (showAlert) {
       return (
         <Alert
-          className="mp-alert col-sm-6 col-sm-offset-3 col-xs-12"
+          className="mp-alert col-sm-8 col-sm-offset-2 col-xs-offset-1 col-xs-10"
           bsStyle={bsStyle}>
           <div className="row">
-            <div className="col-sm-8 text-left">
+            <div className="col-xs-12 col-sm-offset-1 col-sm-10 text-left">
               { alertText }
             </div>
-            <div className="col-sm-4 text-right">
+            <div className="col-xs-12 col-sm-1 text-center alert-button">
               <Button onClick={onDismiss}>&times;</Button>
             </div>
           </div>

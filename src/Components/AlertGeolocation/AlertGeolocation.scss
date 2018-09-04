@@ -1,12 +1,11 @@
-
-#currentAlert {
-  margin: 0 10% 0 10%;
-  z-index: 10;
-  overflow: hidden;
-  position: relative;
-}
-
 .mp-alert {
   position: absolute;
   z-index: 1000;
+  margin: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.alert-button {
+  margin-top: 15px;
 }
