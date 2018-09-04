@@ -128,8 +128,8 @@ class MapMain extends React.Component {
     this.setState({showLegend: true});
   }
   // takes lat/long and updates the state (the map center)
-  showPosition = (position) => {
-    console.log(position);
+  showPosition = position => {
+    console.log('position', position);
     this.setState({
       mapCenterLat: position.coords.latitude,
       mapCenterLng: position.coords.longitude,
@@ -140,18 +140,27 @@ class MapMain extends React.Component {
     });
   };
   eventAddViaGeolocation = () => {
-    this.basemapSatelliteStreets();
-    this.setState({
-      collectedGeolocation: true,
-      showGeolocationAlert: true,
-    });
-    this.addPointTrue();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.showPosition);
+    if ("geolocation" in navigator) {
+      // check if geolocation enabled
+      navigator.geolocation.getCurrentPosition(position => {
+        this.basemapSatelliteStreets();
+        this.addPointTrue();
+        this.setState({
+          collectedGeolocation: true,
+          showGeolocationAlert: true,
+        });
+        this.showPosition(position);
+      },
+      function error (err) {
+        // geolocation error(s)
+        console.error('An error has occured while retrieving location', err);
+      }
+      );
     } else {
-      alert('Geolocation not enabled');
+      // geolocation is not supported
+      // get your location some other way
+      console.log('Geolocation is not enabled on this browser');
     }
-
   };
 
   onDismiss = () => {
@@ -234,7 +243,7 @@ class MapMain extends React.Component {
           bsStyle="success"
           className='alert-fade' />
         <AlertGeolocation
-          alertText="Geolocation enabled. After a moment, please click/tap on the map to identify the pothole."
+          alertText="Geolocation enabled. After the map zooms to your location, please click/tap on the map to identify the pothole."
           showAlert={this.state.showGeolocationAlert}
           onDismiss={this.onDismiss}
           bsStyle="warning"
