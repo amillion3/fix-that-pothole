@@ -13,7 +13,7 @@ class GenerateMarkers extends React.Component {
       if (details.status === 'Newly Added') {
         return (
           new Icon({
-            iconUrl: ('https://www.andymillion.com/fix-that-pothole/red.svg'),
+            iconUrl: ('https://www.sandersbroscoffee.com/fix-that-pothole/red.svg'),
             iconSize: [32, 32],
             iconAnchor: [16, 32],
           })
@@ -21,7 +21,7 @@ class GenerateMarkers extends React.Component {
       } else if (details.status === 'Pothole Assigned') {
         return (
           new Icon({
-            iconUrl: ('https://www.andymillion.com/fix-that-pothole/purple.svg'),
+            iconUrl: ('https://www.sandersbroscoffee.com/fix-that-pothole/purple.svg'),
             iconSize: [32, 32],
             iconAnchor: [16, 32],
           })
@@ -29,7 +29,7 @@ class GenerateMarkers extends React.Component {
       } else if (details.status === 'Pothole Fixed') {
         return (
           new Icon({
-            iconUrl: ('https://www.andymillion.com/fix-that-pothole/orange.svg'),
+            iconUrl: ('https://www.sandersbroscoffee.com/fix-that-pothole/orange.svg'),
             iconSize: [32, 32],
             iconAnchor: [16, 32],
           })
@@ -37,7 +37,7 @@ class GenerateMarkers extends React.Component {
       } else {
         return (
           new Icon({
-            iconUrl: ('https://www.andymillion.com/fix-that-pothole/yellow.svg'),
+            iconUrl: ('https://www.sandersbroscoffee.com/fix-that-pothole/yellow.svg'),
             iconSize: [32, 32],
             iconAnchor: [16, 32],
           })

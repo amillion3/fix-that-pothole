@@ -129,11 +129,32 @@ class MapMain extends React.Component {
   }
   // takes lat/long and updates the state (the map center)
   showPosition = position => {
-    console.log('position', position);
+    const accuracy = position.coords.accuracy;
+    let zoomBasedOnAccuracy = 19;
+    if (accuracy <= 40) {
+      zoomBasedOnAccuracy = 20;
+    } else if (accuracy <= 80) {
+      zoomBasedOnAccuracy = 19;
+    } else if (accuracy <= 150) {
+      zoomBasedOnAccuracy = 18;
+    } else if (accuracy <= 220) {
+      zoomBasedOnAccuracy = 17.5;
+    } else if (accuracy <= 400) {
+      zoomBasedOnAccuracy = 17;
+    } else if (accuracy <= 600) {
+      zoomBasedOnAccuracy = 16.5;
+    } else if (accuracy <= 800) {
+      zoomBasedOnAccuracy = 16;
+    } else if (accuracy <= 1000) {
+      zoomBasedOnAccuracy = 15.5;
+    } else {
+      zoomBasedOnAccuracy = 15;
+    }
+
     this.setState({
       mapCenterLat: position.coords.latitude,
       mapCenterLng: position.coords.longitude,
-      mapZoom: 19,
+      mapZoom: zoomBasedOnAccuracy,
       circleLat: position.coords.latitude,
       circleLng: position.coords.longitude,
       circleRad: position.coords.accuracy,
