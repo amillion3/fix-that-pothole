@@ -135,24 +135,18 @@ class MapMain extends React.Component {
       zoomBasedOnAccuracy = 20;
     } else if (accuracy <= 80) {
       zoomBasedOnAccuracy = 19;
-    } else if (accuracy <= 120) {
+    } else if (accuracy <= 150) {
       zoomBasedOnAccuracy = 18;
-    } else if (accuracy <= 160) {
-      zoomBasedOnAccuracy = 17;
-    } else if (accuracy <= 200) {
-      zoomBasedOnAccuracy = 16;
-    } else if (accuracy <= 250) {
-      zoomBasedOnAccuracy = 15;
-    } else if (accuracy <= 300) {
-      zoomBasedOnAccuracy = 14;
+    } else if (accuracy <= 220) {
+      zoomBasedOnAccuracy = 17.5;
     } else if (accuracy <= 400) {
-      zoomBasedOnAccuracy = 13;
-    } else if (accuracy <= 500) {
-      zoomBasedOnAccuracy = 12;
+      zoomBasedOnAccuracy = 17;
     } else if (accuracy <= 600) {
-      zoomBasedOnAccuracy = 10;
-    } else if (accuracy <= 700) {
-      zoomBasedOnAccuracy = 10;
+      zoomBasedOnAccuracy = 16.5;
+    } else if (accuracy <= 800) {
+      zoomBasedOnAccuracy = 16;
+    } else if (accuracy <= 1000) {
+      zoomBasedOnAccuracy = 15.5;
     } else {
       zoomBasedOnAccuracy = 15;
     }
@@ -163,18 +157,7 @@ class MapMain extends React.Component {
       mapZoom: zoomBasedOnAccuracy,
       circleLat: position.coords.latitude,
       circleLng: position.coords.longitude,
-      // circleRad: position.coords.accuracy,
-      circleRad: 40,
-      // circleRad: 80,
-      // circleRad: 120,
-      // circleRad: 160,
-      // circleRad: 200,
-      // circleRad: 250,
-      // circleRad: 300,
-      // circleRad: 400,
-      // circleRad: 500,
-      // circleRad: 600,
-      // circleRad: 700,
+      circleRad: position.coords.accuracy,
     });
   };
   eventAddViaGeolocation = () => {

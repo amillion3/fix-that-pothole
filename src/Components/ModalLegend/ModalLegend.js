@@ -17,25 +17,25 @@ class ModalLegend extends React.Component {
         <div className='col-xs-12' id='container-legend'>
           <div className='red'>
             <img
-              src="https://www.andymillion.com/fix-that-pothole/red.svg"
+              src="https://www.sandersbroscoffee.com/fix-that-pothole/red.svg"
               className="marker-icon-legend" alt="Newly Added" />
             <h4 className="inline">Newly Added</h4>
           </div>
           <div className='purple'>
             <img
-              src="https://www.andymillion.com/fix-that-pothole/purple.svg"
+              src="https://www.sandersbroscoffee.com/fix-that-pothole/purple.svg"
               className="marker-icon-legend" alt="Pothole Assigned" />
             <h4 className="inline">Pothole Assigned</h4>
           </div>
           <div className='orange'>
             <img
-              src="https://www.andymillion.com/fix-that-pothole/orange.svg"
+              src="https://www.sandersbroscoffee.com/fix-that-pothole/orange.svg"
               className="marker-icon-legend" alt="Pothole Fixed" />
             <h4 className="inline">Pothole Fixed</h4>
           </div>
           <div className='yellow'>
             <img
-              src="https://www.andymillion.com/fix-that-pothole/yellow.svg"
+              src="https://www.sandersbroscoffee.com/fix-that-pothole/yellow.svg"
               className="marker-icon-legend" alt="Problem With Repair" />
             <h4 className="inline">Problem With Repair</h4>
           </div>
