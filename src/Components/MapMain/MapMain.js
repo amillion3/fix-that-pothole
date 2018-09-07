@@ -1,6 +1,7 @@
 import React, { createRef} from 'react';
 import { Map, TileLayer, Circle } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import {bubble as Menu} from 'react-burger-menu';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
@@ -247,6 +248,12 @@ class MapMain extends React.Component {
 
     return (
       <div className='map-container'>
+        <Menu>
+          <a id="home" className="menu-item" href="/">Home</a>
+          <a id="about" className="menu-item" href="/about">About</a>
+          <a id="contact" className="menu-item" href="/contact">Contact</a>
+          <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
+        </Menu>
         <ModalAddPothole
           showModal={this.state.showModal}
           tempPothole={this.state.tempPothole}
