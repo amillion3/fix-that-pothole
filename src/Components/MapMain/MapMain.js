@@ -249,10 +249,29 @@ class MapMain extends React.Component {
     return (
       <div className='map-container'>
         <Menu>
-          <a id="home" className="menu-item" href="/">Home</a>
-          <a id="about" className="menu-item" href="/about">About</a>
-          <a id="contact" className="menu-item" href="/contact">Contact</a>
-          <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
+          <div className='col-xs-12 menu-items'>
+            <button
+              type="button"
+              className = 'col-xs-12 btn menu-items-btn'
+              onMouseUp={this.eventAddNewPothole}>
+              <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+                Add New Pothole
+            </button>
+            <button
+              type="button"
+              className = 'col-xs-12 btn menu-items-btn'
+              onMouseUp={this.eventAddViaGeolocation}>
+              <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
+                Use My Location
+            </button>
+            <button
+              type="button"
+              className = 'col-xs-12 btn btn-large btn-info menu-items-btn'
+              onMouseUp={() => this.setState({showLegend: true})}>
+              <span className="glyphicon glyphicon-list-alt" > </span>
+                Legend
+            </button>
+          </div>
         </Menu>
         <ModalAddPothole
           showModal={this.state.showModal}
@@ -319,7 +338,7 @@ class MapMain extends React.Component {
             </button>
           </div>
         </Map>
-        <div className='col-xs-12 menu-items'>
+        {/* <div className='col-xs-12 menu-items'>
           <button
             type="button"
             className = 'col-xs-4 btn menu-items-btn'
@@ -341,7 +360,7 @@ class MapMain extends React.Component {
             <span className="glyphicon glyphicon-list-alt" > </span>
               Legend
           </button>
-        </div>
+        </div> */}
       </div>
     );
   }

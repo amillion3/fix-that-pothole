@@ -60,6 +60,22 @@
   padding: 7px;
 }
 
+// Color theme:
+// #17252A
+//    dark green/blue
+// #2B7A78
+//    medium teal
+// #3AAFA9
+//    teal
+// #DEF2F1
+//    light teal
+// #FEFFFF
+//    almost white
+
+.bm-menu {
+  background: #17252A;
+}
+
 @media screen and (max-width: 430px) {
 .menu-items-btn {
   font-size: 10px;
