@@ -27,6 +27,8 @@ class MapMain extends React.Component {
       circleLng: 0,
       circleRad: 0,
       potholes: [],
+      isLeftMenuOpen: false,
+      isRightMenuOpen: false,
       hasLocation: false,
       latlng: {
         lat: '',
@@ -237,6 +239,11 @@ class MapMain extends React.Component {
     }
   }
 
+  openLeftMenu = () => {
+    this.setState({isLeftMenuOpen: true});
+    return this.state.isLeftMenuOpen;
+  }
+
   render () {
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
@@ -248,8 +255,11 @@ class MapMain extends React.Component {
 
     return (
       <div className='map-container'>
-
-        <Menu>
+        <Menu
+          isOpen={this.state.isLeftMenuOpen}
+          customBurgerIcon={ false }
+          customCrossIcon={ false }
+        >
           <div className='col-xs-12 menu-items'>
             <button
               type="button"
@@ -337,8 +347,8 @@ class MapMain extends React.Component {
             <button
               type="button"
               className = 'col-xs-12 btn menu-items-btn'
-              onMouseUp={this.eventAddNewPothole}>
-              <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+              onMouseUp={this.openLeftMenu}>
+              <span className="glyphicon glyphicon-option-vertical" aria-hidden="true"> </span>
                 Action Items
             </button>
           </div>
