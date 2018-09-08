@@ -1,7 +1,7 @@
 import React, { createRef} from 'react';
 import { Map, TileLayer, Circle } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import {bubble as Menu} from 'react-burger-menu';
+import {stack as Menu} from 'react-burger-menu';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
@@ -248,6 +248,7 @@ class MapMain extends React.Component {
 
     return (
       <div className='map-container'>
+
         <Menu>
           <div className='col-xs-12 menu-items'>
             <button
@@ -263,13 +264,6 @@ class MapMain extends React.Component {
               onMouseUp={this.eventAddViaGeolocation}>
               <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
                 Use My Location
-            </button>
-            <button
-              type="button"
-              className = 'col-xs-12 btn btn-large btn-info menu-items-btn'
-              onMouseUp={() => this.setState({showLegend: true})}>
-              <span className="glyphicon glyphicon-list-alt" > </span>
-                Legend
             </button>
           </div>
         </Menu>
@@ -338,6 +332,26 @@ class MapMain extends React.Component {
             </button>
           </div>
         </Map>
+        <div className='buttons-action-top col-xs-12'>
+          <div className='button-action-top-left col-xs-6 col-sm-2'>
+            <button
+              type="button"
+              className = 'col-xs-12 btn menu-items-btn'
+              onMouseUp={this.eventAddNewPothole}>
+              <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+                Action Items
+            </button>
+          </div>
+          <div className='button-action-top-right col-xs-6 col-sm-offset-8 col-sm-2'>
+            <button
+              type="button"
+              className = 'col-xs-12 btn btn-large btn-info menu-items-btn'
+              onMouseUp={() => this.setState({showLegend: true})}>
+              <span className="glyphicon glyphicon-list-alt" > </span>
+                Legend
+            </button>
+          </div>
+        </div>
         {/* <div className='col-xs-12 menu-items'>
           <button
             type="button"
