@@ -1,13 +1,14 @@
 import React, { createRef} from 'react';
 import { Map, TileLayer, Circle } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import {stack as Menu} from 'react-burger-menu';
+import {stack as LeftMenu} from 'react-burger-menu';
+import {stack as RightMenu} from 'react-burger-menu';
 
 import GenerateMarkers from '../GenerateMarkers/GenerateMarkers';
 import Alerts from '../Alerts/Alerts';
 import AlertGeolocation from '../AlertGeolocation/AlertGeolocation';
 import ModalAddPothole from '../ModalAddPothole/ModalAddPothole';
-import ModalLegend from '../ModalLegend/ModalLegend';
+import Legend from '../Legend/Legend';
 
 import potholeRequests from '../../firebaseRequests/potholeRequests';
 import reverseGeocoding from '../geocodingRequests/reverseGeocoding';
@@ -240,8 +241,19 @@ class MapMain extends React.Component {
   }
 
   openLeftMenu = () => {
-    this.setState({isLeftMenuOpen: true});
+    this.setState({
+      isLeftMenuOpen: true,
+      isRightMenuOpen: false,
+    });
     return this.state.isLeftMenuOpen;
+  }
+
+  openRightMenu = () => {
+    this.setState({
+      isRightMenuOpen: true,
+      isLeftMenuOpen: false,
+    });
+    return this.state.isRightMenuOpen;
   }
 
   render () {
@@ -255,7 +267,7 @@ class MapMain extends React.Component {
 
     return (
       <div className='map-container'>
-        <Menu
+        <LeftMenu
           isOpen={this.state.isLeftMenuOpen}
           customBurgerIcon={ false }
           customCrossIcon={ false }
@@ -276,17 +288,22 @@ class MapMain extends React.Component {
                 Use My Location
             </button>
           </div>
-        </Menu>
+        </LeftMenu>
+        <RightMenu
+          isOpen={this.state.isRightMenuOpen}
+          right
+          customBurgerIcon={ false }
+          customCrossIcon={ false }
+        >
+          <Legend></Legend>
+
+        </RightMenu>
         <ModalAddPothole
           showModal={this.state.showModal}
           tempPothole={this.state.tempPothole}
           onSaveModal={this.onSaveModal}
           onCancelModal={this.onCancelModal}
         ></ModalAddPothole>
-        <ModalLegend
-          showLegend={this.state.showLegend}
-          onCancelModalLegend={this.onCancelModalLegend}
-        ></ModalLegend>
         <Alerts
           alertText="Pothole record saved."
           showAlert={this.state.showAlert}
@@ -356,7 +373,7 @@ class MapMain extends React.Component {
             <button
               type="button"
               className = 'col-xs-12 btn btn-large btn-info menu-items-btn'
-              onMouseUp={() => this.setState({showLegend: true})}>
+              onMouseUp={this.openRightMenu}>
               <span className="glyphicon glyphicon-list-alt" > </span>
                 Legend
             </button>
