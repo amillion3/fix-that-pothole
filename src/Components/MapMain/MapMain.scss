@@ -7,7 +7,7 @@
 .mappityMap {
   box-shadow: 0px 5px 5px black;
   text-align: center;
-  height: 90%;
+  height: calc(99% - 70px);
   margin: 7px 7px 15px 7px;
   z-index: 0;
   border: 2px solid #FEFFFF;
@@ -57,7 +57,24 @@
 }
 
 .menu-items-btn {
-  padding: 7px;
+  padding: 15px;
+}
+
+// Color theme:
+// #17252A
+//    dark green/blue
+// #2B7A78
+//    medium teal
+// #3AAFA9
+//    teal
+// #DEF2F1
+//    light teal
+// #FEFFFF
+//    almost white
+
+.bm-menu {
+  background: #17252A;
+  z-index: 100000000000000000000;
 }
 
 @media screen and (max-width: 430px) {
