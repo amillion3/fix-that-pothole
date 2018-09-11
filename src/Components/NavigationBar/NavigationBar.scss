@@ -9,12 +9,12 @@
   margin-bottom: 0;
   overflow: visible;
   z-index: 100000000000000;
-  background-color: #17252A;
+  background-color: #3AAFA9;
 }
 
 #navbar-brand-text {
   font-size: 24px;
-  color: #DEF2F1;
+  color:#17252A;
   padding: 0;
   margin: 5% 0 5% 25px;
 }
@@ -35,28 +35,28 @@
 }
 
 .navbar-collapse.out {
-  background-color: #17252A;
+  background-color: #3AAFA9;
   overflow: inherit;
 }
 .navbar-collapse.in {
-  background-color: #17252A;
+  background-color: #3AAFA9;
   overflow-x: hidden;
   font-size: 18px;
-  color: #DEF2F1;
+  color: #17252A;
 }
 a {
-  color: #DEF2F1;
+  color: #17252A;
   font-size: 18px;
 }
 a:hover,
 a:active,
 a:focus {
-  color: #DEF2F1;
+  color: #17252A;
   text-decoration: none;
 }
 
 .collapsing {
-  background-color: #17252A;
+  background-color: #3AAFA9;
 }
 .navbar-nav span[role=button] {
   padding: 15px;
@@ -66,16 +66,16 @@ a:focus {
 
 // hambuger menu line colors
 .navbar-inverse .navbar-toggle .icon-bar {
-  background-color: #DEF2F1;
+  background-color: #17252A;
 }
 // hambuger menu background colors
 .navbar-inverse .navbar-toggle:focus {
-  background-color: #17252A;
+  background-color: #3AAFA9;
 }
 
 li {
   text-align: center;
-  color:#DEF2F1;
+  color:#17252A;
 }
 
 @media screen and (max-width: 385px) {

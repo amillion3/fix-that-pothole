@@ -20,7 +20,7 @@ class NavigationBar extends React.Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <img className='navbar-brand navbar-position'src='https://www.sandersbroscoffee.com/fix-that-pothole/potholesymbol.png' alt='icon' />
+            <img className='navbar-brand navbar-position'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
             {
               authed ? (
                 <Link to='/map' className='navbar-brand' id='navbar-brand-text'>Fix That <span className='brand-bold'>Pothole</span></Link>
