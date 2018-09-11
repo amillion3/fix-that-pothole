@@ -10,7 +10,7 @@
   height: calc(99% - 70px);
   margin: 7px 7px 15px 7px;
   z-index: 0;
-  border: 2px solid #FEFFFF;
+  border: 3px solid #FFFFFF;
 }
 
 .mappityMap:after {
@@ -32,7 +32,7 @@
   height: 100%;
   width: 100%;
   background-image: none;
-  background-color: #3AAFA9;
+  background-color: #DEF2F1;
 }
 
 .input-label {
@@ -73,7 +73,7 @@
 //    almost white
 
 .bm-menu {
-  background: #17252A;
+  background: #3AAFA9;
   z-index: 100000000000000000000;
 }
 
