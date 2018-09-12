@@ -22,7 +22,8 @@ class Alerts extends React.Component {
           </div>
         </Alert>
       );
-    } else {
+    } else
+    {
       return null;
     }
   }
