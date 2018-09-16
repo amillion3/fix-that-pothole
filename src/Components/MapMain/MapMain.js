@@ -31,6 +31,10 @@ class MapMain extends React.Component {
       potholes: [],
       isLeftMenuOpen: false,
       isRightMenuOpen: false,
+      filterChkBoxNewlyAdded: "checked",
+      filterChkBoxAssigned: "checked",
+      filterChkBoxFixed: "checked",
+      filterChkBoxProblem: "checked",
       hasLocation: false,
       latlng: {
         lat: '',
@@ -263,6 +267,10 @@ class MapMain extends React.Component {
   }
 
   render () {
+    const checkBoxHandler = e => {
+      console.log(e);
+    };
+
     const potholeComponents = this.state.potholes.map(pothole => {
       return (
         <GenerateMarkers
@@ -301,16 +309,24 @@ class MapMain extends React.Component {
             >
               <h4 className='text-center left-menu-checkbox'>Filter Results:</h4>
               <Checkbox
-                checked={this.filterCheckbox1}
+                id="check-box-newly-added"
+                checked={this.state.filterChkBoxNewlyAdded}
+                onClick={e => checkBoxHandler(e.target.checked)}
               >Newly Added</Checkbox>
               <Checkbox
-                checked={this.filterCheckbox2}
+                id="check-box-assigned"
+                checked={this.state.filterChkBoxAssigned}
+                onClick={e => checkBoxHandler(e.target.checked)}
               >Pothole Assigned</Checkbox>
               <Checkbox
-                checked={this.filterCheckbox3}
+                id="check-box-fixed"
+                checked={this.state.filterChkBoxFixed}
+                onClick={e => checkBoxHandler(e.target.checked)}
               >Pothole Fixed</Checkbox>
               <Checkbox
-                checked={this.filterCheckbox4}
+                id="check-box-problem"
+                checked={this.state.filterChkBoxProblem}
+                onClick={e => checkBoxHandler(e.target.checked)}
               >Problem With Repair</Checkbox>
             </FormGroup>
             <img className='menu-icon'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
