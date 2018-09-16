@@ -7,8 +7,8 @@
 .mappityMap {
   box-shadow: 0px 5px 5px black;
   text-align: center;
-  height: calc(99% - 70px);
-  margin: 7px 7px 15px 7px;
+  height: calc(99% - 90px);
+  margin: 7px 7px 10px 7px;
   z-index: 0;
   border: 3px solid #FFFFFF;
 }
@@ -65,12 +65,7 @@
   margin-left: 30%;
   margin-right: 30%;
   margin-top: 90%;
-  margin-bottom: 10% !important;
-}
-
-LeftMenu,
-RightMenu {
-  border-top: 5px solid red;
+  margin-bottom: 10%;
 }
 
 // Color theme:
@@ -88,6 +83,7 @@ RightMenu {
 .bm-menu {
   background: #3AAFA9;
   z-index: 100000000000000000000;
+  border-top: 6px solid #17252A;
 }
 
 @media screen and (max-width: 430px) {

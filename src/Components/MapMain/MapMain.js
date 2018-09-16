@@ -276,6 +276,7 @@ class MapMain extends React.Component {
             <button
               type="button"
               className = 'col-xs-12 btn menu-items-btn'
+              id="btn-add-pothole"
               onMouseUp={this.eventAddNewPothole}>
               <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
                 Add New Pothole
@@ -283,11 +284,12 @@ class MapMain extends React.Component {
             <button
               type="button"
               className = 'col-xs-12 btn menu-items-btn'
+              id="btn-add-pothole"
               onMouseUp={this.eventAddViaGeolocation}>
               <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
                 Use My Location
             </button>
-            <img className='menu-icon page-footer'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
+            <img className='menu-icon'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
           </div>
         </LeftMenu>
         <RightMenu
