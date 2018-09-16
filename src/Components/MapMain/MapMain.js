@@ -177,6 +177,7 @@ class MapMain extends React.Component {
         this.setState({
           collectedGeolocation: true,
           showGeolocationAlert: true,
+          isLeftMenuOpen: false,
         });
         this.showPosition(position);
       },
@@ -275,6 +276,7 @@ class MapMain extends React.Component {
           isOpen={this.state.isLeftMenuOpen}
           customBurgerIcon={ false }
           customCrossIcon={ false }
+          width={'250px'}
         >
           <div className='col-xs-12 menu-items'>
             <button
@@ -301,6 +303,7 @@ class MapMain extends React.Component {
           right
           customBurgerIcon={ false }
           customCrossIcon={ false }
+          width={'250px'}
         >
           <Legend></Legend>
           <img className='menu-icon page-footer'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />

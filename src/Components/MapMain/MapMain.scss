@@ -96,3 +96,9 @@ span>.glyphicon-th-list, {
   display: none;
 }
 }
+
+@media screen and (max-width: 330px) {
+  .menu-icon {
+    display: none !important;
+  }
+}
