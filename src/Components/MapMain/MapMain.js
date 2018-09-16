@@ -268,10 +268,22 @@ class MapMain extends React.Component {
 
   render () {
     const checkBoxHandler = e => {
-      console.log(e);
+      this.setState({
+        [e]: !this.state[e],
+      });
     };
 
     const potholeComponents = this.state.potholes.map(pothole => {
+      console.log(pothole.status);
+      if (pothole.status === "Newly Added" && this.state.filterChkBoxNewlyAdded === true) {
+
+      } else if (pothole.status === "Pothole Assigned" && this.state.filterChkBoxAssigned === true) {
+
+      } else if () {
+
+      } else if () {
+
+      }
       return (
         <GenerateMarkers
           details={pothole}
@@ -309,24 +321,24 @@ class MapMain extends React.Component {
             >
               <h4 className='text-center left-menu-checkbox'>Filter Results:</h4>
               <Checkbox
-                id="check-box-newly-added"
+                id="filterChkBoxNewlyAdded"
                 checked={this.state.filterChkBoxNewlyAdded}
-                onClick={e => checkBoxHandler(e.target.checked)}
+                onChange={e => checkBoxHandler(e.target.id)}
               >Newly Added</Checkbox>
               <Checkbox
-                id="check-box-assigned"
+                id="filterChkBoxAssigned"
                 checked={this.state.filterChkBoxAssigned}
-                onClick={e => checkBoxHandler(e.target.checked)}
+                onChange={e => checkBoxHandler(e.target.id)}
               >Pothole Assigned</Checkbox>
               <Checkbox
-                id="check-box-fixed"
+                id="filterChkBoxFixed"
                 checked={this.state.filterChkBoxFixed}
-                onClick={e => checkBoxHandler(e.target.checked)}
+                onChange={e => checkBoxHandler(e.target.id)}
               >Pothole Fixed</Checkbox>
               <Checkbox
-                id="check-box-problem"
+                id="filterChkBoxProblem"
                 checked={this.state.filterChkBoxProblem}
-                onClick={e => checkBoxHandler(e.target.checked)}
+                onChange={e => checkBoxHandler(e.target.id)}
               >Problem With Repair</Checkbox>
             </FormGroup>
             <img className='menu-icon'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
