@@ -287,6 +287,7 @@ class MapMain extends React.Component {
               <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
                 Use My Location
             </button>
+            <img className='menu-icon page-footer'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
           </div>
         </LeftMenu>
         <RightMenu
@@ -296,7 +297,7 @@ class MapMain extends React.Component {
           customCrossIcon={ false }
         >
           <Legend></Legend>
-
+          <img className='menu-icon page-footer'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
         </RightMenu>
         <ModalAddPothole
           showModal={this.state.showModal}
