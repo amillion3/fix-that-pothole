@@ -121,6 +121,10 @@ class MapMain extends React.Component {
 
   eventAddNewPothole = () => {
     this.addPointTrue(); // user CAN add points now
+    this.setState({
+      isLeftMenuOpen: false,
+      isRightMenuOpen: false,
+    });
   };
 
   onCancelModalLegend = () => {
@@ -382,29 +386,6 @@ class MapMain extends React.Component {
             </button>
           </div>
         </div>
-        {/* <div className='col-xs-12 menu-items'>
-          <button
-            type="button"
-            className = 'col-xs-4 btn menu-items-btn'
-            onMouseUp={this.eventAddNewPothole}>
-            <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
-              Add New Pothole
-          </button>
-          <button
-            type="button"
-            className = 'col-xs-4 btn menu-items-btn'
-            onMouseUp={this.eventAddViaGeolocation}>
-            <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
-              Use My Location
-          </button>
-          <button
-            type="button"
-            className = 'col-xs-4 btn btn-large btn-info menu-items-btn'
-            onMouseUp={() => this.setState({showLegend: true})}>
-            <span className="glyphicon glyphicon-list-alt" > </span>
-              Legend
-          </button>
-        </div> */}
       </div>
     );
   }
