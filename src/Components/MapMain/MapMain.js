@@ -1,6 +1,7 @@
 import React, { createRef} from 'react';
 import { Map, TileLayer, Circle } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import {FormGroup, Checkbox} from 'react-bootstrap';
 import {stack as LeftMenu} from 'react-burger-menu';
 import {stack as RightMenu} from 'react-burger-menu';
 
@@ -295,6 +296,23 @@ class MapMain extends React.Component {
               <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
                 Use My Location
             </button>
+            <FormGroup
+              className='left-menu-checkbox'
+            >
+              <h4 className='text-center left-menu-checkbox'>Filter Results:</h4>
+              <Checkbox
+                checked={this.filterCheckbox1}
+              >Newly Added</Checkbox>
+              <Checkbox
+                checked={this.filterCheckbox2}
+              >Pothole Assigned</Checkbox>
+              <Checkbox
+                checked={this.filterCheckbox3}
+              >Pothole Fixed</Checkbox>
+              <Checkbox
+                checked={this.filterCheckbox4}
+              >Problem With Repair</Checkbox>
+            </FormGroup>
             <img className='menu-icon'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
           </div>
         </LeftMenu>
