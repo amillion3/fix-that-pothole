@@ -121,6 +121,10 @@ class MapMain extends React.Component {
 
   eventAddNewPothole = () => {
     this.addPointTrue(); // user CAN add points now
+    this.setState({
+      isLeftMenuOpen: false,
+      isRightMenuOpen: false,
+    });
   };
 
   onCancelModalLegend = () => {
@@ -173,6 +177,7 @@ class MapMain extends React.Component {
         this.setState({
           collectedGeolocation: true,
           showGeolocationAlert: true,
+          isLeftMenuOpen: false,
         });
         this.showPosition(position);
       },
@@ -271,11 +276,13 @@ class MapMain extends React.Component {
           isOpen={this.state.isLeftMenuOpen}
           customBurgerIcon={ false }
           customCrossIcon={ false }
+          width={'250px'}
         >
           <div className='col-xs-12 menu-items'>
             <button
               type="button"
               className = 'col-xs-12 btn menu-items-btn'
+              id="btn-add-pothole"
               onMouseUp={this.eventAddNewPothole}>
               <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
                 Add New Pothole
@@ -283,10 +290,12 @@ class MapMain extends React.Component {
             <button
               type="button"
               className = 'col-xs-12 btn menu-items-btn'
+              id="btn-add-pothole"
               onMouseUp={this.eventAddViaGeolocation}>
               <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
                 Use My Location
             </button>
+            <img className='menu-icon'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
           </div>
         </LeftMenu>
         <RightMenu
@@ -294,9 +303,10 @@ class MapMain extends React.Component {
           right
           customBurgerIcon={ false }
           customCrossIcon={ false }
+          width={'250px'}
         >
           <Legend></Legend>
-
+          <img className='menu-icon page-footer'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
         </RightMenu>
         <ModalAddPothole
           showModal={this.state.showModal}
@@ -379,29 +389,6 @@ class MapMain extends React.Component {
             </button>
           </div>
         </div>
-        {/* <div className='col-xs-12 menu-items'>
-          <button
-            type="button"
-            className = 'col-xs-4 btn menu-items-btn'
-            onMouseUp={this.eventAddNewPothole}>
-            <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
-              Add New Pothole
-          </button>
-          <button
-            type="button"
-            className = 'col-xs-4 btn menu-items-btn'
-            onMouseUp={this.eventAddViaGeolocation}>
-            <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
-              Use My Location
-          </button>
-          <button
-            type="button"
-            className = 'col-xs-4 btn btn-large btn-info menu-items-btn'
-            onMouseUp={() => this.setState({showLegend: true})}>
-            <span className="glyphicon glyphicon-list-alt" > </span>
-              Legend
-          </button>
-        </div> */}
       </div>
     );
   }

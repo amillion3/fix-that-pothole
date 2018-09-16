@@ -59,7 +59,13 @@ body {
 .btn:link,
 .btn:visited,
 .btn:target {
-  background-color:#3AAFA9;
+  background-color:#2B7A78;
+  outline: none;
+}
+
+#btn-add-pothole:hover,
+#btn-my-location:hover {
+  background-color:#DEF2F1;
   outline: none;
 }
 
