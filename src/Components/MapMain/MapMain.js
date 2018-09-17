@@ -1,6 +1,7 @@
 import React, { createRef} from 'react';
 import { Map, TileLayer, Circle } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
+import {FormGroup, Checkbox} from 'react-bootstrap';
 import {stack as LeftMenu} from 'react-burger-menu';
 import {stack as RightMenu} from 'react-burger-menu';
 
@@ -30,6 +31,10 @@ class MapMain extends React.Component {
       potholes: [],
       isLeftMenuOpen: false,
       isRightMenuOpen: false,
+      filterChkBoxNewlyAdded: "checked",
+      filterChkBoxAssigned: "checked",
+      filterChkBoxFixed: "checked",
+      filterChkBoxProblem: "checked",
       hasLocation: false,
       latlng: {
         lat: '',
@@ -76,6 +81,20 @@ class MapMain extends React.Component {
       })
       .catch(err => console.error('Error with pothole get request: ', err));
   }
+
+  // componentDidMount () {
+  //   potholeRequests
+  //     .potholesGETAll()
+  //     .then(potholes => {
+  //       const {customNashville} = constants;
+  //       this.setState({
+  //         basemap: customNashville,
+  //         potholes,
+  //         // this.setState({potholes: potholes});  ES5 long form
+  //       });
+  //     })
+  //     .catch(err => console.error('Error with pothole get request: ', err));
+  // }
 
   mapRef = createRef();
 
@@ -262,11 +281,46 @@ class MapMain extends React.Component {
   }
 
   render () {
+    const checkBoxHandler = e => {
+      this.setState({
+        [e]: !this.state[e],
+      });
+    };
+
     const potholeComponents = this.state.potholes.map(pothole => {
+      let potholeMatch = {};
+
+      if (pothole.status === "Newly Added" && (
+        this.state.filterChkBoxNewlyAdded === "checked" ||
+        this.state.filterChkBoxNewlyAdded === true
+      )) {
+        potholeMatch = pothole;
+      } else if (pothole.status === "Pothole Assigned" && (
+        this.state.filterChkBoxAssigned === "checked" ||
+        this.state.filterChkBoxAssigned === true
+      )) {
+        potholeMatch = pothole;
+      } else if (pothole.status === "Pothole Fixed" && (
+        this.state.filterChkBoxFixed === "checked" ||
+        this.state.filterChkBoxFixed === true
+      )) {
+        potholeMatch = pothole;
+      } else if (pothole.status === "Problem With Pothole" && (
+        this.state.filterChkBoxProblem === "checked" ||
+        this.state.filterChkBoxProblem === true
+      )) {
+        potholeMatch = pothole;
+      } else {
+        potholeMatch = {
+          coordLat: 0,
+          coordLong: 0,
+          key: Math.random(),
+        };
+      }
       return (
         <GenerateMarkers
-          details={pothole}
-          key={pothole.id} />
+          details={potholeMatch}
+          key={Math.random()} />
       );
     });
 
@@ -295,6 +349,31 @@ class MapMain extends React.Component {
               <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
                 Use My Location
             </button>
+            <FormGroup
+              className='left-menu-checkbox'
+            >
+              <h4 className='text-center left-menu-checkbox'>Filter Results:</h4>
+              <Checkbox
+                id="filterChkBoxNewlyAdded"
+                checked={this.state.filterChkBoxNewlyAdded}
+                onChange={e => checkBoxHandler(e.target.id)}
+              >Newly Added</Checkbox>
+              <Checkbox
+                id="filterChkBoxAssigned"
+                checked={this.state.filterChkBoxAssigned}
+                onChange={e => checkBoxHandler(e.target.id)}
+              >Pothole Assigned</Checkbox>
+              <Checkbox
+                id="filterChkBoxFixed"
+                checked={this.state.filterChkBoxFixed}
+                onChange={e => checkBoxHandler(e.target.id)}
+              >Pothole Fixed</Checkbox>
+              <Checkbox
+                id="filterChkBoxProblem"
+                checked={this.state.filterChkBoxProblem}
+                onChange={e => checkBoxHandler(e.target.id)}
+              >Problem With Repair</Checkbox>
+            </FormGroup>
             <img className='menu-icon'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
           </div>
         </LeftMenu>
