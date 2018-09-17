@@ -274,20 +274,28 @@ class MapMain extends React.Component {
     };
 
     const potholeComponents = this.state.potholes.map(pothole => {
+      let potholeMatch = {};
       console.log(pothole.status);
+
       if (pothole.status === "Newly Added" && this.state.filterChkBoxNewlyAdded === true) {
-
+        potholeMatch = pothole;
       } else if (pothole.status === "Pothole Assigned" && this.state.filterChkBoxAssigned === true) {
-
-      } else if () {
-
-      } else if () {
-
+        potholeMatch = pothole;
+      } else if (pothole.status === "Pothole Fixed" && this.state.filterChkBoxFixed === true) {
+        potholeMatch = pothole;
+      } else if (pothole.status === "Problem With Pothole" && this.state.filterChkBoxProblem === true) {
+        potholeMatch = pothole;
+      } else {
+        potholeMatch = {
+          coordLat: 0,
+          coordLong: 0,
+          key: Math.random(),
+        };
       }
       return (
         <GenerateMarkers
-          details={pothole}
-          key={pothole.id} />
+          details={potholeMatch}
+          key={potholeMatch.id} />
       );
     });
 
