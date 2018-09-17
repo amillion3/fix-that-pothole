@@ -82,6 +82,20 @@ class MapMain extends React.Component {
       .catch(err => console.error('Error with pothole get request: ', err));
   }
 
+  // componentDidMount () {
+  //   potholeRequests
+  //     .potholesGETAll()
+  //     .then(potholes => {
+  //       const {customNashville} = constants;
+  //       this.setState({
+  //         basemap: customNashville,
+  //         potholes,
+  //         // this.setState({potholes: potholes});  ES5 long form
+  //       });
+  //     })
+  //     .catch(err => console.error('Error with pothole get request: ', err));
+  // }
+
   mapRef = createRef();
 
   handleClick = e => {
@@ -275,15 +289,26 @@ class MapMain extends React.Component {
 
     const potholeComponents = this.state.potholes.map(pothole => {
       let potholeMatch = {};
-      console.log(pothole.status);
 
-      if (pothole.status === "Newly Added" && this.state.filterChkBoxNewlyAdded === true) {
+      if (pothole.status === "Newly Added" && (
+        this.state.filterChkBoxNewlyAdded === "checked" ||
+        this.state.filterChkBoxNewlyAdded === true
+      )) {
         potholeMatch = pothole;
-      } else if (pothole.status === "Pothole Assigned" && this.state.filterChkBoxAssigned === true) {
+      } else if (pothole.status === "Pothole Assigned" && (
+        this.state.filterChkBoxAssigned === "checked" ||
+        this.state.filterChkBoxAssigned === true
+      )) {
         potholeMatch = pothole;
-      } else if (pothole.status === "Pothole Fixed" && this.state.filterChkBoxFixed === true) {
+      } else if (pothole.status === "Pothole Fixed" && (
+        this.state.filterChkBoxFixed === "checked" ||
+        this.state.filterChkBoxFixed === true
+      )) {
         potholeMatch = pothole;
-      } else if (pothole.status === "Problem With Pothole" && this.state.filterChkBoxProblem === true) {
+      } else if (pothole.status === "Problem With Pothole" && (
+        this.state.filterChkBoxProblem === "checked" ||
+        this.state.filterChkBoxProblem === true
+      )) {
         potholeMatch = pothole;
       } else {
         potholeMatch = {
@@ -295,7 +320,7 @@ class MapMain extends React.Component {
       return (
         <GenerateMarkers
           details={potholeMatch}
-          key={potholeMatch.id} />
+          key={Math.random()} />
       );
     });
 
