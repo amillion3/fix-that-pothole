@@ -449,7 +449,7 @@ class MapMain extends React.Component {
           </div>
         </Map>
         <div className='buttons-action-top col-xs-12'>
-          <div className='button-action-top-left col-xs-6 col-sm-2'>
+          <div className='button-action-top-left col-xs-6 col-sm-3'>
             <button
               type="button"
               className = 'col-xs-12 btn menu-items-btn'
@@ -458,7 +458,7 @@ class MapMain extends React.Component {
                 Action Items
             </button>
           </div>
-          <div className='button-action-top-right col-xs-6 col-sm-offset-8 col-sm-2'>
+          <div className='button-action-top-right col-xs-6 col-sm-offset-6 col-sm-3'>
             <button
               type="button"
               className = 'col-xs-12 btn btn-large btn-info menu-items-btn'
