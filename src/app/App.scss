@@ -64,7 +64,9 @@ body {
 }
 
 #btn-add-pothole:hover,
-#btn-my-location:hover {
+#btn-my-location:hover,
+#btn-filter-all:hover,
+#btn-filter-none:hover {
   background-color:#DEF2F1;
   outline: none;
 }

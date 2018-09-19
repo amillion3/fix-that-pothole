@@ -280,6 +280,24 @@ class MapMain extends React.Component {
     return this.state.isRightMenuOpen;
   }
 
+  switchAllOn = () => {
+    this.setState({
+      filterChkBoxNewlyAdded: true,
+      filterChkBoxAssigned: true,
+      filterChkBoxFixed: true,
+      filterChkBoxProblem: true,
+    });
+  };
+
+  switchAllOff = () => {
+    this.setState({
+      filterChkBoxNewlyAdded: false,
+      filterChkBoxAssigned: false,
+      filterChkBoxFixed: false,
+      filterChkBoxProblem: false,
+    });
+  };
+
   render () {
     const checkBoxHandler = e => {
       this.setState({
@@ -333,46 +351,66 @@ class MapMain extends React.Component {
           width={'250px'}
         >
           <div className='col-xs-12 menu-items'>
-            <button
-              type="button"
-              className = 'col-xs-12 btn menu-items-btn'
-              id="btn-add-pothole"
-              onMouseUp={this.eventAddNewPothole}>
-              <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
-                Add New Pothole
-            </button>
-            <button
-              type="button"
-              className = 'col-xs-12 btn menu-items-btn'
-              id="btn-add-pothole"
-              onMouseUp={this.eventAddViaGeolocation}>
-              <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
-                Use My Location
-            </button>
+            <div className="left-menu-button-container">
+              <button
+                type="button"
+                className = 'col-xs-12 btn menu-items-btn'
+                id="btn-add-pothole"
+                onMouseUp={this.eventAddNewPothole}>
+                <span className="glyphicon glyphicon-plus" aria-hidden="true"> </span>
+                  Add New Pothole
+              </button>
+              <button
+                type="button"
+                className = 'col-xs-12 btn menu-items-btn'
+                id="btn-add-pothole"
+                onMouseUp={this.eventAddViaGeolocation}>
+                <span className="glyphicon glyphicon-globe" aria-hidden="true"> </span>
+                  Use My Location
+              </button>
+            </div>
             <FormGroup
               className='left-menu-checkbox'
             >
               <h4 className='text-center left-menu-checkbox'>Filter Results:</h4>
-              <Checkbox
-                id="filterChkBoxNewlyAdded"
-                checked={this.state.filterChkBoxNewlyAdded}
-                onChange={e => checkBoxHandler(e.target.id)}
-              >Newly Added</Checkbox>
-              <Checkbox
-                id="filterChkBoxAssigned"
-                checked={this.state.filterChkBoxAssigned}
-                onChange={e => checkBoxHandler(e.target.id)}
-              >Pothole Assigned</Checkbox>
-              <Checkbox
-                id="filterChkBoxFixed"
-                checked={this.state.filterChkBoxFixed}
-                onChange={e => checkBoxHandler(e.target.id)}
-              >Pothole Fixed</Checkbox>
-              <Checkbox
-                id="filterChkBoxProblem"
-                checked={this.state.filterChkBoxProblem}
-                onChange={e => checkBoxHandler(e.target.id)}
-              >Problem With Repair</Checkbox>
+              <div className="filter-check-boxes">
+                <Checkbox
+                  id="filterChkBoxNewlyAdded"
+                  checked={this.state.filterChkBoxNewlyAdded}
+                  onChange={e => checkBoxHandler(e.target.id)}
+                >Newly Added</Checkbox>
+                <Checkbox
+                  id="filterChkBoxAssigned"
+                  checked={this.state.filterChkBoxAssigned}
+                  onChange={e => checkBoxHandler(e.target.id)}
+                >Pothole Assigned</Checkbox>
+                <Checkbox
+                  id="filterChkBoxFixed"
+                  checked={this.state.filterChkBoxFixed}
+                  onChange={e => checkBoxHandler(e.target.id)}
+                >Pothole Fixed</Checkbox>
+                <Checkbox
+                  id="filterChkBoxProblem"
+                  checked={this.state.filterChkBoxProblem}
+                  onChange={e => checkBoxHandler(e.target.id)}
+                >Problem With Repair</Checkbox>
+              </div>
+              <div className="filter-check-box-buttons col-xs-12 btn-group">
+                <button
+                  type="button"
+                  className = 'col-xs-6 btn menu-items-btn inline'
+                  id="btn-filter-all"
+                  onMouseUp={this.switchAllOn}>
+                    All On
+                </button>
+                <button
+                  type="button"
+                  className = 'col-xs-6 btn menu-items-btn inline'
+                  id="btn-filter-none"
+                  onMouseUp={this.switchAllOff}>
+                    All Off
+                </button>
+              </div>
             </FormGroup>
             <img className='menu-icon'src='https://www.sandersbroscoffee.com/fix-that-pothole/blackArrow.png' alt='icon' />
           </div>
@@ -449,7 +487,7 @@ class MapMain extends React.Component {
           </div>
         </Map>
         <div className='buttons-action-top col-xs-12'>
-          <div className='button-action-top-left col-xs-6 col-sm-2'>
+          <div className='button-action-top-left col-xs-6 col-sm-3'>
             <button
               type="button"
               className = 'col-xs-12 btn menu-items-btn'
@@ -458,7 +496,7 @@ class MapMain extends React.Component {
                 Action Items
             </button>
           </div>
-          <div className='button-action-top-right col-xs-6 col-sm-offset-8 col-sm-2'>
+          <div className='button-action-top-right col-xs-6 col-sm-offset-6 col-sm-3'>
             <button
               type="button"
               className = 'col-xs-12 btn btn-large btn-info menu-items-btn'
