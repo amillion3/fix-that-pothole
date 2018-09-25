@@ -82,20 +82,6 @@ class MapMain extends React.Component {
       .catch(err => console.error('Error with pothole get request: ', err));
   }
 
-  // componentDidMount () {
-  //   potholeRequests
-  //     .potholesGETAll()
-  //     .then(potholes => {
-  //       const {customNashville} = constants;
-  //       this.setState({
-  //         basemap: customNashville,
-  //         potholes,
-  //         // this.setState({potholes: potholes});  ES5 long form
-  //       });
-  //     })
-  //     .catch(err => console.error('Error with pothole get request: ', err));
-  // }
-
   mapRef = createRef();
 
   handleClick = e => {
