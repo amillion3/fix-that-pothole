@@ -48,7 +48,7 @@ const potholePOST = inputPothole => {
 const potholesGETAll = () => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${constants.firebaseConfig.databaseURL}/potholes.json`)
+      .get(`${constants.firebaseConfig.databaseURL}/potholes.json?orderBy="uid"`)
       .then(response => {
         const potholeArray = [];
         if (response.data !== null) {

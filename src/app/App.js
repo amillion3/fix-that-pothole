@@ -7,8 +7,8 @@ import Login from '../Components/Login/Login';
 import NavigationBar from '../Components/NavigationBar/NavigationBar';
 import Dashboard from '../Components/Dashboard/Dashboard';
 import PotholeCompleteRecord from '../Components/PotholeCompleteRecord/PotholeCompleteRecord';
-import firebaseApp from '../firebaseRequests/connection';
 import MapMain from '../Components/MapMain/MapMain';
+import firebaseApp from '../firebaseRequests/connection';
 
 import './App.css';
 
