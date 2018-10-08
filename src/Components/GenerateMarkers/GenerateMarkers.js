@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Marker, Popup} from 'react-leaflet';
 import {Icon} from 'leaflet';
 
+import Upvotes from '../Upvotes/Upvotes';
+
 import './GenerateMarkers.css';
 
 class GenerateMarkers extends React.Component {
@@ -62,6 +64,9 @@ class GenerateMarkers extends React.Component {
             <p><span className='popup-label'>Status:</span> {details.status}</p>
             <p><span className='popup-label'>Severity:</span> {details.severity}</p>
             <p><span className='popup-label'>Created Date:</span> {details.createdDate}</p>
+            <Upvotes
+              details={this.props}
+            ></Upvotes>
             <div className='popup-buttons col-xs-12'>
               <a href={`
                 http://maps.google.com/maps?q=&layer=c&cbll=
