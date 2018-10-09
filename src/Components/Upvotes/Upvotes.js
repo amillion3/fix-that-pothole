@@ -11,7 +11,12 @@ class Upvotes extends React.Component {
     // users cannot up/downvote more than once
     // users who created pothole cannot up/downvote more than once
     const verifyUpvoteCapability = () => {
-
+      let upvoteObject = upvoteRequests.upvoteGET(details);
+      // if user exists in upvoteUserIds, can only downvote
+      // if user exists in downvoteuserIds, can only upvote
+      // if user does not exist in either, they can
+      //    upvote or downvote
+      // special considerations for the creator of the pothole?
     };
 
     // pass in details instead of referencing the this.props?
@@ -34,9 +39,10 @@ class Upvotes extends React.Component {
         canUpvote = verifyUpvoteCapability();
       }
       if (canUpvote) {
-        let existingUpvotes = upvoteRequests.upvoteGET(details);
+        let existingUpvotes = upvoteRequests.upvoteGET(details.upvoteCount);
         existingUpvotes += modifier;
-        upvoteRequests.upvotePUT(details, existingUpvotes);
+        details.upvoteCount = existingUpvotes;
+        upvoteRequests.upvotePUT(details.id, existingUpvotes);
       }
     };
 

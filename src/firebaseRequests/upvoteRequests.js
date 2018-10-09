@@ -16,4 +16,18 @@ const upvoteGET = id => {
   });
 };
 
-export default {upvoteGET};
+const upvotePUT = (firebaseId, updatedUpvote) => {
+  return new Promise((resolve, reject) => {
+    // updatedPothole.updatedUserId = auth.fbGetUid();
+    axios
+      .put(`${constants.firebaseConfig.databaseURL}/upvotes/${firebaseId}.json`, updatedUpvote)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export default {upvoteGET, upvotePUT};
