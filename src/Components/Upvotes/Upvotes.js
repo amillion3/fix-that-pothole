@@ -1,16 +1,25 @@
 import React from 'react';
 
+import upvoteRequests from '../../firebaseRequests/upvoteRequests';
+
 import './Upvotes.css';
 
 class Upvotes extends React.Component {
   render () {
-    const { potholeId } = this.props;
+    const { details } = this.props;
 
     const getUpvoteCount = () => {
-      return 5;
+      if (details !== null) {
+        const newData = upvoteRequests.upvoteGET(details);
+        console.log("count", newData);
+        return newData.upvoteCount;
+      }
+      else {
+        return "N/A";
+      }
     };
 
-    let upvoteCount = getUpvoteCount();
+    const upvoteCount = getUpvoteCount();
     return (
       <div className="col-xs-12">
         <p>
