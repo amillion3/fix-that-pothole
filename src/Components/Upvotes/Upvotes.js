@@ -8,6 +8,13 @@ class Upvotes extends React.Component {
   render () {
     const { details } = this.props;
 
+    // users cannot up/downvote more than once
+    // users who created pothole cannot up/downvote more than once
+    const verifyUpvoteCapability = () => {
+
+    };
+
+    // pass in details instead of referencing the this.props?
     const getUpvoteCount = () => {
       if (details !== null) {
         const newData = upvoteRequests.upvoteGET(details);
@@ -16,6 +23,20 @@ class Upvotes extends React.Component {
       }
       else {
         return "N/A";
+      }
+    };
+
+    const updateUpvoteCount = modifier => {
+      // modifier should be a 1 or -1 only
+      let canUpvote = false;
+      if (details !== null &&
+        (modifier === -1 || modifier === 1)) {
+        canUpvote = verifyUpvoteCapability();
+      }
+      if (canUpvote) {
+        let existingUpvotes = upvoteRequests.upvoteGET(details);
+        existingUpvotes += modifier;
+        upvoteRequests.upvotePUT(details, existingUpvotes);
       }
     };
 
