@@ -8,7 +8,7 @@ const upvoteGET = id => {
       .get(`${constants.firebaseConfig.databaseURL}/upvotes/${id}.json`)
       .then(response => {
         console.log(response.data);
-        resolve(response);
+        resolve(response.data);
       })
       .catch(error => {
         reject(error);
