@@ -10,6 +10,7 @@ class Upvotes extends React.Component {
   }
 
   componentWillMount () {
+    const { details } = this.props;
     upvoteRequests
       .upvoteGET(details.id)
       .then(singlePotholeResponse => {
@@ -23,7 +24,7 @@ class Upvotes extends React.Component {
   // users cannot up/downvote more than once
   // users who created pothole cannot up/downvote more than once
   verifyUpvoteCapability = () => {
-    let upvoteObject = upvoteRequests.upvoteGET(details);
+    // let upvoteObject = upvoteRequests.upvoteGET(details);
     // if user exists in upvoteUserIds, can only downvote
     // if user exists in downvoteuserIds, can only upvote
     // if user does not exist in either, they can
@@ -33,10 +34,8 @@ class Upvotes extends React.Component {
 
   // pass in details instead of referencing the this.props?
   getUpvoteCount = () => {
-    if (details !== null) {
-      // const newData = upvoteRequests.upvoteGET(details);
-      console.log("count", newData);
-      return newData.upvoteCount;
+    if (this.state !== null) {
+      return this.state.singlePothole.upvoteCount;
     }
     else {
       return "N/A";
@@ -44,24 +43,22 @@ class Upvotes extends React.Component {
   };
 
   // const updateUpvoteCount = modifier => {
-    //   // modifier should be a 1 or -1 only
-    //   let canUpvote = false;
-    //   if (details !== null &&
-    //     (modifier === -1 || modifier === 1)) {
-      //     canUpvote = verifyUpvoteCapability();
-      //   }
-      //   if (canUpvote) {
-        //     let existingUpvotes = upvoteRequests.upvoteGET(details.upvoteCount);
-        //     existingUpvotes += modifier;
-        //     details.upvoteCount = existingUpvotes;
-        //     upvoteRequests.upvotePUT(details.id, existingUpvotes);
-        //   }
-        // };
+  //   // modifier should be a 1 or -1 only
+  //   let canUpvote = false;
+  //   if (details !== null &&
+  //     (modifier === -1 || modifier === 1)) {
+  //     canUpvote = verifyUpvoteCapability();
+  //   }
+  //   if (canUpvote) {
+  //     let existingUpvotes = upvoteRequests.upvoteGET(details.upvoteCount);
+  //     existingUpvotes += modifier;
+  //     details.upvoteCount = existingUpvotes;
+  //     upvoteRequests.upvotePUT(details.id, existingUpvotes);
+  //   }
+  // };
 
   render () {
-    const { details } = this.props;
-
-    const upvoteCount = getUpvoteCount();
+    const upvoteCount = this.state.singlePothole.upvoteCount;
     return (
       <div className="col-xs-12">
         <p>
@@ -69,8 +66,8 @@ class Upvotes extends React.Component {
           <span className="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
         </p>
       </div>
-      );
-    }
+    );
   }
+}
 
 export default Upvotes;

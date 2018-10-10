@@ -3,25 +3,36 @@
         "upvoteCount": 1,
         "createdBy": "Irq7XdWPa0e5vv0CIhfa55iZn2i1",
         "firebaseId": "LJv4HBDaAzyyCq3iZvv",
-        "upVoteUserIds": {
+        "upvoteUserIds": {
             "0": "Irq7XdWPa0e5vv0CIhfa55iZn2i1"
+        },
+        "downvoteUserIds": {
+            "0": "Irq7XdWPa0esdf5vv0CIhfa55iZn2i1"
         }
     },
     "-LJv4NWLTWhq7T2-hJSC": {
         "upvoteCount": 2,
         "createdBy": "Irq7XdWPa0e5vv0CIhfa55iZn2i1",
         "firebaseId": "-LJv4NWLTWhq7T2-hJSC",
-        "upVoteUserIds": {
+        "upvoteUserIds": {
             "0": "Irq7XdWPa0e5vv0CIhfa55iZn2i1",
             "1": "3489dsk09dd037dl30"
+        },
+        "downvoteUserIds": {
+            "0": "Irq7XdWPa0esdf5vv0CIhfa55iZn2i1"
         }
     },
-    "LJv4XBT-kwcQmZkEw3_": {
-        "upvoteCount": 1,
+    "-LJv4HBDaAzyyCq3iZvv": {
+        "upvoteCount": 3,
         "createdBy": "Irq7XdWPa0e5vv0CIhfa55iZn2i1",
         "firebaseId": "LJv4XBT-kwcQmZkEw3_",
-        "upVoteUserIds": {
-            "0": "Irq7XdWPa0e5vv0CIhfa55iZn2i1"
+        "upvoteUserIds": {
+            "0": "Irq7XdWPa0e5vv0CIhfa55iZn2i1",
+            "1": "Irq7XdWPa0e5vv0CIhfa55iZn2i2",
+            "2": "Irq7XdWPa0e5vv0CIhfa55iZn2i3"
+        },
+        "downvoteUserIds": {
+            "0": "Irq7XdWPa0esdf5vv0CIhfa55iZn2i1"
         }
     }
 }
