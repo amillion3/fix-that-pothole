@@ -38,12 +38,14 @@ const potholePOST = inputPothole => {
     axios
       .post(`${constants.firebaseConfig.databaseURL}/potholes.json`, newPothole)
       .then(response => {
-        resolve(response);
+        return (response);
       })
-      .then(response2 => {
-        console.log('response2', response2);
-        newPothole.firebaseConfig = response2;
-        upvoteRequests.upvotePOST(newPothole);
+      .then(response => {
+        console.log('POST - the response', response);
+        // upvoteRequests.upvotePOST(response.data);
+        const newlyCreatedFirebaseId = response.data.name;
+        upvoteRequests.upvotePOST(newPothole, newlyCreatedFirebaseId);
+        resolve(response.data);
       })
       .catch(err => {
         reject(err);
