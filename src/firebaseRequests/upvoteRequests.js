@@ -3,20 +3,13 @@ import axios from 'axios';
 import auth from './auth';
 
 const upvoteGET = id => {
-  console.log('id',id);
   return new Promise((resolve, reject) => {
     axios
-      .get(`${constants.firebaseConfig.databaseURL}/upvotes/${id}.json`)
+      .get(`${constants.firebaseConfig.databaseURL}/upvotes.json?orderBy="firebaseId"&equalTo="${id}"`)
       .then(response => {
-        console.log('thenthen', response);
-
-        resolve(response);
-      })
-      .then(response => {
-        response = response.data.id;
-        response.firebaseId = id;
-        console.log('thenthen', response);
-        resolve(response);
+        const keys = Object.keys(response.data);
+        const matchingKey = keys[0];
+        resolve(response.data[matchingKey]);
       })
       .catch(error => {
         reject(error);
@@ -40,7 +33,6 @@ const upvotePUT = (firebaseId, updatedUpvote) => {
 
 // called when a new pothole is added
 const upvotePOST = (inputPothole, firebaseId) => {
-  console.log('upvotePOST parameter', inputPothole);
   const baseUpvote = {
     "upvoteCount": 1,
     "createdBy": inputPothole.createdBy,
