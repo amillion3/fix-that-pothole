@@ -1,6 +1,7 @@
 import constants from '../constants';
 import axios from 'axios';
 import auth from './auth';
+import upvoteRequests from './upvoteRequests';
 
 const potholePOST = inputPothole => {
   return new Promise((resolve, reject) => {
@@ -37,7 +38,14 @@ const potholePOST = inputPothole => {
     axios
       .post(`${constants.firebaseConfig.databaseURL}/potholes.json`, newPothole)
       .then(response => {
-        resolve(response);
+        return (response);
+      })
+      .then(response => {
+        console.log('POST - the response', response);
+        // upvoteRequests.upvotePOST(response.data);
+        const newlyCreatedFirebaseId = response.data.name;
+        upvoteRequests.upvotePOST(newPothole, newlyCreatedFirebaseId);
+        resolve(response.data);
       })
       .catch(err => {
         reject(err);
