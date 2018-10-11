@@ -61,10 +61,33 @@ class Upvotes extends React.Component {
     const upvoteCount = this.state.singlePothole.upvoteCount;
     return (
       <div className="col-xs-12">
-        <p>
-          {upvoteCount}
-          <span className="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-        </p>
+        <div className="col-xs-12">
+          <div className="col-xs-3 align-vertical-center">
+            <h3 className="up-down-vote">
+              <button
+                type="button"
+                className="btn"
+              >
+                <span className="glyphicon glyphicon-arrow-up remove-padding" aria-hidden="true"></span>
+              </button>
+            </h3>
+          </div>
+          <div className="col-xs-6 text-center center align-vertical-center">
+            <h2>
+              {upvoteCount}
+            </h2>
+          </div>
+          <div className="col-xs-3">
+            <h3 className="up-down-vote">
+              <button
+                type="button"
+                className="btn"
+              >
+                <span className="glyphicon glyphicon-arrow-down remove-padding" aria-hidden="true"></span>
+              </button>
+            </h3>
+          </div>
+        </div>
       </div>
     );
   }
