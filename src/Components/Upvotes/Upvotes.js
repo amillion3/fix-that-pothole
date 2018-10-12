@@ -17,22 +17,14 @@ class Upvotes extends React.Component {
         this.setState({
           singlePothole: singlePotholeResponse,
         });
+        console.log(this.state);
       })
       .catch(err => console.error('Error with upvote get request: ', err));
   };
 
   // users cannot up/downvote more than once
   // users who created pothole cannot up/downvote more than once
-  verifyUpvoteCapability = () => {
-    // let upvoteObject = upvoteRequests.upvoteGET(details);
-    // if user exists in upvoteUserIds, can only downvote
-    // if user exists in downvoteuserIds, can only upvote
-    // if user does not exist in either, they can
-    //    upvote or downvote
-    // special considerations for the creator of the pothole?
-  }
 
-  // pass in details instead of referencing the this.props?
   getUpvoteCount = () => {
     if (this.state !== null) {
       return this.state.singlePothole.upvoteCount;
@@ -42,30 +34,59 @@ class Upvotes extends React.Component {
     }
   };
 
-  // const updateUpvoteCount = modifier => {
+  // const modifyUpDownVotes = e => {
   //   // modifier should be a 1 or -1 only
   //   let canUpvote = false;
-  //   if (details !== null &&
-  //     (modifier === -1 || modifier === 1)) {
-  //     canUpvote = verifyUpvoteCapability();
-  //   }
-  //   if (canUpvote) {
-  //     let existingUpvotes = upvoteRequests.upvoteGET(details.upvoteCount);
-  //     existingUpvotes += modifier;
-  //     details.upvoteCount = existingUpvotes;
-  //     upvoteRequests.upvotePUT(details.id, existingUpvotes);
-  //   }
+  //   console.log(e);
+  // if (details !== null &&
+  //   (modifier === -1 || modifier === 1)) {
+  //   canUpvote = verifyUpvoteCapability();
+  // }
+  // if (canUpvote) {
+  //   let existingUpvotes = upvoteRequests.upvoteGET(details.upvoteCount);
+  //   existingUpvotes += modifier;
+  //   details.upvoteCount = existingUpvotes;
+  //   upvoteRequests.upvotePUT(details.id, existingUpvotes);
+  // }
   // };
 
   render () {
     const upvoteCount = this.state.singlePothole.upvoteCount;
+
+    const verifyVoteCapability = voteType => {
+      let voteModifier = 0;
+      if (voteType === "span-dn-vote") {
+        voteModifier = -1;
+      } else if (voteType === "span-up-vote") {
+        voteModifier = 1;
+      }
+
+      //TODO
+      // check if user can upvote/downvote
+
+
+      // let upvoteObject = upvoteRequests.upvoteGET(details);
+      // if user exists in upvoteUserIds, can only downvote
+      // if user exists in downvoteuserIds, can only upvote
+      // if user does not exist in either, they can
+      //    upvote or downvote
+      // special considerations for the creator of the pothole?
+    };
+
+    const modifyUpDownVotes = e => {
+      console.log(e.target);
+      const voteCapability = verifyVoteCapability(e.target.id);
+      // TO DO check if user can up or down vote
+    };
+
     return (
       <div className="">
         <div className="col-xs-3 align-vertical-center">
-          <h3 className="up-down-vote">
+          <h3>
             <button
               type="button"
               className="btn"
+              onClick={modifyUpDownVotes}
             >
               <span id ="span-up-vote" className="glyphicon glyphicon-arrow-up remove-padding" aria-hidden="true"></span>
             </button>
@@ -77,18 +98,19 @@ class Upvotes extends React.Component {
           </h2>
         </div>
         <div className="col-xs-3">
-          <h3 className="span-dn-vote">
+          <h3>
             <button
               type="button"
               className="btn"
+              onClick={modifyUpDownVotes}
             >
-              <span id="up-down-btn" className="glyphicon glyphicon-arrow-down remove-padding" aria-hidden="true"></span>
+              <span id="span-dn-vote" className="glyphicon glyphicon-arrow-down remove-padding" aria-hidden="true"></span>
             </button>
           </h3>
         </div>
       </div>
     );
   }
-}
+};
 
 export default Upvotes;
