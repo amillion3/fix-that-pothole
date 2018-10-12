@@ -60,33 +60,31 @@ class Upvotes extends React.Component {
   render () {
     const upvoteCount = this.state.singlePothole.upvoteCount;
     return (
-      <div className="col-xs-12">
-        <div className="col-xs-12">
-          <div className="col-xs-3 align-vertical-center">
-            <h3 className="up-down-vote">
-              <button
-                type="button"
-                className="btn"
-              >
-                <span className="glyphicon glyphicon-arrow-up remove-padding" aria-hidden="true"></span>
-              </button>
-            </h3>
-          </div>
-          <div className="col-xs-6 text-center center align-vertical-center">
-            <h2>
-              {upvoteCount}
-            </h2>
-          </div>
-          <div className="col-xs-3">
-            <h3 className="up-down-vote">
-              <button
-                type="button"
-                className="btn"
-              >
-                <span className="glyphicon glyphicon-arrow-down remove-padding" aria-hidden="true"></span>
-              </button>
-            </h3>
-          </div>
+      <div className="">
+        <div className="col-xs-3 align-vertical-center">
+          <h3 className="up-down-vote">
+            <button
+              type="button"
+              className="btn"
+            >
+              <span id ="span-up-vote" className="glyphicon glyphicon-arrow-up remove-padding" aria-hidden="true"></span>
+            </button>
+          </h3>
+        </div>
+        <div className="col-xs-6 text-center center align-vertical-center">
+          <h2>
+            {upvoteCount}
+          </h2>
+        </div>
+        <div className="col-xs-3">
+          <h3 className="span-dn-vote">
+            <button
+              type="button"
+              className="btn"
+            >
+              <span id="up-down-btn" className="glyphicon glyphicon-arrow-down remove-padding" aria-hidden="true"></span>
+            </button>
+          </h3>
         </div>
       </div>
     );

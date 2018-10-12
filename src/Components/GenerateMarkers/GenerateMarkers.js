@@ -60,43 +60,50 @@ class GenerateMarkers extends React.Component {
         riseOnHover={true}
         icon={markerIcon}>
         <Popup>
-          <div className='single-marker-popup'>
-            <p><span className='popup-label'>Status:</span> {details.status}</p>
-            <p><span className='popup-label'>Severity:</span> {details.severity}</p>
-            <p><span className='popup-label'>Created Date:</span> {details.createdDate}</p>
-            <Upvotes
-              details={details}
-            ></Upvotes>
-            <div className='popup-buttons col-xs-12'>
-              <a href={`
-                http://maps.google.com/maps?q=&layer=c&cbll=
-                ${details.coordLat},
-                ${details.coordLong}
-              `} target="_blank">
+          <div className="popup">
+            <div className="popup-hr">
+              <Upvotes
+                details={details}
+              ></Upvotes>
+              <div className='popup-buttons text-center'>
+                <a href={`
+                  http://maps.google.com/maps?q=&layer=c&cbll=
+                  ${details.coordLat},
+                  ${details.coordLong}
+                  `} target="_blank">
+                  <button
+                    type="button"
+                    className="btn" >
+                    <span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                    Streetview
+                  </button>
+                </a>
                 <button
                   type="button"
-                  className="btn" >
-                  <span className="glyphicon glyphicon-camera" aria-hidden="true"></span>
-                  Streetview
+                  className="btn"
+                  onClick={clickSinglePothole}>
+                  <span className="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                  Details
                 </button>
-              </a>
-              <button
-                type="button"
-                className="btn"
-                onClick={clickSinglePothole}>
-                <span className="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                Details
-              </button>
+              </div>
             </div>
-            {
-              details.updated ?
-                <p><span className='popup-label'>Last updated
-                </span> {details.updatedDate}</p>
-                : null
-            }
-            <p><span className='popup-label'>Notes:</span> {details.descriptionNotes}</p>
-            <p><span className='popup-label'>Address:</span> {details.displayAddress}</p>
+            <div className='single-marker-popup'>
+              {
+                details.updated ?
+                  <p><span className='popup-label'>Last updated
+                  </span> {details.updatedDate}</p>
+                  : null
+              }
+
+              <p><span className='popup-label'>Status:</span> {details.status}</p>
+              <p><span className='popup-label'>Severity:</span> {details.severity}</p>
+              <p><span className='popup-label'>Created Date:</span> {details.createdDate}</p>
+              <p><span className='popup-label'>Notes:</span> {details.descriptionNotes}</p>
+              <p><span className='popup-label'>Address:</span> {details.displayAddress}</p>
+              <p className="col-xs-12"><span className='popup-label'></span>I am empty</p>
+            </div>
           </div>
+
         </Popup>
       </Marker>
     );
