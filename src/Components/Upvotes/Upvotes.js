@@ -54,12 +54,29 @@ class Upvotes extends React.Component {
     const upvoteCount = this.state.singlePothole.upvoteCount;
 
     const verifyVoteCapability = voteType => {
+      const upvoters = Object.values(this.state.singlePothole.upvoteUserIds);
+      const downvoters = Object.values(this.state.singlePothole.downvoteUserIds);
       let voteModifier = 0;
+      let canVote = true;
+
       if (voteType === "span-dn-vote") {
-        voteModifier = -1;
+        for (let d in downvoters) {
+          if (d === loggedInUser) {
+            canVote = false;
+            voteModifier = -1;
+          }
+        }
       } else if (voteType === "span-up-vote") {
-        voteModifier = 1;
-      }
+        for (let u in upvoters) {
+          if (u === loggedInUser) {
+            canVote = false;
+            voteModifier = 1;
+          }
+        }
+      };
+
+      return canVote;
+    }
 
       //TODO
       // check if user can upvote/downvote
