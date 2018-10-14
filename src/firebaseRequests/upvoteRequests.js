@@ -38,7 +38,7 @@ const upvotePOST = (inputPothole, firebaseId) => {
     "upvoteCount": 1,
     "createdBy": inputPothole.createdBy,
     "firebaseId": firebaseId,
-    "upvoteUserIds": {"0": ""},
+    "upvoteUserIds": {"0": inputPothole.createdBy},
     "downvoteUserIds": {"0": ""},
   };
   return new Promise((resolve, reject) => {

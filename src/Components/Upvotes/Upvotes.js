@@ -19,6 +19,7 @@ class Upvotes extends React.Component {
           singlePothole: singlePotholeResponse,
           loggedInUser: auth.fbGetUid(),
         });
+        console.log('this state',this.state.singlePothole);
       })
       .catch(err => console.error('Error with upvote get request: ', err));
   };
@@ -35,29 +36,15 @@ class Upvotes extends React.Component {
     }
   };
 
-  // const modifyUpDownVotes = e => {
-  //   // modifier should be a 1 or -1 only
-  //   let canUpvote = false;
-  //   console.log(e);
-  // if (details !== null &&
-  //   (modifier === -1 || modifier === 1)) {
-  //   canUpvote = verifyUpvoteCapability();
-  // }
-  // if (canUpvote) {
-  //   let existingUpvotes = upvoteRequests.upvoteGET(details.upvoteCount);
-  //   existingUpvotes += modifier;
-  //   details.upvoteCount = existingUpvotes;
-  //   upvoteRequests.upvotePUT(details.id, existingUpvotes);
-  // }
-  // };
 
   render () {
     const upvoteCount = this.state.singlePothole.upvoteCount;
 
     const verifyVoteCapability = voteType => {
-      const upvoters = Object.values(this.state.singlePothole.upvoteUserIds);
-      const downvoters = Object.values(this.state.singlePothole.downvoteUserIds);
+      const upvoters = this.state.singlePothole.upvoteUserIds;
+      const downvoters = this.state.singlePothole.downvoteUserIds;
       const loggedInUser = this.state.loggedInUser;
+      debugger;
       let canVote = true;
 
       if (voteType === "span-dn-vote") {
@@ -114,22 +101,46 @@ class Upvotes extends React.Component {
     // Starts the up/down vote process and checking
     const modifyUpDownVotes = e => {
       const voteCapability = verifyVoteCapability(e.target.id);
+      const theCurrentUser = this.state.loggedInUser;
+      console.log('vote cap', voteCapability);
+      console.log('e.target.id', e.target.id);
+
+      // problem with these if else if (voteCapability && e.target.id ===...)
+      // i think the check of 119 should be done earlier in the cod
       if (voteCapability && e.target.id === "span-dn-vote") {
         // make a downvote
         const temp = this.state.singlePothole;
+
         temp.upvoteCount = temp.upvoteCount - 1;
-        // const keys = Object.getOwnPropertyNames(temp);
-        // const greatestKey = (Math.max(...keys) + 1) * 1;
-        // temp.downvoteUserIds[greatestKey] = this.state.loggedInUser;
-        temp.downvoteUserIds.push(this.state.loggedInUser);
-        // add to downvote object
-        console.log(temp);
+        temp.downvoteUserIds.push(theCurrentUser);
+        console.log('temp.upvoteUserIds',temp.upvoteUserIds);
+        console.log('loggedinuser', theCurrentUser);
+        console.log('find a match?', temp.upvoteUserIds.indexOf(theCurrentUser));
+        if (temp.upvoteUserIds.indexOf(theCurrentUser)) {
+          console.log('match!!');
+          const tempIndex = temp.upvoteUserIds.indexOf(theCurrentUser);
+          temp.upvoteUserIds.splice(tempIndex, 1);
+          if (!temp.upvoteUserIds) {
+            temp.upvoteUserIds = [];
+          }
+        }
+        // add to downvote object and update state
         updateState(temp);
       } else if (voteCapability && e.target.id === "span-up-vote") {
         // make an upvote
         const temp = this.state.singlePothole;
+
         temp.upvoteCount = temp.upvoteCount + 1;
-        // add to downvote object
+        temp.upvoteUserIds.push(theCurrentUser);
+
+        if (temp.downvoteUserIds.indexOf(theCurrentUser)) {
+          const tempIndex = temp.downvoteUserIds.indexOf(theCurrentUser);
+          temp.downvoteUserIds.splice(tempIndex, 1);
+          if (!temp.downvoteUserIds) {
+            temp.downvoteUserIds = [];
+          }
+        }
+        // add to upvote object and update state
         updateState(temp);
       }
 
