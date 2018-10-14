@@ -1,6 +1,7 @@
 import React from 'react';
 
 import upvoteRequests from '../../firebaseRequests/upvoteRequests';
+import auth from '../../firebaseRequests/auth';
 
 import './Upvotes.css';
 
@@ -16,8 +17,8 @@ class Upvotes extends React.Component {
       .then(singlePotholeResponse => {
         this.setState({
           singlePothole: singlePotholeResponse,
+          loggedInUser: auth.fbGetUid(),
         });
-        console.log(this.state);
       })
       .catch(err => console.error('Error with upvote get request: ', err));
   };
@@ -56,43 +57,78 @@ class Upvotes extends React.Component {
     const verifyVoteCapability = voteType => {
       const upvoters = Object.values(this.state.singlePothole.upvoteUserIds);
       const downvoters = Object.values(this.state.singlePothole.downvoteUserIds);
-      let voteModifier = 0;
+      const loggedInUser = this.state.loggedInUser;
       let canVote = true;
 
       if (voteType === "span-dn-vote") {
         for (let d in downvoters) {
           if (d === loggedInUser) {
             canVote = false;
-            voteModifier = -1;
           }
         }
       } else if (voteType === "span-up-vote") {
         for (let u in upvoters) {
           if (u === loggedInUser) {
             canVote = false;
-            voteModifier = 1;
           }
         }
+      } else {
+        canVote = false;
       };
-
       return canVote;
-    }
-
-      //TODO
-      // check if user can upvote/downvote
-
-
-      // let upvoteObject = upvoteRequests.upvoteGET(details);
-      // if user exists in upvoteUserIds, can only downvote
-      // if user exists in downvoteuserIds, can only upvote
-      // if user does not exist in either, they can
-      //    upvote or downvote
-      // special considerations for the creator of the pothole?
     };
+
+    //TODO
+    // check if user can upvote/downvote
+    // let upvoteObject = upvoteRequests.upvoteGET(details);
+    // if user exists in upvoteUserIds, can only downvote
+    // if user exists in downvoteuserIds, can only upvote
+    // if user does not exist in either, they can
+    //    upvote or downvote
+    // special considerations for the creator of the pothole?
+
+    // const updateState = () => {
+
+    // };
 
     const modifyUpDownVotes = e => {
       console.log(e.target);
       const voteCapability = verifyVoteCapability(e.target.id);
+      if (voteCapability && e.target.id === "span-dn-vote") {
+        // make a downvote
+        const temp = this.state.singlePothole;
+        temp.upvoteCount = temp.upvoteCount - 1;
+        // add to downvote object
+        console.log('this.state.singlepothole',this.state.singlePothole);
+        console.log('temp', temp);
+        return new Promise((resolve, reject) => {
+          upvoteRequests
+            .upvotePUT(temp.firebaseId, temp)
+            .then(res => {
+              this.setState({
+                singlePothole: res.data,
+              });
+              return upvoteRequests.upvoteGET(this.state.firebaseId);
+            })
+            .then(updatedState => {
+              console.log('updatedstate', updatedState);
+              this.setState({
+                singlePothole: updatedState,
+              });
+              resolve (updatedState);
+            })
+            .catch(err => {
+              reject (err);
+            });
+        });
+      } else if (voteCapability && e.target.id === "span-up-vote") {
+        // make an upvote
+        const temp = this.state.singlePothole;
+        temp.upvoteCount = temp.upvoteCount + 1;
+        // add to downvote object
+        upvoteRequests.upvotePUT(this.state.firebaseId, temp);
+      }
+
       // TO DO check if user can up or down vote
     };
 
