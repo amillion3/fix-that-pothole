@@ -36,7 +36,6 @@ class Upvotes extends React.Component {
     }
   };
 
-
   render () {
     const upvoteCount = this.state.singlePothole.upvoteCount;
 
@@ -46,6 +45,7 @@ class Upvotes extends React.Component {
       const loggedInUser = this.state.loggedInUser;
       debugger;
       let canVote = true;
+      const currentState = this.state.singlePothole;
 
       if (voteType === "span-dn-vote") {
         for (let d = 0; d < downvoters.length; d++) {
@@ -53,10 +53,51 @@ class Upvotes extends React.Component {
             canVote = false;
           }
         }
+        if (canVote) {
+          console.log('up-dn-vote-match!!');
+          const indexUp = currentState.upvoteUserIds.indexOf(loggedInUser);
+          const indexDn = currentState.downvoteUserIds.indexOf(loggedInUser);
+          const tempUsersUp = currentState.upvoteUserIds;
+          const tempUsersDn = currentState.downvoteUserIds;
+          if (indexUp) {
+            tempUsersUp.splice(indexUp, 1);
+            this.setState.singlePothole({
+              upvoteUserIds: tempUsersUp,
+            });
+          }
+          if (indexDn) {
+            tempUsersDn.splice(indexDn, 1);
+            this.setState({
+              singlePothole: {
+                downvoteUserIds: tempUsersDn,
+              },
+            });
+          }
+        }
+
       } else if (voteType === "span-up-vote") {
         for (let u = 0; u < upvoters.length; u++) {
           if (upvoters[u] === loggedInUser) {
             canVote = false;
+          }
+        }
+        if (canVote) {
+          console.log('up-dn-vote-match!!');
+          const indexUp = currentState.upvoteUserIds.indexOf(loggedInUser);
+          const indexDn = currentState.downvoteUserIds.indexOf(loggedInUser);
+          const tempUsersUp = currentState.upvoteUserIds;
+          const tempUsersDn = currentState.downvoteUserIds;
+          if (indexUp) {
+            tempUsersUp.splice(indexUp, 1);
+            this.setState.singlePothole({
+              upvoteUserIds: tempUsersUp,
+            });
+          }
+          if (indexDn) {
+            tempUsersDn.splice(indexDn, 1);
+            this.setState.singlePothole({
+              downvoteUserIds: tempUsersDn,
+            });
           }
         }
       } else {
@@ -65,7 +106,7 @@ class Upvotes extends React.Component {
       return canVote;
     };
 
-    //TODO
+    // TODO
     // check if user can upvote/downvote
     // let upvoteObject = upvoteRequests.upvoteGET(details);
     // if user exists in upvoteUserIds, can only downvote
