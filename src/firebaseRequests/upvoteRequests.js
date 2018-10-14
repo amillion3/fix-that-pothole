@@ -9,6 +9,7 @@ const upvoteGET = id => {
       .then(response => {
         const keys = Object.keys(response.data);
         const matchingKey = keys[0];
+        console.log('GET match', response.data[matchingKey]);
         resolve(response.data[matchingKey]);
       })
       .catch(error => {
