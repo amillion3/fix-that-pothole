@@ -40,26 +40,40 @@ class Upvotes extends React.Component {
     const upvoteCount = this.state.singlePothole.upvoteCount;
 
     const removeLoggedInUserFromVoting = () => {
-      console.log('up-dn-vote-match!!');
       const currentState = this.state.singlePothole;
       const loggedInUser = this.state.loggedInUser;
       const indexUp = currentState.upvoteUserIds.indexOf(loggedInUser);
       const indexDn = currentState.downvoteUserIds.indexOf(loggedInUser);
       const tempUsersUp = currentState.upvoteUserIds;
       const tempUsersDn = currentState.downvoteUserIds;
-      if (indexUp) {
+      console.log('users UP, ', indexUp, "  ", tempUsersUp);
+      console.log('users DOWN, ', indexDn, "   ", tempUsersDn);
+      if (indexUp >= 0) {
         tempUsersUp.splice(indexUp, 1);
-        this.setState.singlePothole({
-          upvoteUserIds: tempUsersUp,
-        });
+        if (tempUsersUp.length < 1) {
+          this.setState.singlePothole({
+            singlePothole: {upvoteUserIds: [] },
+          });
+        } else {
+          this.setState.singlePothole({
+            singlePothole: {upvoteUserIds: tempUsersUp },
+          });
+        }
+
+        console.log('this state post Index UP splice', this.state.singlePothole);
       }
-      if (indexDn) {
+      if (indexDn >= 0) {
         tempUsersDn.splice(indexDn, 1);
-        this.setState({
-          singlePothole: {
-            downvoteUserIds: tempUsersDn,
-          },
-        });
+        if (tempUsersDn.length < 1) {
+          this.setState.singlePothole({
+            singlePothole: {downvoteUserIds: [] },
+          });
+        } else {
+          this.setState({
+            singlePothole: {downvoteUserIds: tempUsersDn },
+          });
+        }
+        console.log('this state post Index down splice', this.state.singlePothole);
       }
     };
 
@@ -68,6 +82,10 @@ class Upvotes extends React.Component {
       const downvoters = this.state.singlePothole.downvoteUserIds;
       const loggedInUser = this.state.loggedInUser;
       let canVote = true;
+
+      console.log('verify UPvoters', upvoters);
+      console.log('verify DOWN voters', downvoters);
+      console.log('loggedinuser: ', loggedInUser);
 
       if (voteType === "span-dn-vote") {
         for (let d = 0; d < downvoters.length; d++) {
@@ -85,9 +103,9 @@ class Upvotes extends React.Component {
             canVote = false;
           }
         }
-        // if (canVote) {
-
-        // }
+        if (canVote) {
+          removeLoggedInUserFromVoting();
+        }
       } else {
         canVote = false;
       };
@@ -107,7 +125,7 @@ class Upvotes extends React.Component {
     const updateState = temp => {
       return new Promise((resolve, reject) => {
         upvoteRequests
-          .upvotePUT(temp.id, temp)
+          .upvotePUT(temp.thisFirebaseId, temp)
           .then(res => {
             this.setState({
               singlePothole: res.data,
@@ -141,17 +159,7 @@ class Upvotes extends React.Component {
 
         temp.upvoteCount = temp.upvoteCount - 1;
         temp.downvoteUserIds.push(theCurrentUser);
-        console.log('temp.upvoteUserIds',temp.upvoteUserIds);
-        console.log('loggedinuser', theCurrentUser);
-        console.log('find a match?', temp.upvoteUserIds.indexOf(theCurrentUser));
-        if (temp.upvoteUserIds.indexOf(theCurrentUser)) {
-          console.log('match!!');
-          const tempIndex = temp.upvoteUserIds.indexOf(theCurrentUser);
-          temp.upvoteUserIds.splice(tempIndex, 1);
-          if (!temp.upvoteUserIds) {
-            temp.upvoteUserIds = [];
-          }
-        }
+
         // add to downvote object and update state
         updateState(temp);
       } else if (voteCapability && e.target.id === "span-up-vote") {
@@ -161,13 +169,6 @@ class Upvotes extends React.Component {
         temp.upvoteCount = temp.upvoteCount + 1;
         temp.upvoteUserIds.push(theCurrentUser);
 
-        if (temp.downvoteUserIds.indexOf(theCurrentUser)) {
-          const tempIndex = temp.downvoteUserIds.indexOf(theCurrentUser);
-          temp.downvoteUserIds.splice(tempIndex, 1);
-          if (!temp.downvoteUserIds) {
-            temp.downvoteUserIds = [];
-          }
-        }
         // add to upvote object and update state
         updateState(temp);
       }
