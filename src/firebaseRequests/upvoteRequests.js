@@ -9,7 +9,6 @@ const upvoteGET = id => {
       .then(response => {
         const keys = Object.keys(response.data);
         const matchingKey = keys[0];
-        console.log('GET match', response.data[matchingKey]);
         resolve(response.data[matchingKey]);
       })
       .catch(error => {
@@ -32,20 +31,16 @@ const upvotePUT = (firebaseId, updatedUpvote) => {
   });
 };
 
-// called when a new pothole is added
-const upvotePOST = (inputPothole, firebaseId) => {
-  const baseUpvote = {
-    "upvoteCount": 1,
-    "createdBy": inputPothole.createdBy,
-    "firebaseId": firebaseId,
-    "upvoteUserIds": {"0": inputPothole.createdBy},
-    "downvoteUserIds": {"0": ""},
-  };
+const upvotePATCH = (firebaseId, votingFirebaseId) => {
   return new Promise((resolve, reject) => {
+    // updatedPothole.updatedUserId = auth.fbGetUid();
     axios
-      .post(`${constants.firebaseConfig.databaseURL}/upvotes.json`, baseUpvote)
-      .then(response => {
-        resolve(response);
+      .patch(`${constants.firebaseConfig.databaseURL}/upvotes/${firebaseId}.json`, {
+        "thisFirebaseId": votingFirebaseId,
+      },
+      { headers: { 'Content-Type': 'application/json; charset=utf-8' } })
+      .then(res => {
+        resolve(res);
       })
       .catch(err => {
         reject(err);
@@ -53,4 +48,30 @@ const upvotePOST = (inputPothole, firebaseId) => {
   });
 };
 
-export default {upvoteGET, upvotePUT, upvotePOST};
+// called when a new pothole is added
+const upvotePOST = (inputPothole, firebaseId) => {
+  const baseUpvote = {
+    "upvoteCount": 1,
+    "createdBy": inputPothole.createdBy,
+    "firebaseId": firebaseId,
+    "thisFirebaseId": "",
+    "upvoteUserIds": {"0": inputPothole.createdBy},
+    "downvoteUserIds": {"0": ""},
+  };
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${constants.firebaseConfig.databaseURL}/upvotes.json`, baseUpvote)
+      .then(response => {
+        return response;
+      })
+      .then(id => {
+        upvotePATCH(id.data.name, id.data.name);
+        resolve(id);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export default {upvoteGET, upvotePUT, upvotePOST, upvotePATCH};

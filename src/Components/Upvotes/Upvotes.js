@@ -39,13 +39,35 @@ class Upvotes extends React.Component {
   render () {
     const upvoteCount = this.state.singlePothole.upvoteCount;
 
+    const removeLoggedInUserFromVoting = () => {
+      console.log('up-dn-vote-match!!');
+      const currentState = this.state.singlePothole;
+      const loggedInUser = this.state.loggedInUser;
+      const indexUp = currentState.upvoteUserIds.indexOf(loggedInUser);
+      const indexDn = currentState.downvoteUserIds.indexOf(loggedInUser);
+      const tempUsersUp = currentState.upvoteUserIds;
+      const tempUsersDn = currentState.downvoteUserIds;
+      if (indexUp) {
+        tempUsersUp.splice(indexUp, 1);
+        this.setState.singlePothole({
+          upvoteUserIds: tempUsersUp,
+        });
+      }
+      if (indexDn) {
+        tempUsersDn.splice(indexDn, 1);
+        this.setState({
+          singlePothole: {
+            downvoteUserIds: tempUsersDn,
+          },
+        });
+      }
+    };
+
     const verifyVoteCapability = voteType => {
       const upvoters = this.state.singlePothole.upvoteUserIds;
       const downvoters = this.state.singlePothole.downvoteUserIds;
       const loggedInUser = this.state.loggedInUser;
-      debugger;
       let canVote = true;
-      const currentState = this.state.singlePothole;
 
       if (voteType === "span-dn-vote") {
         for (let d = 0; d < downvoters.length; d++) {
@@ -54,25 +76,7 @@ class Upvotes extends React.Component {
           }
         }
         if (canVote) {
-          console.log('up-dn-vote-match!!');
-          const indexUp = currentState.upvoteUserIds.indexOf(loggedInUser);
-          const indexDn = currentState.downvoteUserIds.indexOf(loggedInUser);
-          const tempUsersUp = currentState.upvoteUserIds;
-          const tempUsersDn = currentState.downvoteUserIds;
-          if (indexUp) {
-            tempUsersUp.splice(indexUp, 1);
-            this.setState.singlePothole({
-              upvoteUserIds: tempUsersUp,
-            });
-          }
-          if (indexDn) {
-            tempUsersDn.splice(indexDn, 1);
-            this.setState({
-              singlePothole: {
-                downvoteUserIds: tempUsersDn,
-              },
-            });
-          }
+          removeLoggedInUserFromVoting();
         }
 
       } else if (voteType === "span-up-vote") {
@@ -81,25 +85,9 @@ class Upvotes extends React.Component {
             canVote = false;
           }
         }
-        if (canVote) {
-          console.log('up-dn-vote-match!!');
-          const indexUp = currentState.upvoteUserIds.indexOf(loggedInUser);
-          const indexDn = currentState.downvoteUserIds.indexOf(loggedInUser);
-          const tempUsersUp = currentState.upvoteUserIds;
-          const tempUsersDn = currentState.downvoteUserIds;
-          if (indexUp) {
-            tempUsersUp.splice(indexUp, 1);
-            this.setState.singlePothole({
-              upvoteUserIds: tempUsersUp,
-            });
-          }
-          if (indexDn) {
-            tempUsersDn.splice(indexDn, 1);
-            this.setState.singlePothole({
-              downvoteUserIds: tempUsersDn,
-            });
-          }
-        }
+        // if (canVote) {
+
+        // }
       } else {
         canVote = false;
       };
@@ -119,9 +107,8 @@ class Upvotes extends React.Component {
     const updateState = temp => {
       return new Promise((resolve, reject) => {
         upvoteRequests
-          .upvotePUT(temp.firebaseId, temp)
+          .upvotePUT(temp.id, temp)
           .then(res => {
-            console.log('res data',res.data);
             this.setState({
               singlePothole: res.data,
             });
@@ -143,7 +130,7 @@ class Upvotes extends React.Component {
     const modifyUpDownVotes = e => {
       const voteCapability = verifyVoteCapability(e.target.id);
       const theCurrentUser = this.state.loggedInUser;
-      console.log('vote cap', voteCapability);
+      console.log('vote capablity', voteCapability);
       console.log('e.target.id', e.target.id);
 
       // problem with these if else if (voteCapability && e.target.id ===...)

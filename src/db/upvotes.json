@@ -2,21 +2,24 @@
     "LJv4HBDaAzyyCq3iZvv": {
         "upvoteCount": 1,
         "createdBy": "Irq7XdWPa0e5vv0CIhfa55iZn2i1",
-        "firebaseId": "LJv4HBDaAzyyCq3iZvv",
+        "potholeId": "LJv4HBDaAzyyCq3iZvv",
+        "thisFirebaseId": "LJv4HBDaAzyyCq3iZvv",
         "upvoteUserIds": ["Irq7XdWPa0e5vv0CIhfa55iZn2i1"],
         "downvoteUserIds": []
     },
     "-LJv4NWLTWhq7T2-hJSC": {
         "upvoteCount": 2,
         "createdBy": "Irq7XdWPa0e5vv0CIhfa55iZn2i1",
-        "firebaseId": "-LJv4NWLTWhq7T2-hJSC",
+        "potholeId": "-LJv4NWLTWhq7T2-hJSC",
+        "thisFirebaseId": "LJv4NWLTWhq7T2",
         "upvoteUserIds": [],
         "downvoteUserIds": ["Irq7XdWPa0e5vv0CIhfa55iZn2i1"]
     },
     "-LJv4HBDaAzyyCq3iZvv": {
         "upvoteCount": 3,
         "createdBy": "Irq7XdWPa0e5vv0CIhfa55iZn2i1",
-        "firebaseId": "LJv4XBT-kwcQmZkEw3_",
+        "potholeId": "LJv4XBT-kwcQmZkEw3_",
+        "thisFirebaseId": "LJv4HBDaAzyyCq3iZvv",
         "upvoteUserIds": [],
         "downvoteUserIds": []
     }
