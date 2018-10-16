@@ -50,12 +50,14 @@ class Upvotes extends React.Component {
       console.log('users DOWN, ', indexDn, "   ", tempUsersDn);
       if (indexUp >= 0) {
         tempUsersUp.splice(indexUp, 1);
-        if (tempUsersUp.length < 1) {
-          this.setState.singlePothole({
-            singlePothole: {upvoteUserIds: [] },
+        console.log('immediate post splice', tempUsersUp);
+        debugger;
+        if (!tempUsersUp) {
+          this.setState({
+            singlePothole: {upvoteUserIds: [""] },
           });
         } else {
-          this.setState.singlePothole({
+          this.setState({
             singlePothole: {upvoteUserIds: tempUsersUp },
           });
         }
@@ -64,9 +66,11 @@ class Upvotes extends React.Component {
       }
       if (indexDn >= 0) {
         tempUsersDn.splice(indexDn, 1);
-        if (tempUsersDn.length < 1) {
-          this.setState.singlePothole({
-            singlePothole: {downvoteUserIds: [] },
+        console.log('immediate post splice', tempUsersDn);
+        debugger
+        if (!tempUsersDn) {
+          this.setState({
+            singlePothole: {downvoteUserIds: [""] },
           });
         } else {
           this.setState({
@@ -87,7 +91,7 @@ class Upvotes extends React.Component {
       console.log('verify DOWN voters', downvoters);
       console.log('loggedinuser: ', loggedInUser);
 
-      if (voteType === "span-dn-vote") {
+      if (voteType === "span-dn-vote" && downvoters) {
         for (let d = 0; d < downvoters.length; d++) {
           if (downvoters[d] === loggedInUser) {
             canVote = false;
@@ -97,7 +101,7 @@ class Upvotes extends React.Component {
           removeLoggedInUserFromVoting();
         }
 
-      } else if (voteType === "span-up-vote") {
+      } else if (voteType === "span-up-vote" && upvoters) {
         for (let u = 0; u < upvoters.length; u++) {
           if (upvoters[u] === loggedInUser) {
             canVote = false;
