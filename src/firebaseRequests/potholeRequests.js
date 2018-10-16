@@ -25,6 +25,13 @@ const potholePOST = inputPothole => {
       "collectedZoomLevel": inputPothole.collectedZoomLevel,
       "collectedGeolocation": inputPothole.collectedGeolocation,
       "displayAddress": inputPothole.displayAddress,
+      "voteCount": 1,
+      "userWhoUpvoted": {
+        "0": inputPothole.createdBy,
+      },
+      "userWhoDnvoted": {
+        "0": "",
+      },
     };
 
     if (inputPothole.collectedBasemap === constants.customNashville) {
@@ -38,14 +45,7 @@ const potholePOST = inputPothole => {
     axios
       .post(`${constants.firebaseConfig.databaseURL}/potholes.json`, newPothole)
       .then(response => {
-        return (response);
-      })
-      .then(response => {
-        console.log('POST - the response', response);
-        // upvoteRequests.upvotePOST(response.data);
-        const newlyCreatedFirebaseId = response.data.name;
-        upvoteRequests.upvotePOST(newPothole, newlyCreatedFirebaseId);
-        resolve(response.data);
+        resolve (response.data);
       })
       .catch(err => {
         reject(err);
