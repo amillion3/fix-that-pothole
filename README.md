@@ -1,6 +1,6 @@
 # Fix That Pothole
 
-## [Live Demo](https://fix-that-pothole.andymillion.com/)
+## [Live Demo](https://fix-that-pothole.firebaseapp.com/)
 
 ## Do you hate potholes? Then this app is for you!
 
