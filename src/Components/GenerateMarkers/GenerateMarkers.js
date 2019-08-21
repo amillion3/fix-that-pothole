@@ -64,9 +64,11 @@ class GenerateMarkers extends React.Component {
             <p><span className='popup-label'>Status:</span> {details.status}</p>
             <p><span className='popup-label'>Severity:</span> {details.severity}</p>
             <p><span className='popup-label'>Created Date:</span> {details.createdDate}</p>
-            <Upvotes
+
+            {/* <Upvotes
               details={details}
-            ></Upvotes>
+            ></Upvotes> */}
+
             <div className='popup-buttons col-xs-12'>
               <a href={`
                 http://maps.google.com/maps?q=&layer=c&cbll=

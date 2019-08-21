@@ -58,7 +58,7 @@ class Upvotes extends React.Component {
   // };
 
   render () {
-    const upvoteCount = this.state.singlePothole.upvoteCount;
+    const upvoteCount = this.state.singlePothole.upvoteCount || 1;
     return (
       <div className="col-xs-12">
         <p>
